@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Journal — The Badminton Project</title>
+  <meta name="description" content="News and notes from The Badminton Project — announcements, tournament recaps and updates from around the court.">
+  <meta name="theme-color" content="#06231B">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=4">
+</head>
+<body id="top">
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Shared SVG symbols -->
+  <svg class="svg-defs" aria-hidden="true" focusable="false">
+    <symbol id="icon-shuttle" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="18.4" r="2.3"/>
+        <path d="M10.5 16.3 L6.2 6.4"/>
+        <path d="M11.6 16.05 L9.6 5.1"/>
+        <path d="M12.4 16.05 L14.4 5.1"/>
+        <path d="M13.5 16.3 L17.8 6.4"/>
+        <path d="M6.2 6.4 Q12 3.4 17.8 6.4"/>
+        <path d="M9.3 13.6 Q12 12.7 14.7 13.6"/>
+      </g>
+    </symbol>
+  </svg>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="site-header" data-header>
+    <div class="container nav-row">
+      <a class="brand" href="index.html" aria-label="The Badminton Project — home">
+        <svg class="brand-mark" aria-hidden="true"><use href="#icon-shuttle"/></svg>
+        <span class="brand-name">The Badminton Project</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="about.html">Who We Are</a>
+        <a href="programs.html">Programs</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="journal.html" aria-current="page">Journal</a>
+        <a class="nav-cta" href="index.html#join">Join the Project</a>
+      </nav>
+      <button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu">
+        <span class="menu-label">Menu</span>
+        <span class="menu-bars" aria-hidden="true"><span></span><span></span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile navigation overlay -->
+  <div class="mobile-menu" id="mobile-menu" data-mobile-menu role="dialog" aria-modal="true" aria-label="Site menu">
+    <nav aria-label="Mobile">
+      <a href="about.html">Who We Are</a>
+      <a href="programs.html">Programs</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="journal.html" aria-current="page">Journal</a>
+      <a href="index.html#join">Join the Project</a>
+      <div class="ornament" aria-hidden="true">
+        <span class="rule"></span>
+        <svg><use href="#icon-shuttle"/></svg>
+        <span class="rule"></span>
+      </div>
+    </nav>
+  </div>
+
+  <main id="main">
+
+    <!-- ==================== PAGE HERO ==================== -->
+    <section class="page-hero">
+      <div class="container">
+        <p class="overline reveal">Journal</p>
+        <h1 class="reveal" style="--d:.1s">Notes from<br><em>the Project.</em></h1>
+        <div class="ornament reveal" style="--d:.2s" aria-hidden="true">
+          <span class="rule"></span>
+          <svg><use href="#icon-shuttle"/></svg>
+          <span class="rule"></span>
+        </div>
+        <p class="page-lede reveal" style="--d:.3s">Announcements, tournament recaps and updates from around the court. The Journal is warming up — the first posts are coming soon.</p>
+      </div>
+    </section>
+
+    <!-- ==================== POSTS ==================== -->
+    <!-- PLACEHOLDERS: each card below is a template. For a real post, replace
+         the [bracketed] date, title and excerpt. When a post has its own page,
+         point the "Read more" link at it (e.g. journal/post-name.html). -->
+    <section class="section section--ivory" id="posts">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="overline">Latest</p>
+          <h2>From the <em>Journal.</em></h2>
+          <div class="ornament" aria-hidden="true">
+            <span class="rule"></span>
+            <svg><use href="#icon-shuttle"/></svg>
+            <span class="rule"></span>
+          </div>
+        </header>
+        <div class="posts">
+          <article class="post reveal">
+            <p class="post-date ph-text">[Date]</p>
+            <h3 class="ph-text">[Post title — e.g. season launch announcement]</h3>
+            <p class="ph-text">[A short excerpt of the post will appear here — two or three lines introducing the story.]</p>
+            <span class="post-more">Coming soon</span>
+          </article>
+          <article class="post reveal" style="--d:.1s">
+            <p class="post-date ph-text">[Date]</p>
+            <h3 class="ph-text">[Post title — e.g. tournament recap]</h3>
+            <p class="ph-text">[A short excerpt of the post will appear here — two or three lines introducing the story.]</p>
+            <span class="post-more">Coming soon</span>
+          </article>
+          <article class="post reveal" style="--d:.2s">
+            <p class="post-date ph-text">[Date]</p>
+            <h3 class="ph-text">[Post title — e.g. training notes from the coaches]</h3>
+            <p class="ph-text">[A short excerpt of the post will appear here — two or three lines introducing the story.]</p>
+            <span class="post-more">Coming soon</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CTA ==================== -->
+    <section class="section section--green">
+      <div class="container narrow">
+        <p class="overline reveal">Stay Close</p>
+        <h2 class="reveal" style="--d:.1s">Be first to <em>hear.</em></h2>
+        <div class="ornament reveal" style="--d:.2s" aria-hidden="true">
+          <span class="rule"></span>
+          <svg><use href="#icon-shuttle"/></svg>
+          <span class="rule"></span>
+        </div>
+        <p class="join-copy reveal" style="--d:.3s">Want news from the Project as it happens? Reach out and we will keep you in the loop.</p>
+        <a class="btn btn--gold reveal" style="--d:.4s" href="mailto:hello@thebadmintonproject.com">Get in Touch</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
+        <span>The Badminton Project</span>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="about.html">Who We Are</a>
+        <a href="programs.html">Programs</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="journal.html">Journal</a>
+        <a href="index.html#join">Join</a>
+      </nav>
+      <p class="footer-soon">Coach profiles, schedules &amp; venues — <em>details coming soon</em></p>
+    </div>
+    <div class="container footer-base">
+      <p>&copy; <span data-year>2026</span> The Badminton Project. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=4"></script>
+</body>
+</html>
