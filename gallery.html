@@ -7,11 +7,11 @@
   <meta name="description" content="Moments from The Badminton Project — training, tournaments, games nights and life around the court.">
   <meta name="theme-color" content="#06231B">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <script>document.documentElement.classList.add('js')</script>
+  <script>(function(d){d.classList.add('js');var r=false;try{r=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}if(!r){d.classList.add('entering');setTimeout(function(){d.classList.add('entered')},2500);try{if(sessionStorage.getItem('tbp-nav')){sessionStorage.removeItem('tbp-nav');d.classList.add('pt-in')}}catch(e){}}})(document.documentElement)</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=4">
+  <link rel="stylesheet" href="css/styles.css?v=7">
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
@@ -60,6 +60,7 @@
         <span class="menu-bars" aria-hidden="true"><span></span><span></span></span>
       </button>
     </div>
+    <div class="scroll-progress" aria-hidden="true" data-progress></div>
   </header>
 
   <!-- Mobile navigation overlay -->
@@ -83,14 +84,14 @@
     <!-- ==================== PAGE HERO ==================== -->
     <section class="page-hero">
       <div class="container">
-        <p class="overline reveal">Gallery</p>
-        <h1 class="reveal" style="--d:.1s">Moments from<br><em>the court.</em></h1>
-        <div class="ornament reveal" style="--d:.2s" aria-hidden="true">
+        <p class="overline">Gallery</p>
+        <h1><span class="line"><span class="line-inner">Moments from</span></span><span class="line"><span class="line-inner"><em>the court.</em></span></span></h1>
+        <div class="ornament" data-serve aria-hidden="true">
           <span class="rule"></span>
           <svg><use href="#icon-shuttle"/></svg>
           <span class="rule"></span>
         </div>
-        <p class="page-lede reveal" style="--d:.3s">Training, tournaments, games nights and everything in between. The collection is just getting started — more photos are on their way.</p>
+        <p class="page-lede">Training, tournaments, games nights and everything in between. The collection is just getting started — more photos are on their way.</p>
       </div>
     </section>
 
@@ -105,7 +106,7 @@
       <div class="container">
         <div class="gallery-grid">
           <figure class="moment reveal">
-            <img src="assets/photos/photo-01.jpg" alt="Two players share a smile at a tournament medal presentation" loading="lazy">
+            <span class="print"><img src="assets/photos/photo-01.jpg" alt="Two players share a smile at a tournament medal presentation" loading="lazy"></span>
           </figure>
           <figure class="moment moment--ph reveal" style="--d:.06s">
             <div class="ph-media" role="img" aria-label="Placeholder — coaches in action, photo coming soon">
@@ -120,7 +121,7 @@
             </div>
           </figure>
           <figure class="moment reveal" style="--d:.18s">
-            <img src="assets/photos/photo-02.jpg" alt="Two young players together at a badminton tournament" loading="lazy">
+            <span class="print"><img src="assets/photos/photo-02.jpg" alt="Two young players together at a badminton tournament" loading="lazy"></span>
           </figure>
           <figure class="moment moment--ph reveal" style="--d:.24s">
             <div class="ph-media" role="img" aria-label="Placeholder — kids on court, photo coming soon">
@@ -155,7 +156,7 @@
       <div class="container narrow">
         <p class="overline reveal">Join the Project</p>
         <h2 class="reveal" style="--d:.1s">Be in the <em>next photo.</em></h2>
-        <div class="ornament reveal" style="--d:.2s" aria-hidden="true">
+        <div class="ornament reveal" data-serve style="--d:.2s" aria-hidden="true">
           <span class="rule"></span>
           <svg><use href="#icon-shuttle"/></svg>
           <span class="rule"></span>
@@ -181,13 +182,12 @@
         <a href="journal.html">Journal</a>
         <a href="index.html#join">Join</a>
       </nav>
-      <p class="footer-soon">Coach profiles, schedules &amp; venues — <em>details coming soon</em></p>
     </div>
     <div class="container footer-base">
       <p>&copy; <span data-year>2026</span> The Badminton Project. All rights reserved.</p>
     </div>
   </footer>
 
-  <script src="js/main.js?v=4"></script>
+  <script src="js/main.js?v=7"></script>
 </body>
 </html>
