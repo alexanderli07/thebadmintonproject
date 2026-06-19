@@ -186,6 +186,51 @@
     each(revealEls, releaseReveal);
   }
 
+  /* ==================== Anchor navigation ==================== */
+
+  /* Land anchored sections fully in view (so e.g. the Join button is visible
+     immediately on any screen height) and play their reveals right away */
+  var HEADER_OFFSET = 96;
+
+  function sectionScrollTop(el) {
+    var top = el.getBoundingClientRect().top + window.scrollY;
+    var bottom = top + el.offsetHeight;
+    if (el.offsetHeight <= window.innerHeight - HEADER_OFFSET) {
+      /* the section fits below the header: bottom-align it */
+      return Math.max(0, bottom - window.innerHeight);
+    }
+    return Math.max(0, top - HEADER_OFFSET);
+  }
+
+  function revealSection(el) {
+    each(el.querySelectorAll('.reveal'), function (r) { revealEl(r); });
+  }
+
+  each(document.querySelectorAll('a[href^="#"]'), function (link) {
+    var id = link.getAttribute('href').slice(1);
+    if (!id || id === 'top' || id === 'main') return; /* keep native skip/top behaviour */
+    link.addEventListener('click', function (e) {
+      var target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      window.scrollTo({ top: sectionScrollTop(target), behavior: REDUCED ? 'auto' : 'smooth' });
+      revealSection(target);
+      if (history.replaceState) history.replaceState(null, '', '#' + id);
+    });
+  });
+
+  if (location.hash && location.hash.length > 1) {
+    var hashTarget = document.getElementById(location.hash.slice(1));
+    if (hashTarget && location.hash !== '#top' && location.hash !== '#main') {
+      /* after the browser's own hash jump: re-align so the section's end
+         (e.g. the Join button) is on screen, and play its reveals */
+      setTimeout(function () {
+        window.scrollTo(0, sectionScrollTop(hashTarget));
+        revealSection(hashTarget);
+      }, 80);
+    }
+  }
+
   /* ==================== Signature scroll moments ==================== */
 
   if (!REDUCED) {
@@ -317,6 +362,7 @@
     addParallax('.hero-inner', 0.28, 'top');
     addParallax('.hero-court', 0.14, 'top', 'translate(-50%, -50%)');
     addParallax('.page-hero .container', 0.26, 'top');
+    addParallax('.page-court', 0.12, 'top', 'translate(-50%, -50%)');
     addParallax('.band blockquote', -0.12, 'center', '', 44);
     addParallax('.moments-grid', 0.11, 'center', '', 56);
     addParallax('.gallery-grid', 0.09, 'center', '', 48);
