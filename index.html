@@ -8,20 +8,34 @@
   <meta property="og:title" content="The Badminton Project">
   <meta property="og:description" content="High-performance training. Competitive development. A community built around the game.">
   <meta property="og:type" content="website">
-  <!-- Once the site is live, replace with the full address, e.g.
-       https://your-domain.com/assets/og-image.png (most apps resolve the
-       relative path, but the full address works everywhere) -->
-  <meta property="og:image" content="assets/og-image.png">
+  <meta property="og:image" content="https://thebadmintonproject.com/assets/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:url" content="https://thebadmintonproject.com/">
+  <link rel="canonical" href="https://thebadmintonproject.com/">
   <meta name="theme-color" content="#06231B">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <script>(function(d){d.classList.add('js');var r=false;try{r=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}if(!r){d.classList.add('entering');setTimeout(function(){d.classList.add('entered')},2500);try{if(sessionStorage.getItem('tbp-nav')){sessionStorage.removeItem('tbp-nav');d.classList.add('pt-in')}}catch(e){}}})(document.documentElement)</script>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <script>(function(d){d.classList.add('js');var r=false;try{r=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}if(!r){d.classList.add('entering');try{if(sessionStorage.getItem('tbp-nav')){sessionStorage.removeItem('tbp-nav');d.classList.add('pt-in')}}catch(e){}}setTimeout(function(){if(window.__tbp){if(!r)d.classList.add('entered')}else{d.classList.remove('js');d.classList.remove('entering');d.classList.remove('pt-in')}},2500)})(document.documentElement)</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=8">
+  <link rel="stylesheet" href="css/styles.css?v=11">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsOrganization",
+    "name": "The Badminton Project",
+    "url": "https://thebadmintonproject.com/",
+    "logo": "https://thebadmintonproject.com/assets/apple-touch-icon.png",
+    "image": "https://thebadmintonproject.com/assets/og-image.png",
+    "email": "thebadmintonproject@gmail.com",
+    "sport": "Badminton",
+    "description": "High-performance and competitive badminton training for the community — athletic development, intro and development programs, and adult training, games nights and social nights."
+  }
+  </script>
 </head>
 <body id="top">
 
@@ -51,10 +65,10 @@
       </a>
       <nav class="site-nav" aria-label="Primary">
         <a href="about.html">Who We Are</a>
-        <a href="programs.html">Programs</a>
+        <a href="programs.html">The Academy</a>
         <a href="gallery.html">Gallery</a>
         <a href="journal.html">Journal</a>
-        <a class="nav-cta" href="#join">Join the Project</a>
+        <a class="nav-cta" href="signup.html">Join Now</a>
       </nav>
       <button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu">
         <span class="menu-label">Menu</span>
@@ -68,10 +82,10 @@
   <div class="mobile-menu" id="mobile-menu" data-mobile-menu role="dialog" aria-modal="true" aria-label="Site menu">
     <nav aria-label="Mobile">
       <a href="about.html">Who We Are</a>
-      <a href="programs.html">Programs</a>
+      <a href="programs.html">The Academy</a>
       <a href="gallery.html">Gallery</a>
       <a href="journal.html">Journal</a>
-      <a href="#join">Join the Project</a>
+      <a href="signup.html">Join Now</a>
       <div class="ornament" aria-hidden="true">
         <span class="rule"></span>
         <svg><use href="#icon-shuttle"/></svg>
@@ -182,33 +196,45 @@
             <svg><use href="#icon-shuttle"/></svg>
             <span class="rule"></span>
           </div>
-          <p class="section-intro">Two training streams and a full calendar of adult badminton — each built with the same care, whether you are chasing titles or a great night on court.</p>
+          <p class="section-intro">The Academy's four training streams — each built with the same care, whether you are chasing titles or finding your first competitive rally.</p>
         </header>
         <div class="programs">
           <article class="program reveal">
             <span class="program-no" aria-hidden="true">01</span>
             <div class="program-rule" aria-hidden="true"></div>
-            <p class="program-label">Athletic Development Programs</p>
+            <p class="program-label">The Academy</p>
             <h3>High-Performance Training</h3>
-            <p>For the committed competitive athlete. Structured, high-intensity training designed to build complete players — technically, tactically, physically — and carry them toward the highest levels of the sport.</p>
+            <p>For the committed competitive athlete — structured, high-intensity training built to carry players toward the highest levels of the sport.</p>
+            <a class="card-link" href="academy-high-performance.html">Explore</a>
           </article>
-          <article class="program reveal" style="--d:.12s">
+          <article class="program reveal" style="--d:.1s">
             <span class="program-no" aria-hidden="true">02</span>
             <div class="program-rule" aria-hidden="true"></div>
-            <p class="program-label">Intro &amp; Development Programs</p>
-            <h3>Competitive Training</h3>
-            <p>Where the competitive journey begins. Programs for new and developing competitors that build sound technique, movement and match craft — step by step, in an environment that takes their goals seriously.</p>
+            <p class="program-label">The Academy</p>
+            <h3>Competition Team Training</h3>
+            <p>Tournament preparation, match play and a team that holds its standard together — on and off the court.</p>
+            <a class="card-link" href="academy-competition.html">Explore</a>
           </article>
-          <article class="program reveal" style="--d:.24s">
+          <article class="program reveal" style="--d:.2s">
             <span class="program-no" aria-hidden="true">03</span>
             <div class="program-rule" aria-hidden="true"></div>
-            <p class="program-label">Training &middot; Games Nights &middot; Social Nights</p>
-            <h3>Adult Programs</h3>
-            <p>Badminton for life. Adult training programs to sharpen your game, alongside games nights and badminton social nights — because the game belongs to everyone, at every stage.</p>
+            <p class="program-label">The Academy</p>
+            <h3>Intro &amp; Developmental Training</h3>
+            <p>Where the competitive journey begins — sound technique, movement and match craft, built step by step.</p>
+            <a class="card-link" href="academy-intro-development.html">Explore</a>
+          </article>
+          <article class="program reveal" style="--d:.3s">
+            <span class="program-no" aria-hidden="true">04</span>
+            <div class="program-rule" aria-hidden="true"></div>
+            <p class="program-label">The Academy</p>
+            <h3>Athletic Development Training</h3>
+            <p>The physical foundation of the game — footwork, speed, agility and coordination, developed deliberately.</p>
+            <a class="card-link" href="academy-athletic-development.html">Explore</a>
           </article>
         </div>
+        <p class="section-intro reveal" style="margin-top: 2.6rem;">Beyond the Academy — adult training, games nights and badminton social nights run all year. <a href="mailto:thebadmintonproject@gmail.com" style="color: var(--gold-ink);">Write to us.</a></p>
         <div class="section-cta reveal">
-          <a class="btn btn--green" href="programs.html">Explore Programs &amp; Courses</a>
+          <a class="btn btn--green" href="programs.html">Enter the Academy</a>
         </div>
       </div>
     </section>
@@ -254,7 +280,10 @@
           <span class="rule"></span>
         </div>
         <p class="join-copy reveal" style="--d:.3s">The Project is taking shape — training programs, games nights and social nights for athletes and adults alike. If you would like to train with us, play with us, or help build what comes next, we would love to hear from you.</p>
-        <a class="btn btn--gold reveal" style="--d:.4s" href="mailto:thebadmintonproject@gmail.com">Get in Touch</a>
+        <div class="hero-actions reveal" style="--d:.4s">
+          <a class="btn btn--gold" href="signup.html">Register Now</a>
+          <a class="btn btn--ghost" href="mailto:thebadmintonproject@gmail.com">Email Us</a>
+        </div>
       </div>
     </section>
 
@@ -269,10 +298,10 @@
       </div>
       <nav class="footer-nav" aria-label="Footer">
         <a href="about.html">Who We Are</a>
-        <a href="programs.html">Programs</a>
+        <a href="programs.html">The Academy</a>
         <a href="gallery.html">Gallery</a>
         <a href="journal.html">Journal</a>
-        <a href="#join">Join</a>
+        <a href="signup.html">Sign Up</a>
       </nav>
     </div>
     <div class="container footer-base">
@@ -280,6 +309,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=12"></script>
+  <script src="js/main.js?v=15"></script>
 </body>
 </html>
