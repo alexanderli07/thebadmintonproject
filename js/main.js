@@ -1,6 +1,10 @@
 (function () {
   'use strict';
 
+  /* tells the inline head script that main.js arrived — if this flag is
+     missing at its 2.5s backstop, the page self-heals to the no-JS look */
+  window.__tbp = true;
+
   var docEl = document.documentElement;
   var REDUCED = window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -13,22 +17,27 @@
   }
 
   /* Small observer factory: adds a class once when an element enters view;
-     falls back to applying it immediately when IO is unavailable */
+     falls back to applying it immediately when IO is unavailable. Observers
+     are registered so anchor navigation can claim elements away from them. */
+  var momentIOs = [];
+
   function onceInView(elements, className, threshold, beforeAdd) {
     if (!HAS_IO) {
       each(elements, function (el) { el.classList.add(className); });
-      return;
+      return null;
     }
-    var io = new IntersectionObserver(function (entries) {
+    var obs = new IntersectionObserver(function (entries) {
       each(entries, function (entry) {
         if (entry.isIntersecting) {
-          io.unobserve(entry.target);
+          obs.unobserve(entry.target);
           if (beforeAdd) beforeAdd(entry.target);
           else entry.target.classList.add(className);
         }
       });
     }, { threshold: threshold });
-    each(elements, function (el) { io.observe(el); });
+    each(elements, function (el) { obs.observe(el); });
+    momentIOs.push(obs);
+    return obs;
   }
 
   /* ==================== The Overture: entrance choreography ==================== */
@@ -204,6 +213,25 @@
 
   function revealSection(el) {
     each(el.querySelectorAll('.reveal'), function (r) { revealEl(r); });
+    /* play the section's signature moments too, so nothing fires invisibly
+       during the fly-by and everything lands together on arrival */
+    each(el.querySelectorAll('[data-serve]'), function (o) { o.classList.add('is-served'); });
+    each(el.querySelectorAll('.values li, .course, .coach-ach, .footer-grid, .program-rule'), function (o) { o.classList.add('is-ruled'); });
+    each(el.querySelectorAll('.band figcaption'), function (o) { o.classList.add('is-stamped'); });
+    each(el.querySelectorAll('.moment.has-frame'), function (o) { o.classList.add('is-framed'); });
+    each(el.querySelectorAll('.program-no'), function (o) {
+      setTimeout(function () { o.classList.add('is-rolled'); }, 350);
+    });
+  }
+
+  /* Take a section's reveals AND signature moments away from every scroll
+     observer, so nothing plays while the section is still off-screen */
+  function claimSection(target) {
+    var claimed = target.querySelectorAll('.reveal, [data-serve], .values li, .course, .coach-ach, .footer-grid, .program-rule, .band figcaption, .moment, .program, .acad-card');
+    each(claimed, function (el) {
+      if (typeof io !== 'undefined' && io) io.unobserve(el);
+      for (var i = 0; i < momentIOs.length; i++) momentIOs[i].unobserve(el);
+    });
   }
 
   /* Hold a section's reveals until the scroll has actually arrived AND any
@@ -234,29 +262,39 @@
     var id = link.getAttribute('href').slice(1);
     if (!id || id === 'top' || id === 'main') return; /* keep native skip/top behaviour */
     link.addEventListener('click', function (e) {
+      /* let modifier clicks keep their native new-tab/new-window behaviour */
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       var target = document.getElementById(id);
       if (!target) return;
       e.preventDefault();
       var top = sectionScrollTop(target);
-      /* take the section's reveals away from the scroll observer — arrival owns them */
-      if (typeof io !== 'undefined' && io) {
-        each(target.querySelectorAll('.reveal'), function (r) { io.unobserve(r); });
-      }
+      claimSection(target); /* arrival owns the section's animations now */
       window.scrollTo({ top: top, behavior: REDUCED ? 'auto' : 'smooth' });
+      /* move keyboard focus / screen-reader position with the scroll */
+      if (!/^(?:a|button|input|select|textarea)$/i.test(target.tagName)) {
+        target.setAttribute('tabindex', '-1');
+      }
+      try { target.focus({ preventScroll: true }); } catch (err) { target.focus(); }
       if (history.replaceState) history.replaceState(null, '', '#' + id);
       if (REDUCED) revealSection(target);
       else revealOnArrival(target, top, 0, 1400);
     });
   });
 
-  if (location.hash && location.hash.length > 1) {
+  /* Only steer the scroll on fresh navigations — reloads and back/forward
+     keep the browser's own scroll restoration */
+  var navType = '';
+  try {
+    var navEntries = performance.getEntriesByType && performance.getEntriesByType('navigation');
+    if (navEntries && navEntries[0]) navType = navEntries[0].type;
+  } catch (err) {}
+
+  if (location.hash && location.hash.length > 1 && navType !== 'reload' && navType !== 'back_forward') {
     var hashTarget = document.getElementById(location.hash.slice(1));
     if (hashTarget && location.hash !== '#top' && location.hash !== '#main') {
-      /* claim this section's reveals right now (synchronously, before the
-         scroll observer delivers), so they can't play under the arrival veil */
-      if (!REDUCED && typeof io !== 'undefined' && io) {
-        each(hashTarget.querySelectorAll('.reveal'), function (r) { io.unobserve(r); });
-      }
+      /* claim this section's animations right now (synchronously, before the
+         scroll observers deliver), so they can't play under the arrival veil */
+      if (!REDUCED) claimSection(hashTarget);
       /* Chrome smooth-scrolls to the fragment on load (scroll-behavior:
          smooth), so arrival is a ride, not a jump. Re-aim at the section's
          end, then fire the reveals only when the scroll has actually landed
@@ -327,7 +365,7 @@
       }
       el.innerHTML = markup;
     });
-    onceInView(document.querySelectorAll('.program'), 'x-roll', 0.3, function (card) {
+    onceInView(document.querySelectorAll('.program, .acad-card'), 'x-roll', 0.3, function (card) {
       var numeral = card.querySelector('.program-no');
       if (numeral) setTimeout(function () { numeral.classList.add('is-rolled'); }, 350);
     });
@@ -350,6 +388,12 @@
       try { sessionStorage.setItem('tbp-nav', '1'); } catch (err) {}
       docEl.classList.add('pt-out');
       setTimeout(function () { location.href = url.href; }, 300);
+      /* failsafe: if the navigation never commits (Esc/Stop pressed, offline
+         tap), lift the veil and cancel the queued arrival effect */
+      setTimeout(function () {
+        docEl.classList.remove('pt-out');
+        try { sessionStorage.removeItem('tbp-nav'); } catch (err) {}
+      }, 2500);
     });
     window.addEventListener('pageshow', function (e) {
       if (e.persisted) {
@@ -405,9 +449,9 @@
         targets.push({ el: el, factor: factor, mode: mode, base: base || '', cap: cap || 0, applied: 0 });
       });
     };
-    addParallax('.hero-inner', 0.28, 'top');
+    addParallax('.hero-inner', 0.28, 'top', '', 150);
     addParallax('.hero-court', 0.14, 'top', 'translate(-50%, -50%)');
-    addParallax('.page-hero .container', 0.26, 'top');
+    addParallax('.page-hero .container', 0.26, 'top', '', 60);
     addParallax('.page-court', 0.12, 'top', 'translate(-50%, -50%)');
     addParallax('.band blockquote', -0.12, 'center', '', 44);
     addParallax('.moments-grid', 0.11, 'center', '', 56);
@@ -424,6 +468,7 @@
           if (t.mode === 'top') {
             if (window.scrollY > vh * 1.6) continue; /* long gone off-screen */
             y = window.scrollY * t.factor;
+            if (t.cap) y = Math.min(t.cap, y); /* short viewports: never drift past the clip edge */
           } else {
             var rect = t.el.getBoundingClientRect();
             /* subtract what we already applied so the layout position drives it */
@@ -572,6 +617,46 @@
       ctx.globalAlpha = 1;
     }
     requestAnimationFrame(frame);
+  }
+
+  /* ==================== Media carousels ==================== */
+
+  each(document.querySelectorAll('[data-carousel]'), function (car) {
+    var track = car.querySelector('.car-track');
+    var prev = car.querySelector('.car-prev');
+    var next = car.querySelector('.car-next');
+    if (!track || !prev || !next) return;
+    /* aria-disabled (not disabled) so a focused arrow never drops focus to
+       <body> when it reaches the end of the track */
+    function step(dir, btn) {
+      if (btn.getAttribute('aria-disabled') === 'true') return;
+      track.scrollBy({
+        left: dir * Math.max(260, track.clientWidth * 0.8),
+        behavior: REDUCED ? 'auto' : 'smooth'
+      });
+    }
+    prev.addEventListener('click', function () { step(-1, prev); });
+    next.addEventListener('click', function () { step(1, next); });
+    function sync() {
+      /* the snap rest position is the first slide's offset (track padding),
+         not zero — measure it instead of assuming */
+      var start = track.firstElementChild ? track.firstElementChild.offsetLeft : 0;
+      var max = track.scrollWidth - track.clientWidth - 2;
+      prev.setAttribute('aria-disabled', track.scrollLeft <= start + 2 ? 'true' : 'false');
+      next.setAttribute('aria-disabled', track.scrollLeft >= max ? 'true' : 'false');
+    }
+    track.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
+  });
+
+  /* ==================== Sign-up: sent state ==================== */
+
+  var signupForm = document.querySelector('[data-signup]');
+  if (signupForm && /[?&]sent=1/.test(location.search)) {
+    signupForm.classList.add('is-sent');
+    var thanks = document.getElementById('thanks');
+    if (thanks) thanks.classList.add('is-shown');
   }
 
   /* Footer year */

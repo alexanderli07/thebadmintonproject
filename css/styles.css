@@ -58,6 +58,16 @@ h1, h2, h3 {
 ::selection { background: var(--gold); color: var(--green-950); }
 
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+/* on light (ivory) surfaces the bright gold fails 3:1 — use the dark gold */
+.field input:focus-visible,
+.field textarea:focus-visible,
+.choice input:focus-visible,
+.form-actions .btn:focus-visible,
+.car-track:focus-visible,
+.car-btn:focus-visible,
+.card-link:focus-visible,
+.post-more:focus-visible,
+.btn--green:focus-visible { outline-color: var(--gold-ink); }
 
 .svg-defs { display: none; }
 
@@ -211,15 +221,16 @@ body.menu-open .menu-bars span:last-child { transform: translateY(-2.5px) rotate
   z-index: 55;
   background: rgba(4, 27, 20, 0.98);
   display: flex;
-  align-items: center;
-  justify-content: center;
   text-align: center;
+  overflow-y: auto;
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.35s ease, visibility 0s linear 0.35s;
 }
 .mobile-menu.is-open { visibility: visible; opacity: 1; transition: opacity 0.35s ease; }
-.mobile-menu nav { display: flex; flex-direction: column; gap: 1.5rem; }
+/* margin:auto centres when there is room and top-aligns + scrolls when there
+   isn't (short landscape phones), so no link is ever clipped unreachably */
+.mobile-menu nav { display: flex; flex-direction: column; gap: 1.5rem; margin: auto; padding: 3rem 1rem; }
 .mobile-menu nav a {
   font: 500 2rem/1.2 var(--font-serif);
   color: var(--ivory);
@@ -418,10 +429,12 @@ h2 em { font-style: italic; color: var(--gold-ink); }
 
 .programs {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 1.6rem;
   margin: 4.5rem auto 0;
 }
+.program .card-link { margin-top: 1.4rem; }
+.program p { flex: 1; }
 .program {
   background: var(--ivory-bright);
   border: 1px solid var(--line-light);
@@ -695,9 +708,9 @@ h2 em { font-style: italic; color: var(--gold-ink); }
 
 .section-cta { text-align: center; margin-top: 3.5rem; }
 
-.site-nav a[aria-current="page"] { color: var(--gold); }
-.site-nav a[aria-current="page"]::after { transform: scaleX(1); }
-.mobile-menu nav a[aria-current="page"] { color: var(--gold); font-style: italic; }
+.site-nav a[aria-current] { color: var(--gold); }
+.site-nav a[aria-current]::after { transform: scaleX(1); }
+.mobile-menu nav a[aria-current] { color: var(--gold); font-style: italic; }
 
 /* Placeholder media tile (used until real photos are supplied) */
 .ph-media {
@@ -851,6 +864,157 @@ h2 em { font-style: italic; color: var(--gold-ink); }
 .moment--ph { display: flex; }
 .moment--ph .ph-media { flex: 1; aspect-ratio: 3 / 4; }
 
+/* Academy hub cards */
+.acad-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.6rem; margin-top: 4rem; text-align: left; }
+.acad-card {
+  background: var(--ivory-bright);
+  border: 1px solid var(--line-light);
+  padding: 2.6rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+.acad-card:hover { transform: translateY(-6px); border-color: rgba(122, 95, 32, 0.5); box-shadow: 0 30px 50px -38px rgba(6, 35, 27, 0.45); }
+.acad-card h3 { font-size: 1.7rem; font-weight: 600; color: var(--green-800); margin: 0.6rem 0 0.8rem; }
+.acad-card p { margin: 0 0 1.5rem; font-size: 0.95rem; line-height: 1.7; color: var(--ink-soft); flex: 1; }
+.card-link {
+  font: 500 0.68rem/1 var(--font-sans);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold-soft);
+  padding-bottom: 0.35rem;
+  align-self: flex-start;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+.card-link:hover { color: var(--green-800); border-color: var(--green-800); }
+@media (max-width: 760px) { .acad-grid { grid-template-columns: 1fr; } }
+
+/* Venue cards (Locations) */
+.venues { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.4rem; max-width: 760px; margin: 3rem auto 0; }
+.venues .venue-card { margin: 0; max-width: none; }
+
+/* Media carousel */
+.carousel { position: relative; margin-top: 3.5rem; }
+.car-track {
+  display: flex;
+  gap: 1.4rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 4px 4px 1.2rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-soft) transparent;
+}
+.car-track:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
+.car-slide {
+  flex: 0 0 min(340px, 82%);
+  scroll-snap-align: start;
+  margin: 0;
+  background: var(--ivory-bright);
+  border: 1px solid var(--line-light);
+  padding: 12px 12px 1.3rem;
+}
+.car-slide .ph-media, .car-slide img { aspect-ratio: 4 / 3; width: 100%; object-fit: cover; display: block; }
+.car-slide figcaption { padding: 1rem 0.4rem 0; font-size: 0.92rem; line-height: 1.6; color: var(--ink-soft); text-align: left; }
+.car-btn {
+  position: absolute;
+  top: 38%;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-soft);
+  background: var(--ivory);
+  color: var(--gold-ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, opacity 0.25s ease;
+}
+.car-btn svg { width: 15px; height: 15px; }
+.car-btn:hover { background: var(--green-800); color: var(--ivory); border-color: var(--green-800); }
+.car-btn[disabled], .car-btn[aria-disabled="true"] { opacity: 0.35; cursor: default; }
+.car-btn[disabled]:hover, .car-btn[aria-disabled="true"]:hover { background: var(--ivory); color: var(--gold-ink); border-color: var(--gold-soft); }
+/* without JS the buttons are inert — hide them and let the track scroll natively */
+html:not(.js) .car-btn { display: none; }
+.car-prev { left: -12px; }
+.car-next { right: -12px; }
+@media (max-width: 700px) { .car-prev { left: 4px; } .car-next { right: 4px; } }
+
+/* Sign-up form */
+.form-card {
+  background: var(--ivory-bright);
+  border: 1px solid var(--line-light);
+  padding: clamp(1.8rem, 4vw, 3rem);
+  max-width: 720px;
+  margin: 3.5rem auto 0;
+  text-align: left;
+}
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem 1.6rem; }
+.field { display: flex; flex-direction: column; gap: 0.45rem; }
+.field--full { grid-column: 1 / -1; }
+.field > label, .field > legend {
+  font: 500 0.66rem/1.4 var(--font-sans);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
+fieldset.field legend { margin-bottom: 0.45rem; }
+.field input[type="text"], .field input[type="email"], .field input[type="tel"], .field textarea {
+  font: 400 1rem/1.5 var(--font-sans);
+  color: var(--ink);
+  background: var(--ivory);
+  border: 1px solid var(--line-light);
+  padding: 0.85rem 1rem;
+  width: 100%;
+}
+.field textarea { resize: vertical; min-height: 96px; }
+.field input:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 2px; }
+.choices { display: flex; flex-wrap: wrap; gap: 0.6rem 0.9rem; }
+.choice {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  border: 1px solid var(--line-light);
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+.choice:hover { border-color: var(--gold-ink); }
+.choice input { accent-color: var(--green-800); width: 16px; height: 16px; }
+.choice:has(input:checked) { border-color: var(--gold-ink); background: rgba(201, 166, 73, 0.08); }
+.form-actions { margin-top: 2rem; text-align: center; }
+.form-actions .btn { border-color: var(--green-800); color: var(--green-800); }
+.form-actions .btn:hover { background: var(--green-800); color: var(--ivory); }
+.form-note { margin-top: 1.2rem; font-size: 0.82rem; color: var(--ink-soft); text-align: center; }
+.form-thanks { display: none; text-align: center; padding: 1rem 0 0.5rem; }
+.form-thanks:target { display: block; }
+.form-thanks.is-shown { display: block; }
+html.js .signup-form.is-sent { display: none; }
+@media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } }
+
+/* Personal pages (The Team) */
+.person-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 3rem 4rem; margin-top: 4rem; align-items: start; text-align: left; }
+.person-photo { background: var(--ivory-bright); border: 1px solid rgba(201, 166, 73, 0.35); padding: 12px; }
+.person-photo .ph-media { aspect-ratio: 4 / 5; }
+.person-bio p { margin: 0 0 1.2rem; color: var(--ink-soft); }
+.ach-list { list-style: none; margin: 3rem auto 0; padding: 0; max-width: 640px; text-align: left; }
+.ach-list li {
+  position: relative;
+  padding: 1.1rem 0 1.1rem 1.6rem;
+  border-bottom: 1px solid var(--line-light);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.ach-list li::before { content: "\25C6"; position: absolute; left: 0; top: 1.35rem; font-size: 0.45rem; color: var(--gold-ink); }
+@media (max-width: 860px) { .person-grid { grid-template-columns: 1fr; } }
+
 /* Journal posts */
 .posts {
   display: grid;
@@ -1003,6 +1167,18 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
   html.hdr-enter.entered .site-nav a:nth-child(3) { animation-delay: calc(var(--hdr-delay, 1.9s) + 0.15s); }
   html.hdr-enter.entered .site-nav a:nth-child(4) { animation-delay: calc(var(--hdr-delay, 1.9s) + 0.2s); }
   html.hdr-enter.entered .site-nav a:nth-child(5) { animation-delay: calc(var(--hdr-delay, 1.9s) + 0.25s); }
+
+  /* Keyboard escape hatch: anything focused during the entrance hold becomes
+     visible immediately — a focus ring must never point at an invisible control */
+  html.hdr-enter .brand:focus-visible,
+  html.hdr-enter .site-nav a:focus-visible,
+  html.hdr-enter .menu-toggle:focus-visible,
+  html.entering .hero-actions:focus-within,
+  html.entering .scroll-cue:focus-visible {
+    opacity: 1 !important;
+    animation: none !important;
+    transition: none !important;
+  }
 
   /* ---- The serve: ornaments assemble shuttle-first ---- */
   html.js [data-serve] svg { opacity: 0; transform: translateY(-10px) rotate(-14deg) scale(0.92); }
