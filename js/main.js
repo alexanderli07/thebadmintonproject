@@ -650,13 +650,99 @@
     sync();
   });
 
-  /* ==================== Sign-up: sent state ==================== */
+  /* ==================== Sign-up: Supabase submission ==================== */
 
   var signupForm = document.querySelector('[data-signup]');
-  if (signupForm && /[?&]sent=1/.test(location.search)) {
-    signupForm.classList.add('is-sent');
-    var thanks = document.getElementById('thanks');
-    if (thanks) thanks.classList.add('is-shown');
+  if (signupForm) {
+    var signupStatus = signupForm.querySelector('[data-form-status]');
+    var signupButton = signupForm.querySelector('button[type="submit"]');
+    var signupThanks = document.getElementById('thanks');
+
+    function setSignupStatus(message) {
+      if (!signupStatus) return;
+      signupStatus.textContent = message || '';
+      signupStatus.hidden = !message;
+    }
+
+    function checkedValues(name) {
+      var values = [];
+      each(signupForm.querySelectorAll('input[name="' + name + '"]:checked'), function (input) {
+        values.push(input.value);
+      });
+      return values;
+    }
+
+    signupForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      setSignupStatus('');
+
+      if (!signupForm.reportValidity()) return;
+
+      var config = window.TBP_SUPABASE || {};
+      var url = String(config.url || '').replace(/\/$/, '');
+      var key = String(config.publishableKey || '');
+      var isConfigured = url.indexOf('YOUR_PROJECT_REF') === -1 &&
+        key && key !== 'YOUR_SUPABASE_PUBLISHABLE_KEY';
+
+      if (!isConfigured) {
+        setSignupStatus('Registration is not configured yet. Please email us for help.');
+        return;
+      }
+
+      var ageInput = signupForm.elements.age;
+      var ageValue = ageInput ? String(ageInput.value).trim() : '';
+      var payload = {
+        first_name: signupForm.elements.first_name.value,
+        last_name: signupForm.elements.last_name.value,
+        email: signupForm.elements.email.value,
+        phone: signupForm.elements.phone.value,
+        player: signupForm.elements.player.value,
+        age: ageValue ? Number(ageValue) : null,
+        programs: checkedValues('programs'),
+        locations: checkedValues('locations'),
+        message: signupForm.elements.message.value,
+        website: signupForm.elements.website.value
+      };
+
+      if (signupButton) {
+        signupButton.disabled = true;
+        signupButton.textContent = 'Sending…';
+      }
+      signupForm.setAttribute('aria-busy', 'true');
+
+      fetch(url + '/functions/v1/submit-registration', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': key
+        },
+        body: JSON.stringify(payload)
+      }).then(function (response) {
+        return response.json().catch(function () { return {}; }).then(function (body) {
+          if (!response.ok || !body.ok) {
+            throw new Error(body.error || 'Registration could not be sent. Please try again.');
+          }
+          return body;
+        });
+      }).then(function () {
+        signupForm.reset();
+        signupForm.classList.add('is-sent');
+        if (signupThanks) {
+          signupThanks.classList.add('is-shown');
+          signupThanks.setAttribute('tabindex', '-1');
+          try { signupThanks.focus({ preventScroll: true }); } catch (err) { signupThanks.focus(); }
+          signupThanks.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'center' });
+        }
+      }).catch(function (error) {
+        setSignupStatus(error && error.message ? error.message : 'Registration could not be sent. Please try again.');
+      }).then(function () {
+        signupForm.removeAttribute('aria-busy');
+        if (signupButton) {
+          signupButton.disabled = false;
+          signupButton.textContent = 'Register Now';
+        }
+      });
+    });
   }
 
   /* Footer year */

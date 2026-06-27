@@ -28,7 +28,7 @@ server that disables caching, so your edits always show up on refresh.)
 | `index.html` | Home — hero, mission, Academy overview, Moments, Join |
 | `programs.html` | **The Academy** hub — four programs + Locations (Agility Sports & BNM Badminton) |
 | `academy-*.html` | The four program pages (high-performance, competition, intro-development, athletic-development), each with a media carousel |
-| `signup.html` | Registration form — delivers to thebadmintonproject@gmail.com via formsubmit.co. **The very first submission emails an activation link to that inbox — click it once.** |
+| `signup.html` | Registration form — submits to the `submit-registration` Supabase Edge Function and stores entries in the private `registrations` table. Public connection values live in `js/supabase-config.js`. |
 | `sankeerth.html`, `eesan.html` | Personal pages for the two coaches (story / achievements / vision — placeholders to fill) |
 | `404.html` | Branded "Out of bounds" error page (picked up automatically by Netlify, GitHub Pages, Cloudflare Pages) |
 | `about.html` | Who We Are — values + the two coach profiles (placeholders to fill) |
