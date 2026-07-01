@@ -450,9 +450,9 @@
       });
     };
     addParallax('.hero-inner', 0.28, 'top', '', 150);
-    addParallax('.hero-court', 0.14, 'top', 'translate(-50%, -50%)');
+    addParallax('.hero-court', 0.08, 'top', 'translate(-50%, -50%)', 48);
     addParallax('.page-hero .container', 0.26, 'top', '', 60);
-    addParallax('.page-court', 0.12, 'top', 'translate(-50%, -50%)');
+    addParallax('.page-court', 0.06, 'top', 'translate(-50%, -50%)', 40);
     addParallax('.band blockquote', -0.12, 'center', '', 44);
     addParallax('.moments-grid', 0.11, 'center', '', 56);
     addParallax('.gallery-grid', 0.09, 'center', '', 48);
