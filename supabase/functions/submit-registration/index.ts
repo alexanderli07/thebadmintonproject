@@ -4,6 +4,8 @@ import { withSupabase } from "npm:@supabase/server@^1";
 const PRODUCTION_ORIGINS = new Set([
   "https://thebadmintonproject.com",
   "https://www.thebadmintonproject.com",
+  "https://thebadmintonproject.ca",
+  "https://www.thebadmintonproject.ca",
 ]);
 
 const ALLOWED_PROGRAMS = new Set([
