@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=13">
+  <link rel="stylesheet" href="css/styles.css?v=18">
 </head>
 <body id="top">
 
@@ -51,10 +51,34 @@
         <span class="brand-name">The Badminton Project</span>
       </a>
       <nav class="site-nav" aria-label="Primary">
-        <a href="about.html">Who We Are</a>
-        <a href="programs.html" aria-current="page">The Academy</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="journal.html">Journal</a>
+        <a href="index.html">Home</a>
+        <details class="nav-disclosure" data-nav-disclosure>
+          <summary class="nav-disclosure__trigger">The Project<span class="nav-chevron" aria-hidden="true"></span></summary>
+          <div class="nav-submenu">
+            <a href="about.html">Project Overview</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="journal.html">Journal</a>
+          </div>
+        </details>
+        <details class="nav-disclosure is-current" data-nav-disclosure>
+          <summary class="nav-disclosure__trigger">The Academy<span class="nav-chevron" aria-hidden="true"></span></summary>
+          <div class="nav-submenu">
+            <a href="programs.html" aria-current="page">Academy Overview</a>
+            <a href="academy-high-performance.html">High Performance</a>
+            <a href="academy-competition.html">Competition Team</a>
+            <a href="academy-intro-development.html">Intro &amp; Development</a>
+            <a href="academy-athletic-development.html">Athletic Development</a>
+            <a href="programs.html#where-we-train">Where We Train</a>
+          </div>
+        </details>
+        <details class="nav-disclosure" data-nav-disclosure>
+          <summary class="nav-disclosure__trigger">The Team<span class="nav-chevron" aria-hidden="true"></span></summary>
+          <div class="nav-submenu">
+            <a href="about.html#team">Meet the Team</a>
+            <a href="sankeerth.html">B.R. Sankeerth</a>
+            <a href="eesan.html">Eesan</a>
+          </div>
+        </details>
         <a class="nav-cta" href="signup.html">Join Now</a>
       </nav>
       <button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu">
@@ -67,12 +91,36 @@
 
   <!-- Mobile navigation overlay -->
   <div class="mobile-menu" id="mobile-menu" data-mobile-menu role="dialog" aria-modal="true" aria-label="Site menu">
-    <nav aria-label="Mobile">
-      <a href="about.html">Who We Are</a>
-      <a href="programs.html" aria-current="page">The Academy</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="journal.html">Journal</a>
-      <a href="signup.html">Join Now</a>
+    <nav class="mobile-nav" aria-label="Mobile">
+      <a class="mobile-nav__link" href="index.html">Home</a>
+      <details class="mobile-disclosure" data-mobile-disclosure>
+        <summary class="mobile-disclosure__trigger">The Project<span class="nav-chevron" aria-hidden="true"></span></summary>
+        <div class="mobile-submenu">
+          <a href="about.html">Project Overview</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="journal.html">Journal</a>
+        </div>
+      </details>
+      <details class="mobile-disclosure is-current" data-mobile-disclosure open>
+        <summary class="mobile-disclosure__trigger">The Academy<span class="nav-chevron" aria-hidden="true"></span></summary>
+        <div class="mobile-submenu">
+          <a href="programs.html" aria-current="page">Academy Overview</a>
+          <a href="academy-high-performance.html">High Performance</a>
+          <a href="academy-competition.html">Competition Team</a>
+          <a href="academy-intro-development.html">Intro &amp; Development</a>
+          <a href="academy-athletic-development.html">Athletic Development</a>
+          <a href="programs.html#where-we-train">Where We Train</a>
+        </div>
+      </details>
+      <details class="mobile-disclosure" data-mobile-disclosure>
+        <summary class="mobile-disclosure__trigger">The Team<span class="nav-chevron" aria-hidden="true"></span></summary>
+        <div class="mobile-submenu">
+          <a href="about.html#team">Meet the Team</a>
+          <a href="sankeerth.html">B.R. Sankeerth</a>
+          <a href="eesan.html">Eesan</a>
+        </div>
+      </details>
+      <a class="mobile-nav__link mobile-nav__cta" href="signup.html">Join Now</a>
       <div class="ornament" aria-hidden="true">
         <span class="rule"></span>
         <svg><use href="#icon-shuttle"/></svg>
@@ -159,7 +207,7 @@
             <a class="card-link" href="academy-athletic-development.html">Explore the program</a>
           </article>
         </div>
-        <p class="section-intro reveal" style="margin-top: 3rem;">Beyond the Academy — adult training, games nights and badminton social nights run all year. <a href="mailto:thebadmintonproject@gmail.com" style="color: var(--gold-ink);">Write to us.</a></p>
+        <p class="section-intro reveal" id="community" style="margin-top: 3rem;">Beyond the Academy — adult training, games nights and badminton social nights run all year. <a href="mailto:thebadmintonproject@gmail.com" style="color: var(--gold-ink);">Write to us.</a></p>
       </div>
     </section>
 
@@ -215,8 +263,10 @@
         <span>The Badminton Project</span>
       </div>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="about.html">Who We Are</a>
+        <a href="about.html">The Project</a>
         <a href="programs.html">The Academy</a>
+        <a href="about.html#team">The Team</a>
+        <a href="programs.html#where-we-train">Locations</a>
         <a href="gallery.html">Gallery</a>
         <a href="journal.html">Journal</a>
         <a href="signup.html">Sign Up</a>
@@ -227,6 +277,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=17"></script>
+  <script src="js/main.js?v=20"></script>
 </body>
 </html>

@@ -62,7 +62,7 @@ Interior pages get a compressed ~1.1s edition of the same choreography — same
 materials, shorter ceremony. Signature detail: the italic gold word in every
 page title ("a project.", "courses.") lands one beat after its roman siblings,
 like a flourish completing a letterhead. Becomes a recognisable brand tic
-across all five pages.
+across the interior pages.
 
 ---
 
@@ -82,7 +82,7 @@ soft overshoot, no bounce), then the hairlines extend outward. The same gesture
 everywhere makes the crest feel alive.
 
 **B3. Scoreboard Roll** · medium
-The program card numerals (01 / 02 / 03) roll up into place like plates on an
+The program card numerals (01 / 02 / 03 / 04) roll up into place like plates on an
 old manual scoreboard — one restrained roll in Cormorant italic, timed to land
 as each card settles. Pure Wimbledon heritage; no slot-machine spinning.
 
