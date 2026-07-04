@@ -23,8 +23,9 @@ serif font is ready (no mid-swap); the sequence is skipped entirely if the page
 opens deep-linked or mid-scroll; one thing happens at a time.
 
 **A1. The Court Draws First** · medium
-The gold court lines draw themselves before any text appears — outer boundary
-first, then sidelines and service lines, the dashed net line last (~1.4s).
+The gold court lines draw themselves before any text appears — landscape on
+desktop and vertical on portrait phones. The outer boundary arrives first,
+then the sidelines and service lines, with the centre net last (~1.4s).
 Drawn bright (30% opacity) so the moment reads, then settles back to today's
 quiet 12% as the title rises. The groundskeeper lines the lawn; then the
 players walk on. *This was independently proposed by two of the three passes —
@@ -61,7 +62,7 @@ Interior pages get a compressed ~1.1s edition of the same choreography — same
 materials, shorter ceremony. Signature detail: the italic gold word in every
 page title ("a project.", "courses.") lands one beat after its roman siblings,
 like a flourish completing a letterhead. Becomes a recognisable brand tic
-across all five pages.
+across the interior pages.
 
 ---
 
@@ -81,7 +82,7 @@ soft overshoot, no bounce), then the hairlines extend outward. The same gesture
 everywhere makes the crest feel alive.
 
 **B3. Scoreboard Roll** · medium
-The program card numerals (01 / 02 / 03) roll up into place like plates on an
+The program card numerals (01 / 02 / 03 / 04) roll up into place like plates on an
 old manual scoreboard — one restrained roll in Cormorant italic, timed to land
 as each card settles. Pure Wimbledon heritage; no slot-machine spinning.
 
