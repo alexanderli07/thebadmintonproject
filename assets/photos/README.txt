@@ -1,0 +1,3 @@
+﻿Drop website photos in this folder as photo-01.jpg, photo-02.jpg, photo-03.jpg, ...
+Each photo also needs a <figure> block in index.html (see the MOMENTS section there).
+Photos that are missing are hidden on the site automatically.
