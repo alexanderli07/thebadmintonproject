@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Badminton Project — High-Performance &amp; Community Badminton</title>
+  <meta name="description" content="The Badminton Project provides the community with high-performance and competitive badminton training — building athletes step by step — alongside adult programs, games nights, and social nights.">
+  <meta property="og:title" content="The Badminton Project">
+  <meta property="og:description" content="High-performance training. Competitive development. A community built around the game.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#06231B">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=4">
+</head>
+<body id="top">
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Shared SVG symbols -->
+  <svg class="svg-defs" aria-hidden="true" focusable="false">
+    <symbol id="icon-shuttle" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="18.4" r="2.3"/>
+        <path d="M10.5 16.3 L6.2 6.4"/>
+        <path d="M11.6 16.05 L9.6 5.1"/>
+        <path d="M12.4 16.05 L14.4 5.1"/>
+        <path d="M13.5 16.3 L17.8 6.4"/>
+        <path d="M6.2 6.4 Q12 3.4 17.8 6.4"/>
+        <path d="M9.3 13.6 Q12 12.7 14.7 13.6"/>
+      </g>
+    </symbol>
+  </svg>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="site-header" data-header>
+    <div class="container nav-row">
+      <a class="brand" href="#top" aria-label="The Badminton Project — back to top">
+        <svg class="brand-mark" aria-hidden="true"><use href="#icon-shuttle"/></svg>
+        <span class="brand-name">The Badminton Project</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="about.html">Who We Are</a>
+        <a href="programs.html">Programs</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="journal.html">Journal</a>
+        <a class="nav-cta" href="#join">Join the Project</a>
+      </nav>
+      <button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu">
+        <span class="menu-label">Menu</span>
+        <span class="menu-bars" aria-hidden="true"><span></span><span></span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile navigation overlay -->
+  <div class="mobile-menu" id="mobile-menu" data-mobile-menu role="dialog" aria-modal="true" aria-label="Site menu">
+    <nav aria-label="Mobile">
+      <a href="about.html">Who We Are</a>
+      <a href="programs.html">Programs</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="journal.html">Journal</a>
+      <a href="#join">Join the Project</a>
+      <div class="ornament" aria-hidden="true">
+        <span class="rule"></span>
+        <svg><use href="#icon-shuttle"/></svg>
+        <span class="rule"></span>
+      </div>
+    </nav>
+  </div>
+
+  <main id="main">
+
+    <!-- ==================== HERO ==================== -->
+    <section class="hero">
+      <div class="hero-court" aria-hidden="true">
+        <svg viewBox="0 0 244 536" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="#C9A649" stroke-width="1.5">
+            <rect x="2" y="2" width="240" height="532"/>
+            <line x1="20" y1="2" x2="20" y2="534"/>
+            <line x1="224" y1="2" x2="224" y2="534"/>
+            <line x1="2" y1="32" x2="242" y2="32"/>
+            <line x1="2" y1="504" x2="242" y2="504"/>
+            <line x1="2" y1="189" x2="242" y2="189"/>
+            <line x1="2" y1="347" x2="242" y2="347"/>
+            <line x1="122" y1="2" x2="122" y2="189"/>
+            <line x1="122" y1="347" x2="122" y2="534"/>
+            <line x1="2" y1="268" x2="242" y2="268" stroke-dasharray="6 6"/>
+          </g>
+        </svg>
+      </div>
+      <div class="container hero-inner">
+        <p class="overline hero-overline reveal">Badminton &middot; Community &middot; Excellence</p>
+        <h1 class="hero-title reveal" style="--d:.1s">
+          <span class="t1">The</span>
+          <span class="t2">Badminton</span>
+          <span class="t3">Project</span>
+        </h1>
+        <div class="ornament reveal" style="--d:.2s" aria-hidden="true">
+          <span class="rule"></span>
+          <svg><use href="#icon-shuttle"/></svg>
+          <span class="rule"></span>
+        </div>
+        <p class="hero-lede reveal" style="--d:.3s">High-performance training. Competitive development. A&nbsp;community built around the game.</p>
+        <div class="hero-actions reveal" style="--d:.4s">
+          <a class="btn btn--gold" href="#who-we-are">Discover the Project</a>
+          <a class="btn btn--ghost" href="#what-we-do">Our Programs</a>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#who-we-are" aria-label="Scroll to Who We Are"><span></span></a>
+    </section>
+
+    <!-- ==================== WHO WE ARE ==================== -->
+    <section class="section section--ivory" id="who-we-are">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="overline">Who We Are</p>
+          <h2>Every great athlete<br>begins as <em>a project.</em></h2>
+          <div class="ornament" aria-hidden="true">
+            <span class="rule"></span>
+            <svg><use href="#icon-shuttle"/></svg>
+            <span class="rule"></span>
+          </div>
+        </header>
+        <div class="about-grid">
+          <div class="about-lead reveal">
+            <p class="lead-text">The Badminton Project exists to provide our community with genuine high-performance and competitive badminton training — and a place where love of the game is taken seriously.</p>
+          </div>
+          <div class="about-body reveal" style="--d:.15s">
+            <p>We build athletes deliberately: high-performance competitors pursuing the top of the sport, developing players finding their competitive game, and adults who want more from their badminton than a casual rally.</p>
+            <p>Development here is earned step by step — with intention, with standards, and with a community behind you.</p>
+          </div>
+        </div>
+        <div class="section-cta reveal">
+          <a class="btn btn--green" href="about.html">Meet the Coaches</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== QUOTE BAND ==================== -->
+    <section class="band">
+      <div class="container reveal">
+        <svg class="band-mark" aria-hidden="true"><use href="#icon-shuttle"/></svg>
+        <figure class="band-quote">
+          <blockquote>
+            <p>Our goal is simple: to create the best conditions for every athlete — from first rally to championship point — to reach their full athletic and personal potential.</p>
+          </blockquote>
+          <figcaption>The Badminton Project</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ==================== WHAT WE DO ==================== -->
+    <section class="section section--ivory" id="what-we-do">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="overline">What We Do</p>
+          <h2>Training with <em>intention.</em></h2>
+          <div class="ornament" aria-hidden="true">
+            <span class="rule"></span>
+            <svg><use href="#icon-shuttle"/></svg>
+            <span class="rule"></span>
+          </div>
+          <p class="section-intro">Two training streams and a full calendar of adult badminton — each built with the same care, whether you are chasing titles or a great night on court.</p>
+        </header>
+        <div class="programs">
+          <article class="program reveal">
+            <span class="program-no" aria-hidden="true">01</span>
+            <div class="program-rule" aria-hidden="true"></div>
+            <p class="program-label">Athletic Development Programs</p>
+            <h3>High-Performance Training</h3>
+            <p>For the committed competitive athlete. Structured, high-intensity training designed to build complete players — technically, tactically, physically — and carry them toward the highest levels of the sport.</p>
+          </article>
+          <article class="program reveal" style="--d:.12s">
+            <span class="program-no" aria-hidden="true">02</span>
+            <div class="program-rule" aria-hidden="true"></div>
+            <p class="program-label">Intro &amp; Development Programs</p>
+            <h3>Competitive Training</h3>
+            <p>Where the competitive journey begins. Programs for new and developing competitors that build sound technique, movement and match craft — step by step, in an environment that takes their goals seriously.</p>
+          </article>
+          <article class="program reveal" style="--d:.24s">
+            <span class="program-no" aria-hidden="true">03</span>
+            <div class="program-rule" aria-hidden="true"></div>
+            <p class="program-label">Training &middot; Games Nights &middot; Social Nights</p>
+            <h3>Adult Programs</h3>
+            <p>Badminton for life. Adult training programs to sharpen your game, alongside games nights and badminton social nights — because the game belongs to everyone, at every stage.</p>
+          </article>
+        </div>
+        <div class="section-cta reveal">
+          <a class="btn btn--green" href="programs.html">Explore Programs &amp; Courses</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== MOMENTS (photo gallery) ==================== -->
+    <!-- To add a photo: save it in assets/photos/ and copy one of the <figure>
+         blocks below with the new filename and a short alt description.
+         Figures whose image file is missing are hidden automatically. -->
+    <section class="section moments" id="moments" data-moments>
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="overline">Moments</p>
+          <h2>From the <em>court.</em></h2>
+          <div class="ornament" aria-hidden="true">
+            <span class="rule"></span>
+            <svg><use href="#icon-shuttle"/></svg>
+            <span class="rule"></span>
+          </div>
+          <p class="section-intro">Snapshots from around the Project.</p>
+        </header>
+        <div class="moments-grid">
+          <figure class="moment reveal">
+            <img src="assets/photos/photo-01.jpg" alt="Two players share a smile at a tournament medal presentation" loading="lazy">
+          </figure>
+          <figure class="moment reveal" style="--d:.12s">
+            <img src="assets/photos/photo-02.jpg" alt="Two young players together at a badminton tournament" loading="lazy">
+          </figure>
+        </div>
+        <div class="section-cta reveal">
+          <a class="btn btn--gold" href="gallery.html">Visit the Gallery</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== JOIN ==================== -->
+    <section class="section section--green" id="join">
+      <div class="container narrow">
+        <p class="overline reveal">Join the Project</p>
+        <h2 class="reveal" style="--d:.1s">Be part of it<br><em>from the beginning.</em></h2>
+        <div class="ornament reveal" style="--d:.2s" aria-hidden="true">
+          <span class="rule"></span>
+          <svg><use href="#icon-shuttle"/></svg>
+          <span class="rule"></span>
+        </div>
+        <p class="join-copy reveal" style="--d:.3s">The Project is taking shape — training programs, games nights and social nights for athletes and adults alike. If you would like to train with us, play with us, or help build what comes next, we would love to hear from you.</p>
+        <a class="btn btn--gold reveal" style="--d:.4s" href="mailto:hello@thebadmintonproject.com">Get in Touch</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
+        <span>The Badminton Project</span>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="about.html">Who We Are</a>
+        <a href="programs.html">Programs</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="journal.html">Journal</a>
+        <a href="#join">Join</a>
+      </nav>
+      <p class="footer-soon">Coach profiles, schedules &amp; venues — <em>details coming soon</em></p>
+    </div>
+    <div class="container footer-base">
+      <p>&copy; <span data-year>2026</span> The Badminton Project. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=4"></script>
+</body>
+</html>

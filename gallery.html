@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gallery — The Badminton Project</title>
+  <meta name="description" content="Moments from The Badminton Project — training, tournaments, games nights and life around the court.">
+  <meta name="theme-color" content="#06231B">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=4">
+</head>
+<body id="top">
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Shared SVG symbols -->
+  <svg class="svg-defs" aria-hidden="true" focusable="false">
+    <symbol id="icon-shuttle" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="18.4" r="2.3"/>
+        <path d="M10.5 16.3 L6.2 6.4"/>
+        <path d="M11.6 16.05 L9.6 5.1"/>
+        <path d="M12.4 16.05 L14.4 5.1"/>
+        <path d="M13.5 16.3 L17.8 6.4"/>
+        <path d="M6.2 6.4 Q12 3.4 17.8 6.4"/>
+        <path d="M9.3 13.6 Q12 12.7 14.7 13.6"/>
+      </g>
+    </symbol>
+  </svg>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="site-header" data-header>
+    <div class="container nav-row">
+      <a class="brand" href="index.html" aria-label="The Badminton Project — home">
+        <svg class="brand-mark" aria-hidden="true"><use href="#icon-shuttle"/></svg>
+        <span class="brand-name">The Badminton Project</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="about.html">Who We Are</a>
+        <a href="programs.html">Programs</a>
+        <a href="gallery.html" aria-current="page">Gallery</a>
+        <a href="journal.html">Journal</a>
+        <a class="nav-cta" href="index.html#join">Join the Project</a>
+      </nav>
+      <button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu">
+        <span class="menu-label">Menu</span>
+        <span class="menu-bars" aria-hidden="true"><span></span><span></span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile navigation overlay -->
+  <div class="mobile-menu" id="mobile-menu" data-mobile-menu role="dialog" aria-modal="true" aria-label="Site menu">
+    <nav aria-label="Mobile">
+      <a href="about.html">Who We Are</a>
+      <a href="programs.html">Programs</a>
+      <a href="gallery.html" aria-current="page">Gallery</a>
+      <a href="journal.html">Journal</a>
+      <a href="index.html#join">Join the Project</a>
+      <div class="ornament" aria-hidden="true">
+        <span class="rule"></span>
+        <svg><use href="#icon-shuttle"/></svg>
+        <span class="rule"></span>
+      </div>
+    </nav>
+  </div>
+
+  <main id="main">
+
+    <!-- ==================== PAGE HERO ==================== -->
+    <section class="page-hero">
+      <div class="container">
+        <p class="overline reveal">Gallery</p>
+        <h1 class="reveal" style="--d:.1s">Moments from<br><em>the court.</em></h1>
+        <div class="ornament reveal" style="--d:.2s" aria-hidden="true">
+          <span class="rule"></span>
+          <svg><use href="#icon-shuttle"/></svg>
+          <span class="rule"></span>
+        </div>
+        <p class="page-lede reveal" style="--d:.3s">Training, tournaments, games nights and everything in between. The collection is just getting started — more photos are on their way.</p>
+      </div>
+    </section>
+
+    <!-- ==================== GALLERY GRID ==================== -->
+    <!-- To add a photo: save it in assets/photos/ (e.g. photo-03.jpg), then
+         replace a placeholder <figure class="moment moment--ph"> block with:
+         <figure class="moment reveal">
+           <img src="assets/photos/photo-03.jpg" alt="[short description]" loading="lazy">
+         </figure>
+         Figures whose image file is missing are hidden automatically. -->
+    <section class="section section--ivory" id="photos" data-moments>
+      <div class="container">
+        <div class="gallery-grid">
+          <figure class="moment reveal">
+            <img src="assets/photos/photo-01.jpg" alt="Two players share a smile at a tournament medal presentation" loading="lazy">
+          </figure>
+          <figure class="moment moment--ph reveal" style="--d:.06s">
+            <div class="ph-media" role="img" aria-label="Placeholder — coaches in action, photo coming soon">
+              <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
+              <span>Coaches in action<br>photo coming soon</span>
+            </div>
+          </figure>
+          <figure class="moment moment--ph reveal" style="--d:.12s">
+            <div class="ph-media" role="img" aria-label="Placeholder — junior training, photo coming soon">
+              <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
+              <span>Junior training<br>photo coming soon</span>
+            </div>
+          </figure>
+          <figure class="moment reveal" style="--d:.18s">
+            <img src="assets/photos/photo-02.jpg" alt="Two young players together at a badminton tournament" loading="lazy">
+          </figure>
+          <figure class="moment moment--ph reveal" style="--d:.24s">
+            <div class="ph-media" role="img" aria-label="Placeholder — kids on court, photo coming soon">
+              <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
+              <span>Kids on court<br>photo coming soon</span>
+            </div>
+          </figure>
+          <figure class="moment moment--ph reveal" style="--d:.3s">
+            <div class="ph-media" role="img" aria-label="Placeholder — games night, photo coming soon">
+              <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
+              <span>Games night<br>photo coming soon</span>
+            </div>
+          </figure>
+          <figure class="moment moment--ph reveal" style="--d:.36s">
+            <div class="ph-media" role="img" aria-label="Placeholder — tournament day, photo coming soon">
+              <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
+              <span>Tournament day<br>photo coming soon</span>
+            </div>
+          </figure>
+          <figure class="moment moment--ph reveal" style="--d:.42s">
+            <div class="ph-media" role="img" aria-label="Placeholder — social night, photo coming soon">
+              <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
+              <span>Social night<br>photo coming soon</span>
+            </div>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CTA ==================== -->
+    <section class="section section--green">
+      <div class="container narrow">
+        <p class="overline reveal">Join the Project</p>
+        <h2 class="reveal" style="--d:.1s">Be in the <em>next photo.</em></h2>
+        <div class="ornament reveal" style="--d:.2s" aria-hidden="true">
+          <span class="rule"></span>
+          <svg><use href="#icon-shuttle"/></svg>
+          <span class="rule"></span>
+        </div>
+        <p class="join-copy reveal" style="--d:.3s">Train with us, play with us, or just come for a social night — we would love to see you on court.</p>
+        <a class="btn btn--gold reveal" style="--d:.4s" href="mailto:hello@thebadmintonproject.com">Get in Touch</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
+        <span>The Badminton Project</span>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="about.html">Who We Are</a>
+        <a href="programs.html">Programs</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="journal.html">Journal</a>
+        <a href="index.html#join">Join</a>
+      </nav>
+      <p class="footer-soon">Coach profiles, schedules &amp; venues — <em>details coming soon</em></p>
+    </div>
+    <div class="container footer-base">
+      <p>&copy; <span data-year>2026</span> The Badminton Project. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=4"></script>
+</body>
+</html>
