@@ -7,16 +7,11 @@
   <meta name="description" content="The people behind The Badminton Project — our values and the two coaches leading high-performance and competitive badminton training for the community.">
   <meta name="theme-color" content="#06231B">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <script>document.documentElement.classList.add('js')</script>
+  <script>(function(d){d.classList.add('js');var r=false;try{r=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}if(!r){d.classList.add('entering');setTimeout(function(){d.classList.add('entered')},2500);try{if(sessionStorage.getItem('tbp-nav')){sessionStorage.removeItem('tbp-nav');d.classList.add('pt-in')}}catch(e){}}})(document.documentElement)</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=4">
-  <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
-  <script>
-    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-  </script>
-  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <link rel="stylesheet" href="css/styles.css?v=7">
 </head>
 <body id="top">
 
@@ -56,6 +51,7 @@
         <span class="menu-bars" aria-hidden="true"><span></span><span></span></span>
       </button>
     </div>
+    <div class="scroll-progress" aria-hidden="true" data-progress></div>
   </header>
 
   <!-- Mobile navigation overlay -->
@@ -79,14 +75,14 @@
     <!-- ==================== PAGE HERO ==================== -->
     <section class="page-hero">
       <div class="container">
-        <p class="overline reveal">Who We Are</p>
-        <h1 class="reveal" style="--d:.1s">The people behind<br><em>the Project.</em></h1>
-        <div class="ornament reveal" style="--d:.2s" aria-hidden="true">
+        <p class="overline">Who We Are</p>
+        <h1><span class="line"><span class="line-inner">The people behind</span></span><span class="line"><span class="line-inner"><em>the Project.</em></span></span></h1>
+        <div class="ornament" data-serve aria-hidden="true">
           <span class="rule"></span>
           <svg><use href="#icon-shuttle"/></svg>
           <span class="rule"></span>
         </div>
-        <p class="page-lede reveal" style="--d:.3s">The Badminton Project exists to provide our community with genuine high-performance and competitive badminton training — built by people who take the game seriously.</p>
+        <p class="page-lede">The Badminton Project exists to provide our community with genuine high-performance and competitive badminton training — built by people who take the game seriously.</p>
       </div>
     </section>
 
@@ -96,7 +92,7 @@
         <header class="section-head reveal">
           <p class="overline">What We Stand For</p>
           <h2>Three things we <em>hold to.</em></h2>
-          <div class="ornament" aria-hidden="true">
+          <div class="ornament" data-serve aria-hidden="true">
             <span class="rule"></span>
             <svg><use href="#icon-shuttle"/></svg>
             <span class="rule"></span>
@@ -129,7 +125,7 @@
         <header class="section-head reveal">
           <p class="overline">The Coaches</p>
           <h2>Meet your <em>coaches.</em></h2>
-          <div class="ornament" aria-hidden="true">
+          <div class="ornament" data-serve aria-hidden="true">
             <span class="rule"></span>
             <svg><use href="#icon-shuttle"/></svg>
             <span class="rule"></span>
@@ -180,7 +176,7 @@
       <div class="container narrow">
         <p class="overline reveal">Join the Project</p>
         <h2 class="reveal" style="--d:.1s">Train with <em>us.</em></h2>
-        <div class="ornament reveal" style="--d:.2s" aria-hidden="true">
+        <div class="ornament reveal" data-serve style="--d:.2s" aria-hidden="true">
           <span class="rule"></span>
           <svg><use href="#icon-shuttle"/></svg>
           <span class="rule"></span>
@@ -206,13 +202,12 @@
         <a href="journal.html">Journal</a>
         <a href="index.html#join">Join</a>
       </nav>
-      <p class="footer-soon">Coach profiles, schedules &amp; venues — <em>details coming soon</em></p>
     </div>
     <div class="container footer-base">
       <p>&copy; <span data-year>2026</span> The Badminton Project. All rights reserved.</p>
     </div>
   </footer>
 
-  <script src="js/main.js?v=4"></script>
+  <script src="js/main.js?v=7"></script>
 </body>
 </html>
