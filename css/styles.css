@@ -103,6 +103,8 @@ h1, h2, h3 {
 
 .btn {
   display: inline-block;
+  position: relative;
+  overflow: hidden;
   padding: 1rem 2.3rem;
   font: 500 0.74rem/1 var(--font-sans);
   letter-spacing: 0.26em;
@@ -111,6 +113,7 @@ h1, h2, h3 {
   border: 1px solid;
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
+.btn:active { transform: translateY(1px); }
 .btn--gold { color: var(--gold); border-color: var(--gold); }
 .btn--gold:hover { background: var(--gold); color: var(--green-950); }
 .btn--ghost { color: rgba(247, 243, 234, 0.9); border-color: rgba(247, 243, 234, 0.35); }
@@ -369,7 +372,17 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   margin: 5rem 0 0;
   padding: 0;
 }
-.values li { border-top: 1px solid var(--gold-soft); padding-top: 1.6rem; }
+.values li { position: relative; padding-top: 1.6rem; }
+.values li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gold-soft);
+  transform-origin: left;
+}
 .values h3 { font-size: 1.4rem; font-weight: 600; color: var(--green-800); margin-bottom: 0.6rem; }
 .values p { margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--ink-soft); }
 
@@ -429,7 +442,21 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   line-height: 1;
   color: var(--gold-ink);
 }
-.program-rule { width: 34px; height: 1px; background: var(--gold-soft); margin: 1.4rem 0 1.6rem; }
+.program-rule {
+  width: 34px;
+  height: 1px;
+  background: var(--gold-soft);
+  margin: 1.4rem 0 1.6rem;
+  transform-origin: left;
+  transition: width 0.6s var(--ease-settle), background-color 0.6s ease, transform 0.8s var(--ease-draw);
+}
+.program:hover .program-rule {
+  width: 60px;
+  background: var(--gold-ink);
+  transition: width 0.45s var(--ease-settle), background-color 0.45s ease, transform 0.8s var(--ease-draw);
+}
+.program-no { transition: color 0.3s ease; }
+.program:hover .program-no { color: var(--green-800); }
 .program-label {
   font: 500 0.66rem/1.6 var(--font-sans);
   letter-spacing: 0.22em;
@@ -466,12 +493,14 @@ h2 em { font-style: italic; color: var(--gold-ink); }
 }
 .moment {
   margin: 0;
+  position: relative;
   background: var(--ivory-bright);
   padding: 12px;
   border: 1px solid rgba(201, 166, 73, 0.35);
   box-shadow: 0 28px 46px -32px rgba(0, 0, 0, 0.55);
   transition: transform 0.35s ease;
 }
+.print { display: block; overflow: hidden; }
 .moment:hover { transform: translateY(-5px); }
 .moment img {
   display: block;
@@ -512,7 +541,17 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   justify-content: space-between;
   gap: 1.6rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(201, 166, 73, 0.14);
+  position: relative;
+}
+.footer-grid::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(201, 166, 73, 0.14);
+  transform-origin: center;
 }
 .footer-brand { display: inline-flex; align-items: center; gap: 0.7rem; }
 .footer-brand svg { width: 20px; height: 20px; color: var(--gold); }
@@ -532,19 +571,82 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   transition: color 0.25s ease;
 }
 .footer-nav a:hover { color: var(--gold); }
-.footer-soon { margin: 0; font-size: 0.78rem; font-weight: 300; letter-spacing: 0.06em; color: rgba(247, 243, 234, 0.6); }
-.footer-soon em { color: var(--gold); }
 .footer-base { padding-top: 1.6rem; text-align: center; }
 .footer-base p { margin: 0; font-size: 0.74rem; letter-spacing: 0.04em; color: rgba(247, 243, 234, 0.6); }
+
+/* ---------- Atmosphere: hero media, marquee, grain, progress ---------- */
+
+/* Hero background video (assets/video/hero.mp4) with animated rally fallback */
+.hero-media { position: absolute; inset: 0; overflow: hidden; }
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+  filter: saturate(0.5) brightness(0.42) contrast(1.05);
+}
+.hero-media.has-video .hero-video { opacity: 0.55; }
+.hero-media.has-video::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11, 61, 46, 0.4), rgba(4, 27, 20, 0.6));
+}
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.9s ease;
+}
+.hero-media.has-video .hero-canvas { opacity: 0; }
+
+/* Film grain over the dark sections */
+.band, .section--green, .moments, .page-hero { position: relative; }
+.grain,
+.band::after,
+.section--green::after,
+.moments::after,
+.page-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  opacity: 0.055;
+  mix-blend-mode: overlay;
+}
+
+/* Scroll progress hairline under the header */
+.scroll-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), #E4CF87);
+  transform: scaleX(0);
+  transform-origin: left;
+}
 
 /* ---------- Sub-pages ---------- */
 
 .page-hero {
   background: radial-gradient(120% 120% at 50% 0%, #0E4636 0%, var(--green-800) 45%, var(--green-950) 100%);
-  padding: 11rem 0 5.5rem;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: 8rem 0 5rem;
   text-align: center;
   color: var(--ivory);
 }
+.page-hero .container { width: min(var(--container), 92%); }
 .page-hero .overline { color: var(--gold); }
 .page-hero h1 {
   font-size: clamp(2.6rem, 6vw, 4.4rem);
@@ -617,7 +719,17 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   list-style: none;
   margin: 1.4rem 0 0;
   padding: 1.4rem 0 0;
-  border-top: 1px solid var(--gold-soft);
+  position: relative;
+}
+.coach-ach::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gold-soft);
+  transform-origin: left;
 }
 .coach-ach-title {
   font: 500 0.66rem/1 var(--font-sans);
@@ -651,10 +763,20 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   gap: 2.5rem 3.5rem;
   align-items: center;
   padding: 3.5rem 0;
-  border-top: 1px solid var(--line-light);
+  position: relative;
   text-align: left;
 }
-.course:first-child { border-top: 0; }
+.course::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--line-light);
+  transform-origin: left;
+}
+.course:first-child::before { display: none; }
 .course-media .ph-media { aspect-ratio: 4 / 3; }
 .course:nth-child(even) .course-media { order: 2; }
 .course-stream {
@@ -674,7 +796,9 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   color: var(--gold-ink);
   border: 1px solid var(--gold-soft);
   padding: 0.55rem 0.9rem;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
 }
+.chip:hover { border-color: var(--gold-ink); background: rgba(201, 166, 73, 0.07); }
 
 /* Venue card (programs page) */
 .venue-card {
@@ -762,6 +886,193 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
 @media (max-width: 430px) {
   .nav-row { gap: 1rem; }
   .brand-name { font-size: 0.64rem; letter-spacing: 0.12em; white-space: nowrap; }
+}
+
+/* ==========================================================================
+   Motion system — entrance choreography, signature moments, page transitions
+   (concepts documented in ANIMATIONS.md; every state below degrades to
+   "instantly visible, no motion" under reduced motion or without JS)
+   ========================================================================== */
+
+:root {
+  --ease-settle: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-draw: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* Masked title lines (home hero + page heroes) */
+.line { display: block; overflow: hidden; padding: 0.14em 0.18em; margin: -0.14em -0.18em; }
+.line-inner { display: block; }
+
+/* Scoreboard roll (structure built by JS) */
+.roll { display: inline-block; overflow: hidden; height: 1em; line-height: 1; }
+.roll-track { display: block; transition: transform 0.55s var(--ease-settle); }
+.roll-track span { display: block; height: 1em; }
+.roll + .roll .roll-track { transition-delay: 0.08s; }
+.program-no.is-rolled .roll-track { transform: translateY(-50%); }
+
+/* Photo frame outline (SVG injected by JS) */
+.moment .frame { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.moment .frame rect { fill: none; stroke: rgba(201, 166, 73, 0.35); stroke-width: 1; vector-effect: non-scaling-stroke; }
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* ---- The opening ceremony: held states before the curtain ---- */
+  html.entering .hero-overline,
+  html.entering .page-hero .overline { opacity: 0; letter-spacing: 0.58em; }
+  html.entering .line-inner { transform: translateY(115%); }
+  html.entering .hero-lede,
+  html.entering .hero-actions,
+  html.entering .page-lede { opacity: 0; transform: translateY(10px); }
+  html.entering .scroll-cue { opacity: 0; }
+  html.entering .hero-media { transform: scale(1.045); }
+  html.entering .hero-court { opacity: 0; }
+  html.entering .hero-court .c-draw { stroke-dasharray: 100; stroke-dashoffset: 100; }
+  html.entering .hero-court .c-net { transform: scaleX(0); transform-origin: center; transform-box: fill-box; }
+
+  /* ---- The opening ceremony: play ---- */
+  html.entering.entered .hero-overline {
+    opacity: 1;
+    letter-spacing: 0.38em;
+    transition: opacity 1.1s ease 0.3s, letter-spacing 1.1s ease 0.3s;
+  }
+  html.entering.entered .page-hero .overline {
+    opacity: 1;
+    letter-spacing: 0.38em;
+    transition: opacity 0.9s ease, letter-spacing 0.9s ease;
+  }
+  html.entering.entered .line-inner { transform: none; transition: transform 0.9s var(--ease-settle); }
+  html.entering.entered .t1 .line-inner { transition-delay: 0.5s; }
+  html.entering.entered .t2 .line-inner { transition-delay: 0.62s; }
+  html.entering.entered .t3 .line-inner { transition-delay: 0.74s; }
+  html.entering.entered .page-hero h1 .line:first-child .line-inner { transition-duration: 0.8s; transition-delay: 0.15s; }
+  html.entering.entered .page-hero h1 .line:nth-child(2) .line-inner { transition-duration: 0.95s; transition-delay: 0.29s; }
+  html.entering.entered .hero-lede { opacity: 1; transform: none; transition: opacity 0.7s ease 1.6s, transform 0.7s var(--ease-settle) 1.6s; }
+  html.entering.entered .hero-actions { opacity: 1; transform: none; transition: opacity 0.7s ease 1.75s, transform 0.7s var(--ease-settle) 1.75s; }
+  html.entering.entered .page-lede { opacity: 1; transform: none; transition: opacity 0.6s ease 0.7s, transform 0.6s var(--ease-settle) 0.7s; }
+  html.entering.entered .scroll-cue { opacity: 1; transition: opacity 0.8s ease 2.2s; }
+  html.entering.entered .hero-media { transform: scale(1); transition: transform 2.4s ease-out; }
+  html.entering.entered .hero-court { animation: courtGlow 2.3s ease forwards; }
+  html.entering.entered .hero-court .c-draw { stroke-dashoffset: 0; transition: stroke-dashoffset 0.7s var(--ease-draw); }
+  html.entering.entered .hero-court .c-bound { transition-duration: 0.9s; }
+  html.entering.entered .hero-court .c-side { transition-delay: 0.25s; }
+  html.entering.entered .hero-court .c-serve { transition-delay: 0.55s; }
+  html.entering.entered .hero-court .c-center { transition-delay: 0.8s; }
+  html.entering.entered .hero-court .c-net { transform: scaleX(1); transition: transform 0.5s var(--ease-draw) 1.45s; }
+
+  /* ---- The header takes its seat (once per session) ---- */
+  html.hdr-enter .brand,
+  html.hdr-enter .site-nav a,
+  html.hdr-enter .menu-toggle { opacity: 0; }
+  html.hdr-enter.entered .brand,
+  html.hdr-enter.entered .site-nav a,
+  html.hdr-enter.entered .menu-toggle {
+    animation: hdrIn 0.7s var(--ease-settle) both;
+    animation-delay: var(--hdr-delay, 1.9s);
+  }
+  html.hdr-enter.entered .menu-toggle { animation-delay: calc(var(--hdr-delay, 1.9s) + 0.05s); }
+  html.hdr-enter.entered .site-nav a:nth-child(1) { animation-delay: calc(var(--hdr-delay, 1.9s) + 0.05s); }
+  html.hdr-enter.entered .site-nav a:nth-child(2) { animation-delay: calc(var(--hdr-delay, 1.9s) + 0.1s); }
+  html.hdr-enter.entered .site-nav a:nth-child(3) { animation-delay: calc(var(--hdr-delay, 1.9s) + 0.15s); }
+  html.hdr-enter.entered .site-nav a:nth-child(4) { animation-delay: calc(var(--hdr-delay, 1.9s) + 0.2s); }
+  html.hdr-enter.entered .site-nav a:nth-child(5) { animation-delay: calc(var(--hdr-delay, 1.9s) + 0.25s); }
+
+  /* ---- The serve: ornaments assemble shuttle-first ---- */
+  html.js [data-serve] svg { opacity: 0; transform: translateY(-10px) rotate(-14deg) scale(0.92); }
+  html.js [data-serve] .rule:first-child { transform: scaleX(0); transform-origin: right center; }
+  html.js [data-serve] .rule:last-child { transform: scaleX(0); transform-origin: left center; }
+  html.js [data-serve].is-served svg {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.3s ease-out, transform 0.65s cubic-bezier(0.34, 1.3, 0.64, 1);
+  }
+  html.js [data-serve].is-served .rule { transform: scaleX(1); transition: transform 0.55s var(--ease-draw) 0.12s; }
+
+  /* ---- Chalk lines: structural rules draw themselves ---- */
+  .values li::before,
+  .course::before,
+  .coach-ach::before,
+  .footer-grid::after { transition: transform 0.8s var(--ease-draw); }
+  html.js .values li:not(.is-ruled)::before,
+  html.js .course:not(.is-ruled)::before,
+  html.js .coach-ach:not(.is-ruled)::before,
+  html.js .footer-grid:not(.is-ruled)::after,
+  html.js .program-rule:not(.is-ruled) { transform: scaleX(0); }
+  html.js .values li:nth-child(2)::before { transition-delay: 0.09s; }
+  html.js .values li:nth-child(3)::before { transition-delay: 0.18s; }
+
+  /* ---- The darkroom print: photos develop in, breathe on hover ---- */
+  html.js .moment img { transition: opacity 0.9s ease, filter 0.9s ease, transform 0.9s ease; }
+  html.js .moment img:not(.is-developed) { opacity: 0; filter: saturate(0.7) brightness(1.05); }
+  .moment:hover img { transform: scale(1.025); transition: opacity 0.9s ease, filter 0.9s ease, transform 1.2s ease; }
+
+  /* ---- Framing the moment: gold frame draws around each print ---- */
+  html.js .moment.has-frame { border-color: transparent; }
+  html.js .moment.has-frame .frame rect { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1s var(--ease-draw); }
+  html.js .moment.has-frame.is-framed .frame rect { stroke-dashoffset: 0; }
+
+  /* ---- Cufflink polish: one pass of light across buttons ---- */
+  .btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 45%;
+    background: linear-gradient(105deg, transparent, rgba(253, 251, 245, 0.16) 50%, transparent);
+    transform: translateX(-140%);
+    pointer-events: none;
+  }
+  .btn:hover::after,
+  .btn:focus-visible::after { transform: translateX(320%); transition: transform 0.65s ease-out 0.08s; }
+
+  /* ---- The steward's stamp: quote-band signature settles in ---- */
+  html.js .band figcaption { transition: opacity 1.1s var(--ease-settle), letter-spacing 1.1s var(--ease-settle); }
+  html.js .band figcaption:not(.is-stamped) { opacity: 0; letter-spacing: 0.5em; }
+
+  /* ---- Changing ends + rally handoff: page transitions ---- */
+  html.pt-out::before,
+  html.pt-in::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: var(--green-950);
+    z-index: 300;
+    pointer-events: none;
+  }
+  html.pt-out::before { opacity: 0; animation: ptDim 0.22s ease-in forwards; }
+  html.pt-in::before { opacity: 1; animation: ptClear 0.5s ease 0.12s forwards; }
+  html.pt-out::after,
+  html.pt-in::after {
+    content: "";
+    position: fixed;
+    top: 38%;
+    left: 0;
+    height: 2px;
+    width: 30vw;
+    z-index: 301;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, rgba(201, 166, 73, 0.9) 92%, #EAD489 100%);
+    filter: drop-shadow(0 0 6px rgba(201, 166, 73, 0.7));
+    transform: translateX(-32vw) rotate(-3deg);
+  }
+  html.pt-out::after { animation: ptStreak 0.32s cubic-bezier(0.55, 0, 1, 0.45) forwards; }
+  html.pt-in::after { animation: ptStreak 0.4s cubic-bezier(0, 0.55, 0.45, 1) 0.1s both; }
+}
+
+@keyframes courtGlow {
+  0% { opacity: 0; }
+  45% { opacity: 0.3; }
+  100% { opacity: 0.12; }
+}
+@keyframes hdrIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes ptDim { to { opacity: 1; } }
+@keyframes ptClear { to { opacity: 0; } }
+@keyframes ptStreak {
+  from { transform: translateX(-32vw) rotate(-3deg); }
+  to { transform: translateX(104vw) rotate(-3deg); }
 }
 
 /* ---------- Reduced motion ---------- */

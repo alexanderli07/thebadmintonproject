@@ -10,11 +10,11 @@
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#06231B">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <script>document.documentElement.classList.add('js')</script>
+  <script>(function(d){d.classList.add('js');var r=false;try{r=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}if(!r){d.classList.add('entering');setTimeout(function(){d.classList.add('entered')},2500);try{if(sessionStorage.getItem('tbp-nav')){sessionStorage.removeItem('tbp-nav');d.classList.add('pt-in')}}catch(e){}}})(document.documentElement)</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=4">
+  <link rel="stylesheet" href="css/styles.css?v=7">
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
@@ -63,6 +63,7 @@
         <span class="menu-bars" aria-hidden="true"><span></span><span></span></span>
       </button>
     </div>
+    <div class="scroll-progress" aria-hidden="true" data-progress></div>
   </header>
 
   <!-- Mobile navigation overlay -->
@@ -85,41 +86,51 @@
 
     <!-- ==================== HERO ==================== -->
     <section class="hero">
+      <!-- Background video: drop a muted badminton clip at assets/video/hero.mp4
+           and it plays automatically. Until then, an animated shuttlecock rally
+           line is drawn on the canvas below. -->
+      <div class="hero-media" aria-hidden="true" data-hero-media>
+        <video class="hero-video" data-hero-video autoplay muted loop playsinline preload="metadata">
+          <source src="assets/video/hero.mp4" type="video/mp4">
+        </video>
+        <canvas class="hero-canvas" data-rally></canvas>
+      </div>
       <div class="hero-court" aria-hidden="true">
         <svg viewBox="0 0 244 536" xmlns="http://www.w3.org/2000/svg">
           <g fill="none" stroke="#C9A649" stroke-width="1.5">
-            <rect x="2" y="2" width="240" height="532"/>
-            <line x1="20" y1="2" x2="20" y2="534"/>
-            <line x1="224" y1="2" x2="224" y2="534"/>
-            <line x1="2" y1="32" x2="242" y2="32"/>
-            <line x1="2" y1="504" x2="242" y2="504"/>
-            <line x1="2" y1="189" x2="242" y2="189"/>
-            <line x1="2" y1="347" x2="242" y2="347"/>
-            <line x1="122" y1="2" x2="122" y2="189"/>
-            <line x1="122" y1="347" x2="122" y2="534"/>
-            <line x1="2" y1="268" x2="242" y2="268" stroke-dasharray="6 6"/>
+            <rect class="c-draw c-bound" pathLength="100" x="2" y="2" width="240" height="532"/>
+            <line class="c-draw c-side" pathLength="100" x1="20" y1="2" x2="20" y2="534"/>
+            <line class="c-draw c-side" pathLength="100" x1="224" y1="2" x2="224" y2="534"/>
+            <line class="c-draw c-serve" pathLength="100" x1="2" y1="32" x2="242" y2="32"/>
+            <line class="c-draw c-serve" pathLength="100" x1="2" y1="504" x2="242" y2="504"/>
+            <line class="c-draw c-serve" pathLength="100" x1="2" y1="189" x2="242" y2="189"/>
+            <line class="c-draw c-serve" pathLength="100" x1="2" y1="347" x2="242" y2="347"/>
+            <line class="c-draw c-center" pathLength="100" x1="122" y1="2" x2="122" y2="189"/>
+            <line class="c-draw c-center" pathLength="100" x1="122" y1="347" x2="122" y2="534"/>
+            <line class="c-net" x1="2" y1="268" x2="242" y2="268" stroke-dasharray="6 6"/>
           </g>
         </svg>
       </div>
       <div class="container hero-inner">
-        <p class="overline hero-overline reveal">Badminton &middot; Community &middot; Excellence</p>
-        <h1 class="hero-title reveal" style="--d:.1s">
-          <span class="t1">The</span>
-          <span class="t2">Badminton</span>
-          <span class="t3">Project</span>
+        <p class="overline hero-overline">Badminton &middot; Community &middot; Excellence</p>
+        <h1 class="hero-title">
+          <span class="t1 line"><span class="line-inner">The</span></span>
+          <span class="t2 line"><span class="line-inner">Badminton</span></span>
+          <span class="t3 line"><span class="line-inner">Project</span></span>
         </h1>
-        <div class="ornament reveal" style="--d:.2s" aria-hidden="true">
+        <div class="ornament" data-serve aria-hidden="true">
           <span class="rule"></span>
           <svg><use href="#icon-shuttle"/></svg>
           <span class="rule"></span>
         </div>
-        <p class="hero-lede reveal" style="--d:.3s">High-performance training. Competitive development. A&nbsp;community built around the game.</p>
-        <div class="hero-actions reveal" style="--d:.4s">
+        <p class="hero-lede">High-performance training. Competitive development. A&nbsp;community built around the game.</p>
+        <div class="hero-actions">
           <a class="btn btn--gold" href="#who-we-are">Discover the Project</a>
           <a class="btn btn--ghost" href="#what-we-do">Our Programs</a>
         </div>
       </div>
       <a class="scroll-cue" href="#who-we-are" aria-label="Scroll to Who We Are"><span></span></a>
+      <div class="grain" aria-hidden="true"></div>
     </section>
 
     <!-- ==================== WHO WE ARE ==================== -->
@@ -128,7 +139,7 @@
         <header class="section-head reveal">
           <p class="overline">Who We Are</p>
           <h2>Every great athlete<br>begins as <em>a project.</em></h2>
-          <div class="ornament" aria-hidden="true">
+          <div class="ornament" data-serve aria-hidden="true">
             <span class="rule"></span>
             <svg><use href="#icon-shuttle"/></svg>
             <span class="rule"></span>
@@ -168,7 +179,7 @@
         <header class="section-head reveal">
           <p class="overline">What We Do</p>
           <h2>Training with <em>intention.</em></h2>
-          <div class="ornament" aria-hidden="true">
+          <div class="ornament" data-serve aria-hidden="true">
             <span class="rule"></span>
             <svg><use href="#icon-shuttle"/></svg>
             <span class="rule"></span>
@@ -213,7 +224,7 @@
         <header class="section-head reveal">
           <p class="overline">Moments</p>
           <h2>From the <em>court.</em></h2>
-          <div class="ornament" aria-hidden="true">
+          <div class="ornament" data-serve aria-hidden="true">
             <span class="rule"></span>
             <svg><use href="#icon-shuttle"/></svg>
             <span class="rule"></span>
@@ -222,10 +233,10 @@
         </header>
         <div class="moments-grid">
           <figure class="moment reveal">
-            <img src="assets/photos/photo-01.jpg" alt="Two players share a smile at a tournament medal presentation" loading="lazy">
+            <span class="print"><img src="assets/photos/photo-01.jpg" alt="Two players share a smile at a tournament medal presentation" loading="lazy"></span>
           </figure>
           <figure class="moment reveal" style="--d:.12s">
-            <img src="assets/photos/photo-02.jpg" alt="Two young players together at a badminton tournament" loading="lazy">
+            <span class="print"><img src="assets/photos/photo-02.jpg" alt="Two young players together at a badminton tournament" loading="lazy"></span>
           </figure>
         </div>
         <div class="section-cta reveal">
@@ -239,7 +250,7 @@
       <div class="container narrow">
         <p class="overline reveal">Join the Project</p>
         <h2 class="reveal" style="--d:.1s">Be part of it<br><em>from the beginning.</em></h2>
-        <div class="ornament reveal" style="--d:.2s" aria-hidden="true">
+        <div class="ornament reveal" data-serve style="--d:.2s" aria-hidden="true">
           <span class="rule"></span>
           <svg><use href="#icon-shuttle"/></svg>
           <span class="rule"></span>
@@ -265,13 +276,12 @@
         <a href="journal.html">Journal</a>
         <a href="#join">Join</a>
       </nav>
-      <p class="footer-soon">Coach profiles, schedules &amp; venues — <em>details coming soon</em></p>
     </div>
     <div class="container footer-base">
       <p>&copy; <span data-year>2026</span> The Badminton Project. All rights reserved.</p>
     </div>
   </footer>
 
-  <script src="js/main.js?v=4"></script>
+  <script src="js/main.js?v=7"></script>
 </body>
 </html>
