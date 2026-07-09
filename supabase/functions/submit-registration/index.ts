@@ -13,6 +13,7 @@ const ALLOWED_PROGRAMS = new Set([
   "Competition Team Training",
   "Intro & Developmental Training",
   "Athletic Development Training",
+  "Adult Training",
 ]);
 
 const ALLOWED_LOCATIONS = new Set([

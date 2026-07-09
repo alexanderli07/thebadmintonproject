@@ -33,8 +33,8 @@
   <rect x="86" y="128" width="1028" height="390" fill="url(#title-shade)"/>
 
   <text x="600" y="116" text-anchor="middle" fill="#C9A649"
-        font-family="Helvetica Neue" font-size="21" font-weight="500"
-        letter-spacing="9">BADMINTON · COMMUNITY · EXCELLENCE</text>
+        font-family="Helvetica Neue" font-size="19" font-weight="500"
+        letter-spacing="6.5">TRAINING · COACHING · ATHLETIC DEVELOPMENT · EXCELLENCE</text>
 
   <text x="600" y="205" text-anchor="middle" fill="#C9A649"
         transform="translate(600 0) skewX(-12) translate(-600 0)"
