@@ -35,6 +35,7 @@ server that disables caching, so your edits always show up on refresh.)
 | `js/main.js` | Small enhancements: sticky header, mobile menu, scroll-reveal, photo gallery |
 | `assets/favicon.svg` | The shuttlecock browser-tab icon |
 | `assets/photos/` | Website photos (see below); untouched originals in `originals/` |
+| `assets/backdrops/` | Blurred hero backdrops for the sub-pages (stills from the hero footage) |
 | `serve.py` | Optional local dev server with caching disabled |
 
 ## Atmosphere (what makes it feel alive)
