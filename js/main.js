@@ -206,6 +206,30 @@
     each(el.querySelectorAll('.reveal'), function (r) { revealEl(r); });
   }
 
+  /* Hold a section's reveals until the scroll has actually arrived AND any
+     minimum delay (e.g. the arrival veil clearing) has passed, so the
+     animation always plays in front of the visitor — never mid-flight */
+  function revealOnArrival(target, top, minDelay, fallback) {
+    var started = Date.now();
+    var fired = false;
+    var fire = function () {
+      if (fired) return;
+      fired = true;
+      window.removeEventListener('scroll', attempt);
+      revealSection(target);
+    };
+    var attempt = function () {
+      if (Math.abs(window.scrollY - top) < 120) {
+        var wait = minDelay - (Date.now() - started);
+        if (wait <= 0) fire();
+        else setTimeout(attempt, wait); /* arrived early — wait out the veil */
+      }
+    };
+    window.addEventListener('scroll', attempt, { passive: true });
+    setTimeout(attempt, minDelay || 0); /* in case we are already there */
+    setTimeout(fire, fallback); /* absolute fallback if the scroll is interrupted */
+  }
+
   each(document.querySelectorAll('a[href^="#"]'), function (link) {
     var id = link.getAttribute('href').slice(1);
     if (!id || id === 'top' || id === 'main') return; /* keep native skip/top behaviour */
@@ -213,21 +237,43 @@
       var target = document.getElementById(id);
       if (!target) return;
       e.preventDefault();
-      window.scrollTo({ top: sectionScrollTop(target), behavior: REDUCED ? 'auto' : 'smooth' });
-      revealSection(target);
+      var top = sectionScrollTop(target);
+      /* take the section's reveals away from the scroll observer — arrival owns them */
+      if (typeof io !== 'undefined' && io) {
+        each(target.querySelectorAll('.reveal'), function (r) { io.unobserve(r); });
+      }
+      window.scrollTo({ top: top, behavior: REDUCED ? 'auto' : 'smooth' });
       if (history.replaceState) history.replaceState(null, '', '#' + id);
+      if (REDUCED) revealSection(target);
+      else revealOnArrival(target, top, 0, 1400);
     });
   });
 
   if (location.hash && location.hash.length > 1) {
     var hashTarget = document.getElementById(location.hash.slice(1));
     if (hashTarget && location.hash !== '#top' && location.hash !== '#main') {
-      /* after the browser's own hash jump: re-align so the section's end
-         (e.g. the Join button) is on screen, and play its reveals */
-      setTimeout(function () {
-        window.scrollTo(0, sectionScrollTop(hashTarget));
-        revealSection(hashTarget);
-      }, 80);
+      /* claim this section's reveals right now (synchronously, before the
+         scroll observer delivers), so they can't play under the arrival veil */
+      if (!REDUCED && typeof io !== 'undefined' && io) {
+        each(hashTarget.querySelectorAll('.reveal'), function (r) { io.unobserve(r); });
+      }
+      /* Chrome smooth-scrolls to the fragment on load (scroll-behavior:
+         smooth), so arrival is a ride, not a jump. Re-aim at the section's
+         end, then fire the reveals only when the scroll has actually landed
+         AND the arrival veil (~620ms) has cleared. */
+      var veilDelay = docEl.classList.contains('pt-in') ? 700 : 120;
+      if (REDUCED) {
+        setTimeout(function () {
+          window.scrollTo(0, sectionScrollTop(hashTarget));
+          revealSection(hashTarget);
+        }, 80);
+      } else {
+        setTimeout(function () {
+          var top = sectionScrollTop(hashTarget);
+          window.scrollTo(0, top); /* rides along with the CSS smooth scroll */
+          revealOnArrival(hashTarget, top, veilDelay, 3000);
+        }, 80);
+      }
     }
   }
 
