@@ -143,26 +143,30 @@
             <div class="form-grid">
               <div class="field">
                 <label for="f-first-name">First name *</label>
-                <input type="text" id="f-first-name" name="first_name" required autocomplete="given-name" maxlength="80">
+                <input type="text" id="f-first-name" name="first_name" required autocomplete="section-registrant given-name" maxlength="80">
               </div>
               <div class="field">
                 <label for="f-last-name">Last name *</label>
-                <input type="text" id="f-last-name" name="last_name" required autocomplete="family-name" maxlength="80">
+                <input type="text" id="f-last-name" name="last_name" required autocomplete="section-registrant family-name" maxlength="80">
               </div>
               <div class="field">
                 <label for="f-email">Email *</label>
-                <input type="email" id="f-email" name="email" required autocomplete="email" maxlength="254">
+                <input type="email" id="f-email" name="email" required autocomplete="section-registrant email" maxlength="254">
               </div>
               <div class="field">
                 <label for="f-phone">Phone</label>
-                <input type="tel" id="f-phone" name="phone" autocomplete="tel" maxlength="40">
+                <input type="tel" id="f-phone" name="phone" autocomplete="section-registrant tel" maxlength="40">
               </div>
               <div class="field">
-                <label for="f-kid">Player's name (if registering your child)</label>
-                <input type="text" id="f-kid" name="player" maxlength="160">
+                <label for="f-player-first-name">Child's first name (if applicable)</label>
+                <input type="text" id="f-player-first-name" name="player_first_name" autocomplete="section-player given-name" maxlength="80">
               </div>
               <div class="field">
-                <label for="f-age">Player's age</label>
+                <label for="f-player-last-name">Child's last name</label>
+                <input type="text" id="f-player-last-name" name="player_last_name" autocomplete="section-player family-name" maxlength="80">
+              </div>
+              <div class="field">
+                <label for="f-age">Child's age</label>
                 <input type="number" id="f-age" name="age" inputmode="numeric" min="1" max="120">
               </div>
               <fieldset class="field field--full">
