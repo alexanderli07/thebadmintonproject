@@ -260,11 +260,12 @@ body.menu-open { overflow: hidden; }
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 150%;
-  opacity: 0.12;
+  width: min(112vw, 210vh);
+  aspect-ratio: 536 / 244;
+  opacity: 0.11;
   pointer-events: none;
 }
-.hero-court svg { height: 100%; width: auto; }
+.hero-court svg { width: 100%; height: 100%; }
 .hero::after {
   content: "";
   position: absolute;
@@ -683,11 +684,12 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 150%;
-  opacity: 0.12;
+  width: min(112vw, 210vh);
+  aspect-ratio: 536 / 244;
+  opacity: 0.11;
   pointer-events: none;
 }
-.page-court svg { height: 100%; width: auto; }
+.page-court svg { width: 100%; height: 100%; }
 .page-hero .overline { color: var(--gold); }
 .page-hero h1 {
   font-size: clamp(2.6rem, 6vw, 4.4rem);
@@ -1083,6 +1085,20 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
   .brand-name { font-size: 0.64rem; letter-spacing: 0.12em; white-space: nowrap; }
 }
 
+@media (max-width: 700px) and (orientation: portrait) {
+  .hero-court,
+  .page-court {
+    width: 150vh;
+    width: 150svh;
+  }
+
+  .hero-court svg,
+  .page-court svg {
+    transform: rotate(90deg);
+    transform-origin: center;
+  }
+}
+
 /* ==========================================================================
    Motion system — entrance choreography, signature moments, page transitions
    (concepts documented in ANIMATIONS.md; every state below degrades to
@@ -1122,7 +1138,7 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
   html.entering .hero-media { transform: scale(1.045); }
   html.entering :is(.hero-court, .page-court) { opacity: 0; }
   html.entering :is(.hero-court, .page-court) .c-draw { stroke-dasharray: 100; stroke-dashoffset: 100; }
-  html.entering :is(.hero-court, .page-court) .c-net { transform: scaleX(0); transform-origin: center; transform-box: fill-box; }
+  html.entering :is(.hero-court, .page-court) .c-net { transform: scaleY(0); transform-origin: center; transform-box: fill-box; }
 
   /* ---- The opening ceremony: play ---- */
   html.entering.entered .hero-overline {
@@ -1149,10 +1165,10 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
   html.entering.entered :is(.hero-court, .page-court) { animation: courtGlow 2.3s ease forwards; }
   html.entering.entered :is(.hero-court, .page-court) .c-draw { stroke-dashoffset: 0; transition: stroke-dashoffset 0.7s var(--ease-draw); }
   html.entering.entered :is(.hero-court, .page-court) .c-bound { transition-duration: 0.9s; }
-  html.entering.entered :is(.hero-court, .page-court) .c-side { transition-delay: 0.25s; }
-  html.entering.entered :is(.hero-court, .page-court) .c-serve { transition-delay: 0.55s; }
-  html.entering.entered :is(.hero-court, .page-court) .c-center { transition-delay: 0.8s; }
-  html.entering.entered :is(.hero-court, .page-court) .c-net { transform: scaleX(1); transition: transform 0.5s var(--ease-draw) 1.45s; }
+  html.entering.entered :is(.hero-court, .page-court) .c-side { transition-delay: 0.18s; }
+  html.entering.entered :is(.hero-court, .page-court) .c-serve { transition-delay: 0.4s; }
+  html.entering.entered :is(.hero-court, .page-court) .c-center { transition-delay: 0.65s; }
+  html.entering.entered :is(.hero-court, .page-court) .c-net { transform: scaleY(1); transition: transform 0.55s var(--ease-draw) 1.05s; }
 
   /* ---- The header takes its seat (once per session) ---- */
   html.hdr-enter .brand,
@@ -1268,8 +1284,8 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
 
 @keyframes courtGlow {
   0% { opacity: 0; }
-  45% { opacity: 0.3; }
-  100% { opacity: 0.12; }
+  45% { opacity: 0.26; }
+  100% { opacity: 0.11; }
 }
 @keyframes hdrIn {
   from { opacity: 0; transform: translateY(-10px); }

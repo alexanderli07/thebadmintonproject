@@ -23,8 +23,9 @@ serif font is ready (no mid-swap); the sequence is skipped entirely if the page
 opens deep-linked or mid-scroll; one thing happens at a time.
 
 **A1. The Court Draws First** · medium
-The gold court lines draw themselves before any text appears — outer boundary
-first, then sidelines and service lines, the dashed net line last (~1.4s).
+The gold court lines draw themselves before any text appears — landscape on
+desktop and vertical on portrait phones. The outer boundary arrives first,
+then the sidelines and service lines, with the centre net last (~1.4s).
 Drawn bright (30% opacity) so the moment reads, then settles back to today's
 quiet 12% as the title rises. The groundskeeper lines the lawn; then the
 players walk on. *This was independently proposed by two of the three passes —
