@@ -963,7 +963,7 @@ html:not(.js) .car-btn { display: none; }
 }
 fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
 fieldset.field legend { margin-bottom: 0.45rem; }
-.field input[type="text"], .field input[type="email"], .field input[type="tel"], .field textarea {
+.field input[type="text"], .field input[type="email"], .field input[type="tel"], .field input[type="number"], .field textarea {
   font: 400 1rem/1.5 var(--font-sans);
   color: var(--ink);
   background: var(--ivory);
@@ -991,6 +991,9 @@ fieldset.field legend { margin-bottom: 0.45rem; }
 .form-actions { margin-top: 2rem; text-align: center; }
 .form-actions .btn { border-color: var(--green-800); color: var(--green-800); }
 .form-actions .btn:hover { background: var(--green-800); color: var(--ivory); }
+.form-actions .btn:disabled { opacity: 0.55; cursor: wait; }
+.form-actions .btn:disabled:hover { background: transparent; color: var(--green-800); }
+.form-status { margin: 1rem auto 0; max-width: 560px; color: #8B2D24; font-size: 0.9rem; text-align: center; }
 .form-note { margin-top: 1.2rem; font-size: 0.82rem; color: var(--ink-soft); text-align: center; }
 .form-thanks { display: none; text-align: center; padding: 1rem 0 0.5rem; }
 .form-thanks:target { display: block; }
