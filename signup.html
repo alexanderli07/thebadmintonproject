@@ -117,9 +117,9 @@
     </section>
 
     <!-- ==================== FORM ==================== -->
-    <!-- Submissions are delivered by formsubmit.co to thebadmintonproject@gmail.com.
-         IMPORTANT: the very first submission emails an activation link to that
-         inbox — click it once and every submission after that arrives normally. -->
+    <!-- Submissions are validated and stored by the submit-registration
+         Supabase Edge Function. Public connection values live in
+         js/supabase-config.js; never put a Supabase secret key in this site. -->
     <section class="section section--ivory">
       <div class="container">
         <header class="section-head reveal">
@@ -138,56 +138,61 @@
             <h3 style="font-size: 1.6rem; color: var(--green-800); margin-bottom: 0.8rem;">Thank you — you're on our list.</h3>
             <p style="color: var(--ink-soft); margin: 0;">We will be in touch shortly. If it is urgent, write to <a href="mailto:thebadmintonproject@gmail.com" style="color: var(--gold-ink);">thebadmintonproject@gmail.com</a>.</p>
           </div>
-          <form class="signup-form" data-signup action="https://formsubmit.co/thebadmintonproject@gmail.com" method="POST">
-            <input type="hidden" name="_subject" value="New sign-up — The Badminton Project">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_next" value="https://thebadmintonproject.com/signup.html?sent=1#thanks">
-            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <form class="signup-form" data-signup>
+            <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="form-grid">
               <div class="field">
-                <label for="f-name">Your name *</label>
-                <input type="text" id="f-name" name="Name" required autocomplete="name">
+                <label for="f-first-name">First name *</label>
+                <input type="text" id="f-first-name" name="first_name" required autocomplete="section-registrant given-name" maxlength="80">
+              </div>
+              <div class="field">
+                <label for="f-last-name">Last name *</label>
+                <input type="text" id="f-last-name" name="last_name" required autocomplete="section-registrant family-name" maxlength="80">
+              </div>
+              <div class="field">
+                <label for="f-email">Email *</label>
+                <input type="email" id="f-email" name="email" required autocomplete="section-registrant email" maxlength="254">
               </div>
               <div class="field">
                 <label for="f-phone">Phone</label>
-                <input type="tel" id="f-phone" name="Phone" autocomplete="tel">
-              </div>
-              <div class="field field--full">
-                <label for="f-email">Email *</label>
-                <input type="email" id="f-email" name="Email" required autocomplete="email">
+                <input type="tel" id="f-phone" name="phone" autocomplete="section-registrant tel" maxlength="40">
               </div>
               <div class="field">
-                <label for="f-kid">Player's name (if registering your child)</label>
-                <input type="text" id="f-kid" name="Player">
+                <label for="f-player-first-name">Child's first name (if applicable)</label>
+                <input type="text" id="f-player-first-name" name="player_first_name" autocomplete="section-player given-name" maxlength="80">
               </div>
               <div class="field">
-                <label for="f-age">Player's age</label>
-                <input type="text" id="f-age" name="Age" inputmode="numeric">
+                <label for="f-player-last-name">Child's last name</label>
+                <input type="text" id="f-player-last-name" name="player_last_name" autocomplete="section-player family-name" maxlength="80">
+              </div>
+              <div class="field">
+                <label for="f-age">Child's age</label>
+                <input type="number" id="f-age" name="age" inputmode="numeric" min="1" max="120">
               </div>
               <fieldset class="field field--full">
                 <legend>Program of interest</legend>
                 <div class="choices">
-                  <label class="choice"><input type="checkbox" name="Program[]" value="High-Performance Training"> High-Performance</label>
-                  <label class="choice"><input type="checkbox" name="Program[]" value="Competition Team Training"> Competition Team</label>
-                  <label class="choice"><input type="checkbox" name="Program[]" value="Intro &amp; Developmental Training"> Intro &amp; Developmental</label>
-                  <label class="choice"><input type="checkbox" name="Program[]" value="Athletic Development Training"> Athletic Development</label>
+                  <label class="choice"><input type="checkbox" name="programs" value="High-Performance Training"> High-Performance</label>
+                  <label class="choice"><input type="checkbox" name="programs" value="Competition Team Training"> Competition Team</label>
+                  <label class="choice"><input type="checkbox" name="programs" value="Intro &amp; Developmental Training"> Intro &amp; Developmental</label>
+                  <label class="choice"><input type="checkbox" name="programs" value="Athletic Development Training"> Athletic Development</label>
                 </div>
               </fieldset>
               <fieldset class="field field--full">
                 <legend>Preferred location</legend>
                 <div class="choices">
-                  <label class="choice"><input type="checkbox" name="Location[]" value="Agility Sports"> Agility Sports</label>
-                  <label class="choice"><input type="checkbox" name="Location[]" value="BNM Badminton"> BNM Badminton</label>
+                  <label class="choice"><input type="checkbox" name="locations" value="Agility Sports"> Agility Sports</label>
+                  <label class="choice"><input type="checkbox" name="locations" value="BNM Badminton"> BNM Badminton</label>
                 </div>
               </fieldset>
               <div class="field field--full">
                 <label for="f-msg">Anything we should know?</label>
-                <textarea id="f-msg" name="Message" rows="4"></textarea>
+                <textarea id="f-msg" name="message" rows="4" maxlength="2000"></textarea>
               </div>
             </div>
             <div class="form-actions">
               <button class="btn" type="submit">Register Now</button>
+              <p class="form-status" data-form-status role="status" aria-live="polite" hidden></p>
               <p class="form-note">Prefer email? Write to <a href="mailto:thebadmintonproject@gmail.com" style="color: var(--gold-ink);">thebadmintonproject@gmail.com</a></p>
             </div>
           </form>
@@ -217,6 +222,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=15"></script>
+  <script src="js/supabase-config.js?v=1"></script>
+  <script src="js/main.js?v=16"></script>
 </body>
 </html>
