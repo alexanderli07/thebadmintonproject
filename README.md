@@ -25,7 +25,11 @@ server that disables caching, so your edits always show up on refresh.)
 
 | File | What it is |
 | --- | --- |
-| `index.html` | Home — hero, mission, What We Do overview, Moments, Join |
+| `index.html` | Home — hero, mission, Academy overview, Moments, Join |
+| `programs.html` | **The Academy** hub — four programs + Locations (Agility Sports & BNM Badminton) |
+| `academy-*.html` | The four program pages (high-performance, competition, intro-development, athletic-development), each with a media carousel |
+| `signup.html` | Registration form — delivers to thebadmintonproject@gmail.com via formsubmit.co. **The very first submission emails an activation link to that inbox — click it once.** |
+| `sankeerth.html`, `eesan.html` | Personal pages for the two coaches (story / achievements / vision — placeholders to fill) |
 | `404.html` | Branded "Out of bounds" error page (picked up automatically by Netlify, GitHub Pages, Cloudflare Pages) |
 | `about.html` | Who We Are — values + the two coach profiles (placeholders to fill) |
 | `programs.html` | Programs & Courses — course details + Where We Train (placeholders) |
@@ -96,11 +100,13 @@ hides if there are none), so the site never shows a broken image.
   (`<!-- WHO WE ARE -->`, `<!-- WHAT WE DO -->`, etc.). Edit the text in place.
 - To change colors or fonts, edit the CSS variables at the top of `css/styles.css`.
 
-## Placeholders to replace before going live
+## Contact & domain
 
-- **Contact email** — the "Get in Touch" button links to
-  `hello@thebadmintonproject.com`, which is a placeholder. Search `index.html` for
-  `mailto:` and replace it with your real address (or an Instagram link).
+- All "Get in Touch" buttons email **thebadmintonproject@gmail.com**.
+- The canonical domain is **https://thebadmintonproject.com** (used in the
+  canonical tags, og:url, share-image URLs, sitemap.xml and robots.txt).
+  The `.ca` domain and the `www.` variants should 301-redirect to it —
+  most hosts do this automatically when they're added as domain aliases.
 
 Nothing on the site claims a founding year, location, or credentials — those were
 deliberately left out until you have the details you want to publish.
@@ -118,10 +124,8 @@ page (e.g. `journal.html`) or a new section in `index.html`, plus a nav link.
 
 `assets/og-image.png` is the branded card that appears when someone shares a
 link to the site (WhatsApp, iMessage, Instagram DMs, X, Facebook, …). It's
-wired into every page via `og:image` meta tags. **Once the site is live**,
-replace the relative `assets/og-image.png` in each page's `og:image` tag with
-the full address (e.g. `https://your-domain.com/assets/og-image.png`) — some
-platforms require the full form.
+wired into every page via `og:image` meta tags pointing at the full
+`https://thebadmintonproject.com/...` address.
 
 ## Publishing
 
