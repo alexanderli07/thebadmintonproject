@@ -102,9 +102,98 @@
     window.addEventListener('resize', updateProgress);
   }
 
+  /* Desktop navigation disclosures. Native details/summary keeps every
+     destination available without JavaScript; this layer only coordinates
+     siblings and adds the expected outside-click / Escape behavior. */
+  var navDisclosures = document.querySelectorAll('[data-nav-disclosure]');
+
+  function replayAnimation(element) {
+    if (!element || REDUCED) return;
+    element.classList.remove('is-opening');
+    /* Force the browser to commit the reset before re-adding the class. */
+    void element.offsetWidth;
+    element.classList.add('is-opening');
+  }
+
+  function closeNavDisclosures(except) {
+    each(navDisclosures, function (disclosure) {
+      if (disclosure !== except) disclosure.removeAttribute('open');
+    });
+  }
+
+  each(navDisclosures, function (disclosure) {
+    disclosure.addEventListener('toggle', function () {
+      if (disclosure.open) {
+        closeNavDisclosures(disclosure);
+        replayAnimation(disclosure);
+      } else {
+        disclosure.classList.remove('is-opening');
+      }
+    });
+    each(disclosure.querySelectorAll('a[href]'), function (link) {
+      link.addEventListener('click', function () { disclosure.removeAttribute('open'); });
+    });
+  });
+
+  document.addEventListener('click', function (e) {
+    var insideDisclosure = e.target && e.target.closest ? e.target.closest('[data-nav-disclosure]') : null;
+    if (!insideDisclosure) closeNavDisclosures();
+  });
+
+  document.addEventListener('focusin', function (e) {
+    each(navDisclosures, function (disclosure) {
+      if (disclosure.open && !disclosure.contains(e.target)) disclosure.removeAttribute('open');
+    });
+  });
+
   /* Mobile menu */
   var toggle = document.querySelector('[data-menu-toggle]');
   var menu = document.querySelector('[data-mobile-menu]');
+  var mobileDisclosures = menu ? menu.querySelectorAll('[data-mobile-disclosure]') : [];
+
+  function resetMobileDisclosures(openCurrent) {
+    each(mobileDisclosures, function (disclosure) {
+      disclosure.removeAttribute('open');
+    });
+    if (openCurrent && menu) {
+      var current = menu.querySelector('[data-mobile-disclosure].is-current');
+      if (current) current.setAttribute('open', '');
+    }
+  }
+
+  each(mobileDisclosures, function (disclosure) {
+    disclosure.addEventListener('toggle', function () {
+      if (!disclosure.open) {
+        disclosure.classList.remove('is-opening');
+        return;
+      }
+      each(mobileDisclosures, function (other) {
+        if (other !== disclosure) other.removeAttribute('open');
+      });
+      replayAnimation(disclosure);
+    });
+  });
+
+  function mobileFocusables() {
+    if (!menu) return [];
+    var candidates = menu.querySelectorAll('a[href], summary, button:not([disabled])');
+    var visible = [];
+    each(candidates, function (candidate) {
+      if (candidate.getClientRects().length) visible.push(candidate);
+    });
+    return visible;
+  }
+
+  function linkTargetsCurrentDocument(link) {
+    try {
+      var url = new URL(link.href, location.href);
+      return url.origin === location.origin &&
+        url.pathname === location.pathname &&
+        url.search === location.search;
+    } catch (err) {
+      return false;
+    }
+  }
 
   function setPageInert(on) {
     var regions = [document.getElementById('main'), document.querySelector('.site-footer')];
@@ -117,7 +206,7 @@
     }
   }
 
-  function setMenuOpen(open) {
+  function setMenuOpen(open, restoreFocus) {
     if (!toggle || !menu) return;
     if (menu.classList.contains('is-open') === open) return;
     toggle.setAttribute('aria-expanded', String(open));
@@ -125,10 +214,14 @@
     document.body.classList.toggle('menu-open', open);
     setPageInert(open);
     if (open) {
-      var first = menu.querySelector('a');
+      replayAnimation(menu);
+      resetMobileDisclosures(true);
+      var first = mobileFocusables()[0];
       if (first) first.focus();
     } else {
-      toggle.focus();
+      menu.classList.remove('is-opening');
+      resetMobileDisclosures(false);
+      if (restoreFocus !== false) toggle.focus();
     }
   }
 
@@ -137,21 +230,107 @@
       setMenuOpen(toggle.getAttribute('aria-expanded') !== 'true');
     });
     each(menu.querySelectorAll('a'), function (link) {
-      link.addEventListener('click', function () { setMenuOpen(false); });
+      link.addEventListener('click', function () {
+        setMenuOpen(false, linkTargetsCurrentDocument(link));
+      });
     });
     var brand = document.querySelector('.brand');
-    if (brand) brand.addEventListener('click', function () { setMenuOpen(false); });
+    if (brand) brand.addEventListener('click', function () { setMenuOpen(false, false); });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && menu.classList.contains('is-open')) setMenuOpen(false);
+      if (!menu.classList.contains('is-open')) return;
+      if (e.key === 'Escape') {
+        e.stopImmediatePropagation();
+        setMenuOpen(false);
+        return;
+      }
+      if (e.key !== 'Tab') return;
+
+      var links = mobileFocusables();
+      if (!links.length) return;
+      var first = links[0];
+      var last = links[links.length - 1];
+      if (e.shiftKey && (document.activeElement === first || !menu.contains(document.activeElement))) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && (document.activeElement === last || !menu.contains(document.activeElement))) {
+        e.preventDefault();
+        first.focus();
+      }
     });
     /* Close if the viewport grows past the breakpoint that hides the toggle */
     if (window.matchMedia) {
       var mq = window.matchMedia('(min-width: 1001px)');
-      var onBreakpoint = function (e) { if (e.matches) setMenuOpen(false); };
+      var onBreakpoint = function (e) {
+        closeNavDisclosures();
+        if (e.matches) setMenuOpen(false, false);
+      };
       if (mq.addEventListener) mq.addEventListener('change', onBreakpoint);
       else if (mq.addListener) mq.addListener(onBreakpoint);
     }
   }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape' || (menu && menu.classList.contains('is-open'))) return;
+    var openDisclosure = document.querySelector('[data-nav-disclosure][open]');
+    if (!openDisclosure) return;
+    e.preventDefault();
+    openDisclosure.removeAttribute('open');
+    var summary = openDisclosure.querySelector('summary');
+    if (summary) summary.focus();
+  });
+
+  /* Exact section feedback for the two intentional in-page destinations.
+     Top-level navigation remains page-based; when a matching hash is active,
+     its child link becomes the current location and its disclosure is marked. */
+  var navGroups = document.querySelectorAll('.nav-disclosure, .mobile-disclosure');
+  var baseCurrentLinks = document.querySelectorAll('.site-nav a[aria-current="page"], .mobile-nav a[aria-current="page"]');
+
+  each(navGroups, function (group) {
+    if (group.classList.contains('is-current')) group.setAttribute('data-base-current', '');
+  });
+  each(baseCurrentLinks, function (link) { link.setAttribute('data-base-page-current', ''); });
+
+  function updateNavLocationState() {
+    var locationLinks = document.querySelectorAll('.nav-submenu a[aria-current="location"], .mobile-submenu a[aria-current="location"]');
+    each(locationLinks, function (link) { link.removeAttribute('aria-current'); });
+    each(baseCurrentLinks, function (link) { link.setAttribute('aria-current', 'page'); });
+    each(navGroups, function (group) {
+      group.classList.toggle('is-current', group.hasAttribute('data-base-current'));
+      if (group.classList.contains('mobile-disclosure')) {
+        if (group.hasAttribute('data-base-current')) group.setAttribute('open', '');
+        else group.removeAttribute('open');
+      }
+    });
+
+    if (!location.hash || location.hash === '#top') return;
+
+    var candidates = document.querySelectorAll('.nav-submenu a[href*="#"], .mobile-submenu a[href*="#"]');
+    var matches = [];
+    each(candidates, function (link) {
+      try {
+        var url = new URL(link.href, location.href);
+        if (url.origin === location.origin &&
+            url.pathname === location.pathname &&
+            url.search === location.search &&
+            url.hash === location.hash) matches.push(link);
+      } catch (err) {}
+    });
+    if (!matches.length) return;
+
+    each(baseCurrentLinks, function (link) { link.removeAttribute('aria-current'); });
+    each(navGroups, function (group) { group.classList.remove('is-current'); });
+    each(matches, function (link) {
+      link.setAttribute('aria-current', 'location');
+      var group = link.closest ? link.closest('.nav-disclosure, .mobile-disclosure') : null;
+      if (group) {
+        group.classList.add('is-current');
+        if (group.classList.contains('mobile-disclosure')) group.setAttribute('open', '');
+      }
+    });
+  }
+
+  updateNavLocationState();
+  window.addEventListener('hashchange', updateNavLocationState);
 
   /* Scroll reveal.
      Once an element has finished its entrance, the reveal classes are removed

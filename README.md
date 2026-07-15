@@ -73,7 +73,7 @@ Anything in `[square brackets]` is a placeholder waiting for real content:
   save as `assets/photos/coach-01.jpg` / `coach-02.jpg` and swap the placeholder
   tile for an `<img>` (instructions are in a comment right above that section).
 - **Courses** (`programs.html`) — detailed descriptions plus the ages/schedule/
-  venue/fees chips for each of the five courses, and the venue card under
+  venue/fees chips for each of the four Academy programs, and the venue card under
   "Where We Train".
 - **Journal** (`journal.html`) — each card is a post template: date, title, excerpt.
 - **Gallery** (`gallery.html`) — each placeholder tile names the kind of shot it's

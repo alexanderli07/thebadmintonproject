@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=13">
+  <link rel="stylesheet" href="css/styles.css?v=18">
 </head>
 <body id="top">
 
@@ -51,10 +51,34 @@
         <span class="brand-name">The Badminton Project</span>
       </a>
       <nav class="site-nav" aria-label="Primary">
-        <a href="about.html">Who We Are</a>
-        <a href="programs.html" aria-current="true">The Academy</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="journal.html">Journal</a>
+        <a href="index.html">Home</a>
+        <details class="nav-disclosure" data-nav-disclosure>
+          <summary class="nav-disclosure__trigger">The Project<span class="nav-chevron" aria-hidden="true"></span></summary>
+          <div class="nav-submenu">
+            <a href="about.html">Project Overview</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="journal.html">Journal</a>
+          </div>
+        </details>
+        <details class="nav-disclosure is-current" data-nav-disclosure>
+          <summary class="nav-disclosure__trigger">The Academy<span class="nav-chevron" aria-hidden="true"></span></summary>
+          <div class="nav-submenu">
+            <a href="programs.html">Academy Overview</a>
+            <a href="academy-high-performance.html">High Performance</a>
+            <a href="academy-competition.html" aria-current="page">Competition Team</a>
+            <a href="academy-intro-development.html">Intro &amp; Development</a>
+            <a href="academy-athletic-development.html">Athletic Development</a>
+            <a href="programs.html#where-we-train">Where We Train</a>
+          </div>
+        </details>
+        <details class="nav-disclosure" data-nav-disclosure>
+          <summary class="nav-disclosure__trigger">The Team<span class="nav-chevron" aria-hidden="true"></span></summary>
+          <div class="nav-submenu">
+            <a href="about.html#team">Meet the Team</a>
+            <a href="sankeerth.html">B.R. Sankeerth</a>
+            <a href="eesan.html">Eesan</a>
+          </div>
+        </details>
         <a class="nav-cta" href="signup.html">Join Now</a>
       </nav>
       <button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu">
@@ -67,12 +91,36 @@
 
   <!-- Mobile navigation overlay -->
   <div class="mobile-menu" id="mobile-menu" data-mobile-menu role="dialog" aria-modal="true" aria-label="Site menu">
-    <nav aria-label="Mobile">
-      <a href="about.html">Who We Are</a>
-      <a href="programs.html" aria-current="true">The Academy</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="journal.html">Journal</a>
-      <a href="signup.html">Join Now</a>
+    <nav class="mobile-nav" aria-label="Mobile">
+      <a class="mobile-nav__link" href="index.html">Home</a>
+      <details class="mobile-disclosure" data-mobile-disclosure>
+        <summary class="mobile-disclosure__trigger">The Project<span class="nav-chevron" aria-hidden="true"></span></summary>
+        <div class="mobile-submenu">
+          <a href="about.html">Project Overview</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="journal.html">Journal</a>
+        </div>
+      </details>
+      <details class="mobile-disclosure is-current" data-mobile-disclosure open>
+        <summary class="mobile-disclosure__trigger">The Academy<span class="nav-chevron" aria-hidden="true"></span></summary>
+        <div class="mobile-submenu">
+          <a href="programs.html">Academy Overview</a>
+          <a href="academy-high-performance.html">High Performance</a>
+          <a href="academy-competition.html" aria-current="page">Competition Team</a>
+          <a href="academy-intro-development.html">Intro &amp; Development</a>
+          <a href="academy-athletic-development.html">Athletic Development</a>
+          <a href="programs.html#where-we-train">Where We Train</a>
+        </div>
+      </details>
+      <details class="mobile-disclosure" data-mobile-disclosure>
+        <summary class="mobile-disclosure__trigger">The Team<span class="nav-chevron" aria-hidden="true"></span></summary>
+        <div class="mobile-submenu">
+          <a href="about.html#team">Meet the Team</a>
+          <a href="sankeerth.html">B.R. Sankeerth</a>
+          <a href="eesan.html">Eesan</a>
+        </div>
+      </details>
+      <a class="mobile-nav__link mobile-nav__cta" href="signup.html">Join Now</a>
       <div class="ornament" aria-hidden="true">
         <span class="rule"></span>
         <svg><use href="#icon-shuttle"/></svg>
@@ -84,7 +132,7 @@
   <main id="main">
 
     <!-- ==================== PAGE HERO ==================== -->
-    <section class="page-hero">
+    <section class="page-hero page-hero--program">
       <div class="page-media" aria-hidden="true">
         <img class="page-photo" src="assets/backdrops/academy-comp.jpg" alt="">
       </div>
@@ -120,9 +168,9 @@
     <!-- Add real photos/videos: replace a placeholder figure with
          <figure class="car-slide"><img src="assets/photos/....jpg" alt="..."><figcaption>...</figcaption></figure>
          (or a <video muted playsinline controls> element for clips). -->
-    <section class="section section--ivory">
-      <div class="container">
-        <header class="section-head reveal">
+    <section class="section section--ivory program-showcase">
+      <div class="container program-showcase__inner">
+        <header class="section-head reveal program-showcase__head">
           <p class="overline">Inside the Program</p>
           <h2>On the <em>court.</em></h2>
           <div class="ornament" data-serve aria-hidden="true">
@@ -131,28 +179,28 @@
           <span class="rule"></span>
         </div>
         </header>
-        <div class="carousel reveal" data-carousel>
+        <div class="carousel reveal program-showcase__rail" data-carousel>
           <button class="car-btn car-prev" type="button" aria-label="Previous slide"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 2 L4 8 L10 14"/></svg></button>
-          <div class="car-track" tabindex="0" role="group" aria-label="Program photos and videos">
-          <figure class="car-slide">
+          <div class="car-track editorial-track" tabindex="0" role="group" aria-label="Program photos and videos">
+          <figure class="car-slide editorial-slide editorial-slide--lead">
             <img src="assets/photos/photo-01.jpg" alt="Two players share a smile at a tournament medal presentation" loading="lazy">
             <figcaption>Tournament day with the Project.</figcaption>
           </figure>
-          <figure class="car-slide">
+          <figure class="car-slide editorial-slide editorial-slide--portrait">
             <div class="ph-media" role="img" aria-label="Placeholder — team training, media coming soon">
               <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
               <span>Team training<br>coming soon</span>
             </div>
             <figcaption class="ph-text">[Caption — what this moment shows.]</figcaption>
           </figure>
-          <figure class="car-slide">
+          <figure class="car-slide editorial-slide editorial-slide--wide">
             <div class="ph-media" role="img" aria-label="Placeholder — match play, media coming soon">
               <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
               <span>Match play<br>coming soon</span>
             </div>
             <figcaption class="ph-text">[Caption — what this moment shows.]</figcaption>
           </figure>
-          <figure class="car-slide">
+          <figure class="car-slide editorial-slide editorial-slide--portrait">
             <div class="ph-media" role="img" aria-label="Placeholder — program video, media coming soon">
               <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
               <span>Program video<br>coming soon</span>
@@ -217,8 +265,10 @@
         <span>The Badminton Project</span>
       </div>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="about.html">Who We Are</a>
+        <a href="about.html">The Project</a>
         <a href="programs.html">The Academy</a>
+        <a href="about.html#team">The Team</a>
+        <a href="programs.html#where-we-train">Locations</a>
         <a href="gallery.html">Gallery</a>
         <a href="journal.html">Journal</a>
         <a href="signup.html">Sign Up</a>
@@ -229,6 +279,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=17"></script>
+  <script src="js/main.js?v=20"></script>
 </body>
 </html>

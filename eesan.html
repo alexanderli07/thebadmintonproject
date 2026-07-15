@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=13">
+  <link rel="stylesheet" href="css/styles.css?v=18">
 </head>
 <body id="top">
 
@@ -51,10 +51,34 @@
         <span class="brand-name">The Badminton Project</span>
       </a>
       <nav class="site-nav" aria-label="Primary">
-        <a href="about.html">Who We Are</a>
-        <a href="programs.html">The Academy</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="journal.html">Journal</a>
+        <a href="index.html">Home</a>
+        <details class="nav-disclosure" data-nav-disclosure>
+          <summary class="nav-disclosure__trigger">The Project<span class="nav-chevron" aria-hidden="true"></span></summary>
+          <div class="nav-submenu">
+            <a href="about.html">Project Overview</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="journal.html">Journal</a>
+          </div>
+        </details>
+        <details class="nav-disclosure" data-nav-disclosure>
+          <summary class="nav-disclosure__trigger">The Academy<span class="nav-chevron" aria-hidden="true"></span></summary>
+          <div class="nav-submenu">
+            <a href="programs.html">Academy Overview</a>
+            <a href="academy-high-performance.html">High Performance</a>
+            <a href="academy-competition.html">Competition Team</a>
+            <a href="academy-intro-development.html">Intro &amp; Development</a>
+            <a href="academy-athletic-development.html">Athletic Development</a>
+            <a href="programs.html#where-we-train">Where We Train</a>
+          </div>
+        </details>
+        <details class="nav-disclosure is-current" data-nav-disclosure>
+          <summary class="nav-disclosure__trigger">The Team<span class="nav-chevron" aria-hidden="true"></span></summary>
+          <div class="nav-submenu">
+            <a href="about.html#team">Meet the Team</a>
+            <a href="sankeerth.html">B.R. Sankeerth</a>
+            <a href="eesan.html" aria-current="page">Eesan</a>
+          </div>
+        </details>
         <a class="nav-cta" href="signup.html">Join Now</a>
       </nav>
       <button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu">
@@ -67,12 +91,36 @@
 
   <!-- Mobile navigation overlay -->
   <div class="mobile-menu" id="mobile-menu" data-mobile-menu role="dialog" aria-modal="true" aria-label="Site menu">
-    <nav aria-label="Mobile">
-      <a href="about.html">Who We Are</a>
-      <a href="programs.html">The Academy</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="journal.html">Journal</a>
-      <a href="signup.html">Join Now</a>
+    <nav class="mobile-nav" aria-label="Mobile">
+      <a class="mobile-nav__link" href="index.html">Home</a>
+      <details class="mobile-disclosure" data-mobile-disclosure>
+        <summary class="mobile-disclosure__trigger">The Project<span class="nav-chevron" aria-hidden="true"></span></summary>
+        <div class="mobile-submenu">
+          <a href="about.html">Project Overview</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="journal.html">Journal</a>
+        </div>
+      </details>
+      <details class="mobile-disclosure" data-mobile-disclosure>
+        <summary class="mobile-disclosure__trigger">The Academy<span class="nav-chevron" aria-hidden="true"></span></summary>
+        <div class="mobile-submenu">
+          <a href="programs.html">Academy Overview</a>
+          <a href="academy-high-performance.html">High Performance</a>
+          <a href="academy-competition.html">Competition Team</a>
+          <a href="academy-intro-development.html">Intro &amp; Development</a>
+          <a href="academy-athletic-development.html">Athletic Development</a>
+          <a href="programs.html#where-we-train">Where We Train</a>
+        </div>
+      </details>
+      <details class="mobile-disclosure is-current" data-mobile-disclosure open>
+        <summary class="mobile-disclosure__trigger">The Team<span class="nav-chevron" aria-hidden="true"></span></summary>
+        <div class="mobile-submenu">
+          <a href="about.html#team">Meet the Team</a>
+          <a href="sankeerth.html">B.R. Sankeerth</a>
+          <a href="eesan.html" aria-current="page">Eesan</a>
+        </div>
+      </details>
+      <a class="mobile-nav__link mobile-nav__cta" href="signup.html">Join Now</a>
       <div class="ornament" aria-hidden="true">
         <span class="rule"></span>
         <svg><use href="#icon-shuttle"/></svg>
@@ -84,7 +132,7 @@
   <main id="main">
 
     <!-- ==================== PAGE HERO ==================== -->
-    <section class="page-hero">
+    <section class="page-hero page-hero--profile">
       <div class="page-media" aria-hidden="true">
         <img class="page-photo" src="assets/backdrops/eesan.jpg" alt="">
       </div>
@@ -120,85 +168,113 @@
     <!-- PLACEHOLDERS: replace every [bracketed] item with the real story, and
          drop the headshot at assets/photos/eesan.jpg then swap the tile
          for <img src="..." alt="Eesan"> -->
-    <section class="section section--ivory">
+    <section class="section section--ivory profile-story-section" aria-labelledby="eesan-story-title">
       <div class="container">
-        <header class="section-head reveal">
-          <p class="overline">The Story</p>
-          <h2>The <em>story.</em></h2>
-          <div class="ornament" data-serve aria-hidden="true">
-          <span class="rule"></span>
-          <svg><use href="#icon-shuttle"/></svg>
-          <span class="rule"></span>
-        </div>
-        </header>
-        <div class="person-grid">
-          <div class="person-photo reveal">
-            <div class="ph-media" role="img" aria-label="Portrait coming soon">
-              <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
-              <span>Portrait<br>coming soon</span>
+        <div class="person-grid profile-story">
+          <div class="profile-story__identity">
+            <div class="person-photo profile-story__portrait reveal">
+              <div class="ph-media" role="img" aria-label="Portrait coming soon">
+                <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
+                <span>Portrait<br>coming soon</span>
+              </div>
+            </div>
+            <div class="profile-story__signature reveal" style="--d:.1s">
+              <p class="overline">The Team</p>
+              <h2 class="profile-story__name"><em>Eesan.</em></h2>
+              <p class="coach-role profile-story__role">[Role — e.g. Co-Founder &amp; Coach]</p>
             </div>
           </div>
-          <div class="person-bio reveal" style="--d:.15s">
-            <p class="coach-role">[Role — e.g. Co-Founder &amp; Coach]</p>
-            <p class="ph-text">[Playing background — where the game started, junior and senior career, national/international experience.]</p>
-            <p class="ph-text">[Coaching journey — how they came to coaching, certifications, athletes developed.]</p>
-            <p class="ph-text">[Why The Badminton Project — the brand and the vision in their own words.]</p>
-          </div>
+          <article class="person-bio profile-story__narrative reveal" style="--d:.15s">
+            <header class="section-head profile-story__head">
+              <p class="overline">The Story</p>
+              <h2 id="eesan-story-title">The <em>story.</em></h2>
+              <div class="ornament" data-serve aria-hidden="true">
+                <span class="rule"></span>
+                <svg><use href="#icon-shuttle"/></svg>
+                <span class="rule"></span>
+              </div>
+            </header>
+            <div class="profile-story__chapters">
+              <section class="profile-story__chapter">
+                <p class="profile-story__chapter-index" aria-hidden="true">01</p>
+                <h3>Player</h3>
+                <p class="ph-text">[Playing background — where the game started, junior and senior career, national/international experience.]</p>
+              </section>
+              <section class="profile-story__chapter">
+                <p class="profile-story__chapter-index" aria-hidden="true">02</p>
+                <h3>Coach</h3>
+                <p class="ph-text">[Coaching journey — how they came to coaching, certifications, athletes developed.]</p>
+              </section>
+              <section class="profile-story__chapter">
+                <p class="profile-story__chapter-index" aria-hidden="true">03</p>
+                <h3>The Project</h3>
+                <p class="ph-text">[Why The Badminton Project — the brand and the vision in their own words.]</p>
+              </section>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
     <!-- ==================== ACHIEVEMENTS ==================== -->
-    <section class="section">
+    <section class="section profile-record-section" aria-labelledby="eesan-record-title">
       <div class="container">
-        <header class="section-head reveal">
-          <p class="overline">The Record</p>
-          <h2>Achievements &amp; <em>honours.</em></h2>
-          <div class="ornament" data-serve aria-hidden="true">
-          <span class="rule"></span>
-          <svg><use href="#icon-shuttle"/></svg>
-          <span class="rule"></span>
+        <div class="profile-record">
+          <header class="section-head profile-record__intro reveal">
+            <p class="overline">The Record</p>
+            <h2 id="eesan-record-title">Achievements &amp; <em>honours.</em></h2>
+            <div class="ornament" data-serve aria-hidden="true">
+              <span class="rule"></span>
+              <svg><use href="#icon-shuttle"/></svg>
+              <span class="rule"></span>
+            </div>
+          </header>
+          <ul class="ach-list profile-record__list reveal">
+            <li class="ph-text">[Achievement — e.g. international / national title]</li>
+            <li class="ph-text">[Achievement — e.g. games or championships represented]</li>
+            <li class="ph-text">[Achievement — e.g. ranking milestone]</li>
+            <li class="ph-text">[Achievement — e.g. coaching credential or result]</li>
+          </ul>
         </div>
-        </header>
-        <ul class="ach-list reveal">
-          <li class="ph-text">[Achievement — e.g. international / national title]</li>
-          <li class="ph-text">[Achievement — e.g. games or championships represented]</li>
-          <li class="ph-text">[Achievement — e.g. ranking milestone]</li>
-          <li class="ph-text">[Achievement — e.g. coaching credential or result]</li>
-        </ul>
-        <div class="carousel reveal" data-carousel>
-          <button class="car-btn car-prev" type="button" aria-label="Previous slide"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 2 L4 8 L10 14"/></svg></button>
-          <div class="car-track" tabindex="0" role="group" aria-label="Career photos">
-          <figure class="car-slide">
-            <div class="ph-media" role="img" aria-label="Placeholder — career moment, media coming soon">
-              <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
-              <span>Career moment<br>coming soon</span>
+        <div class="profile-record__media">
+          <header class="profile-record__media-head reveal">
+            <p class="overline">Career Photos</p>
+            <h3 id="eesan-career-title">Career <em>moments.</em></h3>
+          </header>
+          <div class="carousel carousel--career reveal" data-carousel aria-labelledby="eesan-career-title">
+            <button class="car-btn car-prev" type="button" aria-label="Previous slide"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 2 L4 8 L10 14"/></svg></button>
+            <div class="car-track" tabindex="0" role="group" aria-label="Career photos">
+            <figure class="car-slide car-slide--career">
+              <div class="ph-media" role="img" aria-label="Placeholder — career moment, media coming soon">
+                <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
+                <span>Career moment<br>coming soon</span>
+              </div>
+              <figcaption class="ph-text">[Caption — what this moment shows.]</figcaption>
+            </figure>
+            <figure class="car-slide car-slide--career">
+              <div class="ph-media" role="img" aria-label="Placeholder — career moment, media coming soon">
+                <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
+                <span>Career moment<br>coming soon</span>
+              </div>
+              <figcaption class="ph-text">[Caption — what this moment shows.]</figcaption>
+            </figure>
+            <figure class="car-slide car-slide--career">
+              <div class="ph-media" role="img" aria-label="Placeholder — career moment, media coming soon">
+                <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
+                <span>Career moment<br>coming soon</span>
+              </div>
+              <figcaption class="ph-text">[Caption — what this moment shows.]</figcaption>
+            </figure>
+            <figure class="car-slide car-slide--career">
+              <div class="ph-media" role="img" aria-label="Placeholder — career moment, media coming soon">
+                <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
+                <span>Career moment<br>coming soon</span>
+              </div>
+              <figcaption class="ph-text">[Caption — what this moment shows.]</figcaption>
+            </figure>
             </div>
-            <figcaption class="ph-text">[Caption — what this moment shows.]</figcaption>
-          </figure>
-          <figure class="car-slide">
-            <div class="ph-media" role="img" aria-label="Placeholder — career moment, media coming soon">
-              <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
-              <span>Career moment<br>coming soon</span>
-            </div>
-            <figcaption class="ph-text">[Caption — what this moment shows.]</figcaption>
-          </figure>
-          <figure class="car-slide">
-            <div class="ph-media" role="img" aria-label="Placeholder — career moment, media coming soon">
-              <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
-              <span>Career moment<br>coming soon</span>
-            </div>
-            <figcaption class="ph-text">[Caption — what this moment shows.]</figcaption>
-          </figure>
-          <figure class="car-slide">
-            <div class="ph-media" role="img" aria-label="Placeholder — career moment, media coming soon">
-              <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
-              <span>Career moment<br>coming soon</span>
-            </div>
-            <figcaption class="ph-text">[Caption — what this moment shows.]</figcaption>
-          </figure>
+            <button class="car-btn car-next" type="button" aria-label="Next slide"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 2 L12 8 L6 14"/></svg></button>
           </div>
-          <button class="car-btn car-next" type="button" aria-label="Next slide"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 2 L12 8 L6 14"/></svg></button>
         </div>
       </div>
     </section>
@@ -242,8 +318,10 @@
         <span>The Badminton Project</span>
       </div>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="about.html">Who We Are</a>
+        <a href="about.html">The Project</a>
         <a href="programs.html">The Academy</a>
+        <a href="about.html#team">The Team</a>
+        <a href="programs.html#where-we-train">Locations</a>
         <a href="gallery.html">Gallery</a>
         <a href="journal.html">Journal</a>
         <a href="signup.html">Sign Up</a>
@@ -254,6 +332,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=17"></script>
+  <script src="js/main.js?v=20"></script>
 </body>
 </html>

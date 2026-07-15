@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">The Badminton Project</title>
+  <desc id="desc">The Badminton Project wordmark over a horizontal badminton court.</desc>
+  <defs>
+    <radialGradient id="background" cx="50%" cy="0%" r="110%">
+      <stop offset="0" stop-color="#0E4636"/>
+      <stop offset="0.52" stop-color="#0B3D2E"/>
+      <stop offset="1" stop-color="#041B14"/>
+    </radialGradient>
+    <linearGradient id="title-shade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#041B14" stop-opacity="0"/>
+      <stop offset="0.2" stop-color="#041B14" stop-opacity="0.42"/>
+      <stop offset="0.8" stop-color="#041B14" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#041B14" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#background)"/>
+
+  <g fill="none" stroke="#C9A649" stroke-width="2" opacity="0.2">
+    <rect x="46" y="42" width="1108" height="546"/>
+    <line x1="46" y1="82" x2="1154" y2="82"/>
+    <line x1="46" y1="548" x2="1154" y2="548"/>
+    <line x1="106" y1="42" x2="106" y2="588"/>
+    <line x1="1094" y1="42" x2="1094" y2="588"/>
+    <line x1="438" y1="42" x2="438" y2="588"/>
+    <line x1="762" y1="42" x2="762" y2="588"/>
+    <line x1="46" y1="315" x2="438" y2="315"/>
+    <line x1="762" y1="315" x2="1154" y2="315"/>
+    <line x1="600" y1="42" x2="600" y2="588" stroke-dasharray="9 11" opacity="0.82"/>
+  </g>
+
+  <rect x="86" y="128" width="1028" height="390" fill="url(#title-shade)"/>
+
+  <text x="600" y="116" text-anchor="middle" fill="#C9A649"
+        font-family="Helvetica Neue" font-size="21" font-weight="500"
+        letter-spacing="9">BADMINTON · COMMUNITY · EXCELLENCE</text>
+
+  <text x="600" y="205" text-anchor="middle" fill="#C9A649"
+        transform="translate(600 0) skewX(-12) translate(-600 0)"
+        font-family="Baskerville" font-size="62"
+        font-style="italic" font-weight="500">The</text>
+
+  <text x="600" y="359" text-anchor="middle" fill="#F7F3EA"
+        font-family="Baskerville" font-size="126"
+        font-weight="500" letter-spacing="8">BADMINTON</text>
+  <text x="600" y="493" text-anchor="middle" fill="#F7F3EA"
+        font-family="Baskerville" font-size="126"
+        font-weight="500" letter-spacing="11">PROJECT</text>
+
+  <g transform="translate(600 558)" fill="none" stroke="#C9A649" stroke-width="2">
+    <line x1="-136" y1="0" x2="-34" y2="0"/>
+    <line x1="34" y1="0" x2="136" y2="0"/>
+    <circle cx="0" cy="13" r="5"/>
+    <path d="M-5 7 -16 -18 M-2 6 -8 -22 M2 6 8 -22 M5 7 16 -18"/>
+    <path d="M-16 -18 Q0 -27 16 -18 M-9 -1 Q0 -5 9 -1"/>
+  </g>
+</svg>

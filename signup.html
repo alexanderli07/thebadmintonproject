@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=13">
+  <link rel="stylesheet" href="css/styles.css?v=18">
 </head>
 <body id="top">
 
@@ -51,10 +51,34 @@
         <span class="brand-name">The Badminton Project</span>
       </a>
       <nav class="site-nav" aria-label="Primary">
-        <a href="about.html">Who We Are</a>
-        <a href="programs.html">The Academy</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="journal.html">Journal</a>
+        <a href="index.html">Home</a>
+        <details class="nav-disclosure" data-nav-disclosure>
+          <summary class="nav-disclosure__trigger">The Project<span class="nav-chevron" aria-hidden="true"></span></summary>
+          <div class="nav-submenu">
+            <a href="about.html">Project Overview</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="journal.html">Journal</a>
+          </div>
+        </details>
+        <details class="nav-disclosure" data-nav-disclosure>
+          <summary class="nav-disclosure__trigger">The Academy<span class="nav-chevron" aria-hidden="true"></span></summary>
+          <div class="nav-submenu">
+            <a href="programs.html">Academy Overview</a>
+            <a href="academy-high-performance.html">High Performance</a>
+            <a href="academy-competition.html">Competition Team</a>
+            <a href="academy-intro-development.html">Intro &amp; Development</a>
+            <a href="academy-athletic-development.html">Athletic Development</a>
+            <a href="programs.html#where-we-train">Where We Train</a>
+          </div>
+        </details>
+        <details class="nav-disclosure" data-nav-disclosure>
+          <summary class="nav-disclosure__trigger">The Team<span class="nav-chevron" aria-hidden="true"></span></summary>
+          <div class="nav-submenu">
+            <a href="about.html#team">Meet the Team</a>
+            <a href="sankeerth.html">B.R. Sankeerth</a>
+            <a href="eesan.html">Eesan</a>
+          </div>
+        </details>
         <a class="nav-cta" href="signup.html" aria-current="page">Join Now</a>
       </nav>
       <button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu">
@@ -67,12 +91,36 @@
 
   <!-- Mobile navigation overlay -->
   <div class="mobile-menu" id="mobile-menu" data-mobile-menu role="dialog" aria-modal="true" aria-label="Site menu">
-    <nav aria-label="Mobile">
-      <a href="about.html">Who We Are</a>
-      <a href="programs.html">The Academy</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="journal.html">Journal</a>
-      <a href="signup.html" aria-current="page">Join Now</a>
+    <nav class="mobile-nav" aria-label="Mobile">
+      <a class="mobile-nav__link" href="index.html">Home</a>
+      <details class="mobile-disclosure" data-mobile-disclosure>
+        <summary class="mobile-disclosure__trigger">The Project<span class="nav-chevron" aria-hidden="true"></span></summary>
+        <div class="mobile-submenu">
+          <a href="about.html">Project Overview</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="journal.html">Journal</a>
+        </div>
+      </details>
+      <details class="mobile-disclosure" data-mobile-disclosure>
+        <summary class="mobile-disclosure__trigger">The Academy<span class="nav-chevron" aria-hidden="true"></span></summary>
+        <div class="mobile-submenu">
+          <a href="programs.html">Academy Overview</a>
+          <a href="academy-high-performance.html">High Performance</a>
+          <a href="academy-competition.html">Competition Team</a>
+          <a href="academy-intro-development.html">Intro &amp; Development</a>
+          <a href="academy-athletic-development.html">Athletic Development</a>
+          <a href="programs.html#where-we-train">Where We Train</a>
+        </div>
+      </details>
+      <details class="mobile-disclosure" data-mobile-disclosure>
+        <summary class="mobile-disclosure__trigger">The Team<span class="nav-chevron" aria-hidden="true"></span></summary>
+        <div class="mobile-submenu">
+          <a href="about.html#team">Meet the Team</a>
+          <a href="sankeerth.html">B.R. Sankeerth</a>
+          <a href="eesan.html">Eesan</a>
+        </div>
+      </details>
+      <a class="mobile-nav__link mobile-nav__cta" href="signup.html" aria-current="page">Join Now</a>
       <div class="ornament" aria-hidden="true">
         <span class="rule"></span>
         <svg><use href="#icon-shuttle"/></svg>
@@ -84,7 +132,7 @@
   <main id="main">
 
     <!-- ==================== PAGE HERO ==================== -->
-    <section class="page-hero">
+    <section class="page-hero page-hero--utility">
       <div class="page-media" aria-hidden="true">
         <img class="page-photo" src="assets/backdrops/signup.jpg" alt="">
       </div>
@@ -141,6 +189,7 @@
           <form class="signup-form" data-signup>
             <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="form-grid">
+              <h3 class="form-section-label field--full"><span>01</span> About you</h3>
               <div class="field">
                 <label for="f-first-name">First name *</label>
                 <input type="text" id="f-first-name" name="first_name" required autocomplete="section-registrant given-name" maxlength="80">
@@ -157,6 +206,7 @@
                 <label for="f-phone">Phone</label>
                 <input type="tel" id="f-phone" name="phone" autocomplete="section-registrant tel" maxlength="40">
               </div>
+              <h3 class="form-section-label field--full"><span>02</span> Player</h3>
               <div class="field">
                 <label for="f-player-first-name">Child's first name (if applicable)</label>
                 <input type="text" id="f-player-first-name" name="player_first_name" autocomplete="section-player given-name" maxlength="80">
@@ -169,6 +219,7 @@
                 <label for="f-age">Child's age</label>
                 <input type="number" id="f-age" name="age" inputmode="numeric" min="1" max="120">
               </div>
+              <h3 class="form-section-label field--full"><span>03</span> Training interests</h3>
               <fieldset class="field field--full">
                 <legend>Program of interest</legend>
                 <div class="choices">
@@ -210,8 +261,10 @@
         <span>The Badminton Project</span>
       </div>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="about.html">Who We Are</a>
+        <a href="about.html">The Project</a>
         <a href="programs.html">The Academy</a>
+        <a href="about.html#team">The Team</a>
+        <a href="programs.html#where-we-train">Locations</a>
         <a href="gallery.html">Gallery</a>
         <a href="journal.html">Journal</a>
         <a href="signup.html">Sign Up</a>
@@ -223,6 +276,6 @@
   </footer>
 
   <script src="js/supabase-config.js?v=1"></script>
-  <script src="js/main.js?v=17"></script>
+  <script src="js/main.js?v=20"></script>
 </body>
 </html>
