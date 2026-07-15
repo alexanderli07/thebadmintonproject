@@ -52,6 +52,7 @@ a { color: inherit; }
 h1, h2, h3 {
   font-family: var(--font-serif);
   font-weight: 500;
+  line-height: 1.15;
   margin: 0;
 }
 
@@ -68,6 +69,11 @@ h1, h2, h3 {
 .card-link:focus-visible,
 .post-more:focus-visible,
 .btn--green:focus-visible { outline-color: var(--gold-ink); }
+/* Backstop: any focusable element inside a light (ivory) surface — including plain
+   in-copy links the allowlist above doesn't name — gets the dark gold ring too, so
+   the 2.1:1 bright-gold ring never lands on a light background. */
+.section--ivory :focus-visible,
+.form-card :focus-visible { outline-color: var(--gold-ink); }
 
 .svg-defs { display: none; }
 
@@ -343,6 +349,9 @@ body.menu-open .menu-bars span:last-child { transform: translateY(-2.5px) rotate
 .mobile-disclosure > summary:hover,
 .mobile-nav__link[aria-current="page"],
 .mobile-disclosure.is-current > summary { color: var(--gold); }
+/* The label is now a real link (navigates on tap); it fills the row so only the
+   chevron toggles the submenu. Colour/typography are inherited from the summary. */
+.mobile-disclosure__label { flex: 1 1 auto; color: inherit; text-decoration: none; }
 .mobile-submenu {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -862,6 +871,9 @@ h2 em { font-style: italic; color: var(--gold-ink); }
 .btn--green:hover { background: var(--green-800); color: var(--ivory); }
 
 .section-cta { text-align: center; margin-top: 3.5rem; }
+/* The Who-We-Are block is left-aligned editorial, so its CTA hangs on the same
+   left rail instead of re-centering mid-section. (.btn is inline-block.) */
+#who-we-are .section-cta { text-align: left; }
 
 .site-nav > a[aria-current="page"] { color: var(--gold); }
 .site-nav > a[aria-current="page"]::after { transform: scaleX(1); }
@@ -883,8 +895,8 @@ h2 em { font-style: italic; color: var(--gold-ink); }
 }
 .ph-media svg { width: 30px; height: 30px; opacity: 0.8; }
 .ph-media span {
-  font: 500 0.62rem/1.7 var(--font-sans);
-  letter-spacing: 0.24em;
+  font: 500 0.7rem/1.7 var(--font-sans);
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: rgba(247, 243, 234, 0.65);
 }
@@ -903,7 +915,7 @@ h2 em { font-style: italic; color: var(--gold-ink); }
 .coach { background: var(--ivory-bright); border: 1px solid var(--line-light); padding: 1.2rem; }
 .coach .ph-media { aspect-ratio: 4 / 5; }
 .coach-body { padding: 1.8rem 1rem 1rem; }
-.coach-body h3 { font-size: 1.7rem; font-weight: 600; color: var(--green-800); margin-bottom: 0.3rem; }
+.coach-body h3 { font-size: 1.7rem; font-weight: 600; color: var(--green-800); margin-bottom: 0.5rem; }
 .coach-role {
   font: 500 0.68rem/1.6 var(--font-sans);
   letter-spacing: 0.22em;
@@ -1139,8 +1151,8 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   bottom: 1rem;
   padding: 0.45rem 0.65rem;
   border: 1px solid rgba(201, 166, 73, 0.55);
-  font: 500 0.55rem/1 var(--font-sans);
-  letter-spacing: 0.2em;
+  font: 500 0.7rem/1 var(--font-sans);
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 .car-btn {
@@ -1197,8 +1209,8 @@ html:not(.js) .car-btn { display: none; }
 .field { display: flex; flex-direction: column; gap: 0.45rem; }
 .field--full { grid-column: 1 / -1; }
 .field > label, .field > legend {
-  font: 500 0.66rem/1.4 var(--font-sans);
-  letter-spacing: 0.22em;
+  font: 500 0.72rem/1.4 var(--font-sans);
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold-ink);
 }
