@@ -102,9 +102,8 @@
     window.addEventListener('resize', updateProgress);
   }
 
-  /* Desktop navigation disclosures. Native details/summary keeps every
-     destination available without JavaScript; this layer only coordinates
-     siblings and adds the expected outside-click / Escape behavior. */
+  /* Desktop navigation disclosures. The group label remains a normal link;
+     hovering or focusing the group reveals its child destinations. */
   var navDisclosures = document.querySelectorAll('[data-nav-disclosure]');
 
   function replayAnimation(element) {
@@ -115,35 +114,56 @@
     element.classList.add('is-opening');
   }
 
+  function closeNavDisclosure(disclosure) {
+    disclosure.classList.remove('is-open');
+    disclosure.classList.remove('is-opening');
+    var trigger = disclosure.querySelector('.nav-disclosure__trigger');
+    if (trigger) trigger.setAttribute('aria-expanded', 'false');
+  }
+
   function closeNavDisclosures(except) {
     each(navDisclosures, function (disclosure) {
-      if (disclosure !== except) disclosure.removeAttribute('open');
+      if (disclosure !== except) closeNavDisclosure(disclosure);
     });
   }
 
+  function openNavDisclosure(disclosure) {
+    if (disclosure.classList.contains('is-open')) return;
+    closeNavDisclosures(disclosure);
+    disclosure.classList.add('is-open');
+    var trigger = disclosure.querySelector('.nav-disclosure__trigger');
+    if (trigger) trigger.setAttribute('aria-expanded', 'true');
+    replayAnimation(disclosure);
+  }
+
   each(navDisclosures, function (disclosure) {
-    disclosure.addEventListener('toggle', function () {
-      if (disclosure.open) {
-        closeNavDisclosures(disclosure);
-        replayAnimation(disclosure);
-      } else {
-        disclosure.classList.remove('is-opening');
-      }
+    var trigger = disclosure.querySelector('.nav-disclosure__trigger');
+    if (trigger) trigger.setAttribute('aria-expanded', 'false');
+
+    disclosure.addEventListener('pointerenter', function () {
+      openNavDisclosure(disclosure);
+    });
+    disclosure.addEventListener('pointerleave', function () {
+      if (!disclosure.contains(document.activeElement)) closeNavDisclosure(disclosure);
+    });
+    disclosure.addEventListener('focusin', function () {
+      openNavDisclosure(disclosure);
+    });
+    disclosure.addEventListener('focusout', function () {
+      setTimeout(function () {
+        if (!disclosure.contains(document.activeElement) && !disclosure.matches(':hover')) {
+          closeNavDisclosure(disclosure);
+        }
+      }, 0);
     });
     each(disclosure.querySelectorAll('a[href]'), function (link) {
-      link.addEventListener('click', function () { disclosure.removeAttribute('open'); });
+      link.addEventListener('click', function () { closeNavDisclosure(disclosure); });
     });
   });
 
   document.addEventListener('click', function (e) {
     var insideDisclosure = e.target && e.target.closest ? e.target.closest('[data-nav-disclosure]') : null;
     if (!insideDisclosure) closeNavDisclosures();
-  });
-
-  document.addEventListener('focusin', function (e) {
-    each(navDisclosures, function (disclosure) {
-      if (disclosure.open && !disclosure.contains(e.target)) disclosure.removeAttribute('open');
-    });
   });
 
   /* Mobile menu */
@@ -271,12 +291,12 @@
 
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape' || (menu && menu.classList.contains('is-open'))) return;
-    var openDisclosure = document.querySelector('[data-nav-disclosure][open]');
+    var openDisclosure = document.querySelector('[data-nav-disclosure].is-open');
     if (!openDisclosure) return;
     e.preventDefault();
-    openDisclosure.removeAttribute('open');
-    var summary = openDisclosure.querySelector('summary');
-    if (summary) summary.focus();
+    var trigger = openDisclosure.querySelector('.nav-disclosure__trigger');
+    if (trigger) trigger.focus();
+    closeNavDisclosure(openDisclosure);
   });
 
   /* Exact section feedback for the two intentional in-page destinations.

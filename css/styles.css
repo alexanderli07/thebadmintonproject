@@ -198,8 +198,6 @@ html:not(.js) .site-header {
 .site-nav .nav-cta:hover { background: var(--gold); color: var(--green-900); }
 
 .nav-disclosure { position: relative; }
-.nav-disclosure > summary { list-style: none; }
-.nav-disclosure > summary::-webkit-details-marker { display: none; }
 .nav-disclosure__trigger {
   display: flex;
   align-items: center;
@@ -216,11 +214,17 @@ html:not(.js) .site-header {
   transform: translateY(-0.12rem) rotate(45deg);
   transition: transform 0.25s ease;
 }
-.nav-disclosure[open] .nav-chevron,
+.nav-disclosure.is-open .nav-chevron,
+html:not(.js) .nav-disclosure:hover .nav-chevron,
+html:not(.js) .nav-disclosure:focus-within .nav-chevron,
 .mobile-disclosure[open] .nav-chevron { transform: translateY(0.12rem) rotate(225deg); }
-.nav-disclosure[open] .nav-disclosure__trigger,
+.nav-disclosure.is-open .nav-disclosure__trigger,
+html:not(.js) .nav-disclosure:hover .nav-disclosure__trigger,
+html:not(.js) .nav-disclosure:focus-within .nav-disclosure__trigger,
 .nav-disclosure.is-current .nav-disclosure__trigger { color: var(--gold); }
-.nav-disclosure[open] .nav-disclosure__trigger::after,
+.nav-disclosure.is-open .nav-disclosure__trigger::after,
+html:not(.js) .nav-disclosure:hover .nav-disclosure__trigger::after,
+html:not(.js) .nav-disclosure:focus-within .nav-disclosure__trigger::after,
 .nav-disclosure.is-current .nav-disclosure__trigger::after { transform: scaleX(1); }
 .nav-submenu {
   position: absolute;
@@ -243,7 +247,9 @@ html:not(.js) .site-header {
   inset: -1rem 0 auto;
   height: 1rem;
 }
-.nav-disclosure[open] .nav-submenu {
+.nav-disclosure.is-open .nav-submenu,
+html:not(.js) .nav-disclosure:hover .nav-submenu,
+html:not(.js) .nav-disclosure:focus-within .nav-submenu {
   opacity: 1;
   visibility: visible;
   transform: translate(-50%, 0);
@@ -1028,6 +1034,9 @@ h2 em { font-style: italic; color: var(--gold-ink); }
 .acad-card h3 { font-size: 1.7rem; font-weight: 600; color: var(--green-800); margin: 0.6rem 0 0.8rem; }
 .acad-card p { margin: 0 0 1.5rem; font-size: 0.95rem; line-height: 1.7; color: var(--ink-soft); flex: 1; }
 .card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.58rem;
   font: 500 0.68rem/1 var(--font-sans);
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -1038,7 +1047,17 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   align-self: flex-start;
   transition: color 0.25s ease, border-color 0.25s ease;
 }
+.card-link::after {
+  content: "\2192";
+  font-size: 0.95rem;
+  line-height: 1;
+  letter-spacing: 0;
+  transform: translateX(0);
+  transition: transform 0.3s var(--ease-settle);
+}
 .card-link:hover { color: var(--green-800); border-color: var(--green-800); }
+.card-link:hover::after,
+.card-link:focus-visible::after { transform: translateX(0.28rem); }
 @media (max-width: 760px) { .acad-grid { grid-template-columns: 1fr; } }
 
 /* Venue cards (Locations) */
@@ -1474,9 +1493,9 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: no-preference) {
 
   /* ---- Navigation disclosures: one composed drop, then a quiet link cascade ---- */
-  /* Native <details> exposes its content before the toggle event runs. Keep
-     that intermediate frame hidden so replaying the entrance never flashes. */
-  html.js .nav-disclosure[open]:not(.is-opening) .nav-submenu {
+  /* Hold the desktop panel between the state change and animation replay so
+     repeated hover openings never expose an unanimated flash frame. */
+  html.js .nav-disclosure.is-open:not(.is-opening) .nav-submenu {
     opacity: 0;
     transform: translate(-50%, -0.75rem) scale(0.985);
   }
@@ -1484,18 +1503,18 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
     opacity: 0;
     transform: translateY(-0.45rem);
   }
-  .nav-disclosure.is-opening[open] .nav-submenu {
+  .nav-disclosure.is-open.is-opening .nav-submenu {
     animation: navDropdownIn 0.3s var(--ease-settle) both;
   }
-  .nav-disclosure.is-opening[open] .nav-submenu a {
+  .nav-disclosure.is-open.is-opening .nav-submenu a {
     animation: navItemIn 0.32s var(--ease-settle) both;
   }
-  .nav-disclosure.is-opening[open] .nav-submenu a:nth-child(1) { animation-delay: 0.04s; }
-  .nav-disclosure.is-opening[open] .nav-submenu a:nth-child(2) { animation-delay: 0.075s; }
-  .nav-disclosure.is-opening[open] .nav-submenu a:nth-child(3) { animation-delay: 0.11s; }
-  .nav-disclosure.is-opening[open] .nav-submenu a:nth-child(4) { animation-delay: 0.145s; }
-  .nav-disclosure.is-opening[open] .nav-submenu a:nth-child(5) { animation-delay: 0.18s; }
-  .nav-disclosure.is-opening[open] .nav-submenu a:nth-child(6) { animation-delay: 0.215s; }
+  .nav-disclosure.is-open.is-opening .nav-submenu a:nth-child(1) { animation-delay: 0.04s; }
+  .nav-disclosure.is-open.is-opening .nav-submenu a:nth-child(2) { animation-delay: 0.075s; }
+  .nav-disclosure.is-open.is-opening .nav-submenu a:nth-child(3) { animation-delay: 0.11s; }
+  .nav-disclosure.is-open.is-opening .nav-submenu a:nth-child(4) { animation-delay: 0.145s; }
+  .nav-disclosure.is-open.is-opening .nav-submenu a:nth-child(5) { animation-delay: 0.18s; }
+  .nav-disclosure.is-open.is-opening .nav-submenu a:nth-child(6) { animation-delay: 0.215s; }
 
   .mobile-menu.is-open.is-opening .mobile-nav > * {
     animation: mobileNavItemIn 0.42s var(--ease-settle) both;
@@ -1518,7 +1537,7 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
   .mobile-menu.is-open .mobile-disclosure.is-opening[open] .mobile-submenu a:nth-child(4) { animation-delay: 0.14s; }
   .mobile-menu.is-open .mobile-disclosure.is-opening[open] .mobile-submenu a:nth-child(5) { animation-delay: 0.175s; }
   .mobile-menu.is-open .mobile-disclosure.is-opening[open] .mobile-submenu a:nth-child(6) { animation-delay: 0.21s; }
-  .nav-disclosure.is-opening[open] .nav-submenu a:focus-visible,
+  .nav-disclosure.is-open.is-opening .nav-submenu a:focus-visible,
   .mobile-menu.is-open.is-opening .mobile-nav > *:focus-within,
   .mobile-menu.is-open .mobile-disclosure.is-opening[open] .mobile-submenu a:focus-visible {
     opacity: 1;
