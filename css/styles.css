@@ -77,6 +77,19 @@ h1, h2, h3 {
 
 .svg-defs { display: none; }
 
+/* Visually hidden, still read by screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 .container { width: min(var(--container), 92%); margin-inline: auto; }
 
 .skip-link {
@@ -870,10 +883,77 @@ h2 em { font-style: italic; color: var(--gold-ink); }
 .btn--green { color: var(--green-800); border-color: var(--green-800); }
 .btn--green:hover { background: var(--green-800); color: var(--ivory); }
 
-.section-cta { text-align: center; margin-top: 3.5rem; }
-/* The Who-We-Are block is left-aligned editorial, so its CTA hangs on the same
-   left rail instead of re-centering mid-section. (.btn is inline-block.) */
-#who-we-are .section-cta { text-align: left; }
+.section-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  justify-content: center;
+  margin-top: 3.5rem;
+}
+/* The For-Parents and Who-We-Are blocks are left-aligned editorial, so their CTAs
+   hang on the same left rail instead of re-centering mid-section. */
+#for-parents .section-cta,
+#who-we-are .section-cta { justify-content: flex-start; }
+
+/* ---------- The Difference (comparison table) ---------- */
+
+.diff-table {
+  width: 100%;
+  max-width: 880px;
+  margin: 3.6rem auto 0;
+  border-collapse: collapse;
+  text-align: left;
+}
+.diff-table th {
+  font: 500 0.7rem/1.5 var(--font-sans);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding: 1.1rem 1.6rem;
+  vertical-align: bottom;
+}
+.diff-table td {
+  padding: 1.35rem 1.6rem;
+  border-top: 1px solid var(--line-light);
+  vertical-align: top;
+  font-size: 0.97rem;
+  line-height: 1.65;
+  width: 50%;
+}
+.diff-table td:first-child { color: var(--ink-soft); }
+.diff-table th:last-child,
+.diff-table td:last-child {
+  background: rgba(201, 166, 73, 0.07);
+  border-left: 2px solid var(--gold-soft);
+}
+.diff-table th:last-child { color: var(--gold-ink); }
+.diff-table td:last-child { color: var(--green-800); font-weight: 500; }
+.diff-closing {
+  max-width: 620px;
+  margin: 3rem auto 0;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+  line-height: 1.45;
+  font-weight: 500;
+  color: var(--green-800);
+}
+@media (max-width: 560px) {
+  .diff-table th { padding: 0.8rem 0.9rem; letter-spacing: 0.14em; }
+  .diff-table td { padding: 1rem 0.9rem; font-size: 0.9rem; }
+}
+
+/* ---------- Academy program detail (Who it's for / What they'll train / ...) ---------- */
+
+.program-detail h3 {
+  font: 500 0.72rem/1.5 var(--font-sans);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+  margin: 2.3rem 0 0.7rem;
+}
+.program-detail h3:first-child { margin-top: 0; }
+.program-detail p { margin: 0; color: var(--ink-soft); }
 
 .site-nav > a[aria-current="page"] { color: var(--gold); }
 .site-nav > a[aria-current="page"]::after { transform: scaleX(1); }
