@@ -70,6 +70,11 @@
         setTimeout(function () {
           each(heroServeEls, function (el) { el.classList.add('is-served'); });
         }, serveDelay);
+        /* Tear down the ceremony once every entrance transition has settled (the
+           longest is the scroll-cue at 2.2s + 0.8s = 3.0s). Every .entering.entered
+           end-state equals the element's base style, so dropping the class leaves the
+           resting page pixel-identical while releasing the armed entrance rules. */
+        setTimeout(function () { docEl.classList.remove('entering'); }, 3200);
       };
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(enterNow, enterNow);
       setTimeout(enterNow, 600); /* never gate the page on a slow font */
@@ -324,7 +329,7 @@
 
     if (!location.hash || location.hash === '#top') return;
 
-    var candidates = document.querySelectorAll('.nav-submenu a[href*="#"], .mobile-submenu a[href*="#"]');
+    var candidates = document.querySelectorAll('.nav-submenu a[href*="#"], .mobile-submenu a[href*="#"], .nav-disclosure__trigger[href*="#"], .mobile-disclosure__label[href*="#"]');
     var matches = [];
     each(candidates, function (link) {
       try {
@@ -748,11 +753,24 @@
     var fromLeft = true;
     var pauseUntil = 0;
     var visible = true;
+    var rafId = null;
+    var io = null;
+
+    function startLoop() {
+      if (rafId === null && !media.classList.contains('has-video')) {
+        rafId = requestAnimationFrame(frame);
+      }
+    }
+    function stopLoop() {
+      if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; }
+    }
 
     if (HAS_IO) {
-      new IntersectionObserver(function (entries) {
+      io = new IntersectionObserver(function (entries) {
         visible = entries[0].isIntersecting;
-      }).observe(canvas);
+        if (visible) startLoop(); else stopLoop();
+      });
+      io.observe(canvas);
     }
 
     function newShot(t) {
@@ -771,12 +789,15 @@
     }
 
     function frame(t) {
+      rafId = null;
       if (media.classList.contains('has-video')) {
-        ctx.clearRect(0, 0, W, H); /* video took over — stop drawing */
+        ctx.clearRect(0, 0, W, H); /* video took over — stop drawing for good */
+        if (io) { io.disconnect(); io = null; }
+        window.removeEventListener('resize', resize);
         return;
       }
-      requestAnimationFrame(frame);
-      if (!visible || document.hidden) return;
+      if (!visible) return; /* scrolled off-screen: the IntersectionObserver restarts us */
+      rafId = requestAnimationFrame(frame);
 
       if (!shot && t > pauseUntil) shot = newShot(t);
       if (shot) {
@@ -815,7 +836,7 @@
       }
       ctx.globalAlpha = 1;
     }
-    requestAnimationFrame(frame);
+    startLoop();
   }
 
   /* ==================== Media carousels ==================== */
