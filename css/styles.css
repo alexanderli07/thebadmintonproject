@@ -787,18 +787,38 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   text-transform: uppercase;
   color: var(--ink-soft);
 }
+/* Credential rail: one row per credential, label left, value right. As a single
+   wrapping flex line these broke 2-1 under Sankeerth and 1-2 under Eesan, so the
+   two mirrored panels never agreed — a fixed row each always lines up, and the
+   label carries the qualifier ("Men's doubles") that used to bloat one item. */
 .who-creds {
   list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem 1.4rem;
-  margin: 1.2rem 0 0;
-  padding: 1.2rem 0 0;
+  margin: 1.15rem 0 0;
+  padding: 0;
   border-top: 1px solid var(--gold-soft);
-  font: 500 0.68rem/1 var(--font-sans);
-  letter-spacing: 0.16em;
+}
+.who-creds li {
+  display: grid;
+  grid-template-columns: minmax(0, auto) 1fr;
+  align-items: baseline;
+  gap: 0 0.9rem;
+  padding: 0.52rem 0;
+  border-bottom: 1px solid rgba(201, 166, 73, 0.18);
+}
+.who-creds li:last-child { border-bottom: 0; padding-bottom: 0; }
+.who-creds__k {
+  font: 500 0.6rem/1.4 var(--font-sans);
+  letter-spacing: 0.2em;
   text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.who-creds__v {
+  font: 500 0.72rem/1.4 var(--font-sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: right;
   color: var(--gold-ink);
+  white-space: nowrap;
 }
 .who-lead {
   margin: clamp(1rem, 2.2vh, 1.5rem) 0 0;
@@ -1151,7 +1171,16 @@ html:not(.js) .dossier__label {
   .who-portrait .ph-media { padding: 0.7rem; }
   .who-portrait .ph-media span { display: none; }
   .who-name { margin-top: 0; }
-  .who-creds { margin-top: 0.9rem; padding-top: 0.9rem; }
+  .who-creds { margin-top: 0.9rem; }
+  /* Beside the portrait the rail is only ~195px, too tight for label + value on
+     one line — the labels wrapped and the two coaches' rails stopped matching.
+     Stack them instead so every row is the same height on both panels. */
+  .who-creds li {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+    padding: 0.42rem 0;
+  }
+  .who-creds__v { text-align: left; }
   /* single column: drop the mirrored placement so the figure leads again */
   .panel--who-alt .who-grid { grid-template-columns: 1fr; }
   .panel--who-alt .who-figure,
@@ -1214,8 +1243,11 @@ html:not(.js) .dossier__label {
   align-items: flex-end;
   text-align: left;
 }
-.page-hero--program .page-lede,
-.page-hero--profile .page-lede { margin-left: 0; max-width: 44ch; }
+.page-hero--program .page-lede { margin-left: 0; max-width: 44ch; }
+/* The profile hero's lede is a credential strip, not prose — 44ch caps it at
+   408px where Eesan's needs 427px, which orphaned "NCCP Level 3" on its own
+   line. Sankeerth's (359px) always fit, which is why only one page showed it. */
+.page-hero--profile .page-lede { margin-left: 0; max-width: 52ch; }
 .page-hero--utility { min-height: clamp(13rem, 33svh, 20rem); }
 /* 404 is the exception: its header IS the page, so it fills the screen and the
    footer sits below the fold. Must follow .page-hero — same specificity. */
@@ -1240,21 +1272,29 @@ html:not(.js) .dossier__label {
   inset: 0;
   background: linear-gradient(180deg, rgba(11, 61, 46, 0.4), rgba(4, 27, 20, 0.6));
 }
-/* Scaled off the header's own height, not the viewport — so the whole court
-   still reads inside the shallow band instead of being sliced to stray lines */
+/* The court fills the band edge to edge. It is stretched to do it
+   (preserveAspectRatio="none" on the SVG), which is safe here because every
+   element is a straight line: a non-uniform scale keeps them straight and
+   parallel and only changes the court's proportions. Sizing it off its own
+   536/244 ratio instead left it letterboxed — about 660px of court centred in
+   a 1280px header, which read as a small court floating in the middle. */
 .page-court {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 100%;
   height: 100%;
-  width: auto;
-  min-width: 100%;
-  aspect-ratio: 536 / 244;
   opacity: 0.11;
   pointer-events: none;
 }
-.page-court svg { width: 100%; height: 100%; }
+.page-court svg { display: block; width: 100%; height: 100%; }
+/* NOTE: stretched, the x and y scales differ by roughly 2:1, so the vertical
+   service lines render about twice the weight of the horizontal side lines
+   (~3.6px vs ~1.8px at 1280 wide). Deliberately left alone: vector-effect
+   non-scaling-stroke would even them out but also moves the dash pattern into
+   device space, and the entrance draw depends on stroke-dasharray + pathLength.
+   If the weight difference ever needs fixing, verify that animation first. */
 .page-hero .overline { color: var(--gold); }
 .page-hero h1 {
   font-size: clamp(2.6rem, 6vw, 4.4rem);
@@ -1919,6 +1959,11 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
   .page-hero { padding: 6.25rem 0 2.5rem; }
   .page-hero h1 { font-size: clamp(2.1rem, 4.6vw, 3.2rem); }
   .page-lede { margin-top: 1.5rem; font-size: 0.95rem; }
+
+  /* The credential rail is three rows tall now, which tipped the Sankeerth panel
+     7px past one screen at 1366x700 — take it back out of the row padding. */
+  .who-creds { margin-top: 0.95rem; }
+  .who-creds li { padding: 0.36rem 0; }
 }
 
 /* Short landscape phones: shrink the hero rather than drop pieces of it. The
@@ -1936,14 +1981,15 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
 }
 
 @media (max-width: 700px) and (orientation: portrait) {
-  .hero-court,
-  .page-court {
+  /* The hero court keeps the oversize-and-rotate trick: it is proportional, so on
+     a narrow portrait screen it only reads as a court stood on its end. The page
+     court is stretched to its band at any ratio, so it needs neither. */
+  .hero-court {
     width: 150vh;
     width: 150svh;
   }
 
-  .hero-court svg,
-  .page-court svg {
+  .hero-court svg {
     transform: rotate(90deg);
     transform-origin: center;
   }
