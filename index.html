@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=48">
+  <link rel="stylesheet" href="css/styles.css?v=49">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -197,9 +197,9 @@
           <h3 class="who-name">B.R. <em>Sankeerth</em></h3>
           <p class="who-role">Founder &amp; Head Coach</p>
           <ul class="who-creds">
-            <li>World No. 73</li>
-            <li>Team Canada</li>
-            <li>3&times; National Champion</li>
+            <li><span class="who-creds__k">Career high</span><span class="who-creds__v">World No.&nbsp;73</span></li>
+            <li><span class="who-creds__k">International</span><span class="who-creds__v">Team Canada</span></li>
+            <li><span class="who-creds__k">National champion</span><span class="who-creds__v">3&times;</span></li>
           </ul>
         </div>
 
@@ -210,23 +210,19 @@
 
           <!-- The client's brief for this screen: BIO · Achievements · News Articles.
                Filed as one dossier so all three fit the single-screen panel; without
-               JS every pane simply stacks open. -->
+               JS every pane simply stacks open. Exactly those three, in that order —
+               there is deliberately no fourth "The Project" pane. The brief's
+               growth/access passage that used to sit in one lives on sankeerth.html
+               (chapter 03), so nothing of the client's copy is lost by leaving it out. -->
           <div class="dossier reveal" style="--d:.16s" data-tabs>
             <div class="dossier__tabs" role="tablist" aria-label="B.R. Sankeerth">
-              <button class="dossier__tab" type="button" role="tab" id="tab-s-project" aria-controls="pane-s-project" aria-selected="true">The Project</button>
-              <button class="dossier__tab" type="button" role="tab" id="tab-s-bio" aria-controls="pane-s-bio" aria-selected="false" tabindex="-1">Bio</button>
+              <button class="dossier__tab" type="button" role="tab" id="tab-s-bio" aria-controls="pane-s-bio" aria-selected="true">Bio</button>
               <button class="dossier__tab" type="button" role="tab" id="tab-s-record" aria-controls="pane-s-record" aria-selected="false" tabindex="-1">Achievements</button>
               <button class="dossier__tab" type="button" role="tab" id="tab-s-news" aria-controls="pane-s-news" aria-selected="false" tabindex="-1">News</button>
             </div>
             <div class="dossier__panes">
 
-              <div class="dossier__pane is-active" role="tabpanel" id="pane-s-project" aria-labelledby="tab-s-project" tabindex="0">
-                <p class="dossier__label">The Project</p>
-                <p>Badminton is one of the fastest-growing sports in North America, but coaching hasn&rsquo;t caught up. Most kids who love the game never get taught it properly. For every kid who gets real coaching, five or six of their friends are stuck at school level with nowhere to go next.</p>
-                <p class="dossier__kicker">Talent is everywhere. Access isn&rsquo;t. That&rsquo;s the gap we&rsquo;re here to close.</p>
-              </div>
-
-              <div class="dossier__pane" role="tabpanel" id="pane-s-bio" aria-labelledby="tab-s-bio" tabindex="0" hidden>
+              <div class="dossier__pane is-active" role="tabpanel" id="pane-s-bio" aria-labelledby="tab-s-bio" tabindex="0">
                 <p class="dossier__label">Bio</p>
                 <p>Born and raised in Bangalore, India, Sankeerth came up through the Indian Junior National Team and competed at the World Junior Championships. He has represented Team Canada since 2019 on the sport&rsquo;s biggest stages &mdash; the World Championships and World Team Championships, including the Thomas Cup and Sudirman Cup, along with multiple Pan Am Championships in both team and individual events, earning international wins and medals along the way.</p>
                 <p>Across two Olympic cycles, he spent 42 to 45 weeks a year on the international circuit, competing worldwide in pursuit of qualification for the 2020 Tokyo and 2024 Paris Olympic Games.</p>
@@ -291,9 +287,9 @@
           <h3 class="who-name" id="eesan-name">Eesan <em>Holtzman</em></h3>
           <p class="who-role">Co-Founder &amp; Coach</p>
           <ul class="who-creds">
-            <li>Canadian #4 &mdash; Men&rsquo;s Doubles</li>
-            <li>BWF World #273</li>
-            <li>NCCP Level 3</li>
+            <li><span class="who-creds__k">Men&rsquo;s doubles</span><span class="who-creds__v">Canadian No.&nbsp;4</span></li>
+            <li><span class="who-creds__k">World ranking</span><span class="who-creds__v">BWF No.&nbsp;273</span></li>
+            <li><span class="who-creds__k">Certification</span><span class="who-creds__v">NCCP Level&nbsp;3</span></li>
           </ul>
         </div>
 
@@ -334,7 +330,7 @@
 
           <div class="who-actions reveal" style="--d:.16s">
             <a class="btn btn--green" href="signup.html">Book Your Assessment / Trial Session</a>
-            <a class="btn btn--green" href="eesan.html">Eesan&rsquo;s Profile</a>
+            <a class="btn btn--green" href="about.html#team">Our Coaching Team</a>
           </div>
         </div>
 

@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=48">
+  <link rel="stylesheet" href="css/styles.css?v=49">
 </head>
 <body id="top">
 
@@ -127,7 +127,7 @@
         <img class="page-photo" src="assets/backdrops/eesan.jpg" alt="">
       </div>
       <div class="page-court" aria-hidden="true">
-        <svg viewBox="0 0 536 244" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 536 244" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
           <g fill="none" stroke="#C9A649" stroke-width="1.5">
             <rect class="c-draw c-bound" pathLength="100" x="2" y="2" width="532" height="240"/>
             <line class="c-draw c-side" pathLength="100" x1="2" y1="20" x2="534" y2="20"/>
@@ -145,7 +145,9 @@
       <div class="container">
         <p class="overline">The Team &middot; The Badminton Project</p>
         <h1><span class="line"><span class="line-inner">Eesan</span></span><span class="line"><span class="line-inner"><em>Holtzman.</em></span></span></h1>
-        <p class="page-lede">Men’s Doubles Canadian #4 &middot; BWF World #273 &middot; NCCP Level 3</p>
+        <!-- nbsp inside each credential so a narrow screen can only ever break at
+             a middot, never mid-credential -->
+        <p class="page-lede">Men’s&nbsp;Doubles&nbsp;Canadian&nbsp;#4 &middot; BWF&nbsp;World&nbsp;#273 &middot; NCCP&nbsp;Level&nbsp;3</p>
       </div>
     </section>
 
