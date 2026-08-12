@@ -25,19 +25,22 @@ server that disables caching, so your edits always show up on refresh.)
 
 | File | What it is |
 | --- | --- |
-| `index.html` | Home — hero, mission, Academy overview, Moments, Join |
-| `programs.html` | **The Academy** hub — four programs + Locations (Agility Sports & BNM Badminton) |
-| `academy-*.html` | The four program pages (high-performance, competition, intro-development, athletic-development), each with a media carousel |
+| `index.html` | Home — four full-screen panels: hero, B.R. Sankeerth, Eesan Holtzman, the training pathway |
+| `programs.html` | **The Academy** hub — the junior pathway, Adult Training, Locations (Agility Sports & BNM Badminton) |
+| `academy-intro-development.html` | **Beginner Training** |
+| `academy-intermediate.html` | **Intermediate Training** |
+| `academy-competition.html` | **High Performance Team Training** |
+| `academy-high-performance.html` | **National Team Elite Training** |
+| `academy-athletic-development.html` | Retired program. Unlinked, out of the sitemap and `noindex` — kept only so old inbound links still land somewhere. |
 | `signup.html` | Registration form — submits to the `submit-registration` Supabase Edge Function and stores entries in the private `registrations` table. Public connection values live in `js/supabase-config.js`. |
-| `sankeerth.html`, `eesan.html` | Personal pages for the two coaches (story / achievements / vision — placeholders to fill) |
+| `sankeerth.html`, `eesan.html` | Personal pages for the two coaches (story / achievements / news / vision) |
 | `404.html` | Branded "Out of bounds" error page (picked up automatically by Netlify, GitHub Pages, Cloudflare Pages) |
-| `about.html` | Who We Are — values + the two coach profiles (placeholders to fill) |
-| `programs.html` | Programs & Courses — course details + Where We Train (placeholders) |
-| `gallery.html` | Gallery — real photos + labeled placeholder tiles |
-| `journal.html` | Journal — placeholder post cards, ready for real posts |
+| `about.html` | Who We Are — the Project, the values, and the two coach profiles |
+| `gallery.html` | Gallery — real photos + labelled empty print slots |
+| `journal.html` | Journal — empty state; the post-card template is in a comment |
 | `css/styles.css` | All styling. Colors and fonts are defined once at the top under `:root` |
-| `js/main.js` | Small enhancements: sticky header, mobile menu, scroll-reveal, photo gallery |
-| `assets/favicon.svg` | The shuttlecock browser-tab icon |
+| `js/main.js` | Small enhancements: sticky header, mobile menu, scroll-reveal, dossier tabs, photo gallery |
+| `assets/favicon.svg` | The court-lines browser-tab icon |
 | `assets/photos/` | Website photos (see below); untouched originals in `originals/` |
 | `assets/backdrops/` | Blurred hero backdrops for the sub-pages (stills from the hero footage) |
 | `serve.py` | Optional local dev server with caching disabled |
@@ -65,22 +68,25 @@ All motion is disabled automatically for visitors whose system asks for reduced
 motion. To remove any effect, delete its block in `index.html` (hero video) or
 the matching section in `css/styles.css` / `js/main.js` (each is labelled).
 
-## Filling in the placeholders
+## What is still waiting on the client
 
-Anything in `[square brackets]` is a placeholder waiting for real content:
+All copy is final. Nothing bracketed renders to a visitor any more — every
+remaining gap is **media** or **a fact nobody has confirmed yet**:
 
-- **Coaches** (`about.html`) — names, roles, bios, achievement lists. Headshots:
-  save as `assets/photos/coach-01.jpg` / `coach-02.jpg` and swap the placeholder
-  tile for an `<img>` (instructions are in a comment right above that section).
-- **Courses** (`programs.html`) — detailed descriptions plus the ages/schedule/
-  venue/fees chips for each of the four Academy programs, and the venue card under
-  "Where We Train".
-- **Journal** (`journal.html`) — each card is a post template: date, title, excerpt.
-- **Gallery** (`gallery.html`) — each placeholder tile names the kind of shot it's
-  waiting for (coaches in action, junior training, games night, ...).
+- **Headshots** — `assets/photos/sankeerth.jpg` and `eesan.jpg`, then swap the
+  `.ph-media` tile for an `<img>` (a comment above each section shows how).
+  Used on `about.html`, `sankeerth.html`, `eesan.html` and the two home panels.
+- **Program photos and video** — each program page has an "Inside the Program"
+  carousel of empty slots; the client's deck asks for "Photos n Videos" per
+  program. Replace a placeholder `<figure>` with an `<img>`/`<video>` plus a
+  real `<figcaption>`.
+- **Career photos** — four slots on each coach profile.
+- **Gallery** — four empty print slots, each labelled with the kind of shot it
+  is waiting for.
+- **Venue detail** — street address for Agility Sports and training days for
+  both venues. The cards deliberately show only what is confirmed.
 
-A note in a comment at the top of each section explains exactly how to swap
-placeholders for real content.
+A comment at the top of each section explains exactly how to fill it.
 
 ## Adding photos
 
