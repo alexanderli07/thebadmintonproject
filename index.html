@@ -21,8 +21,8 @@
   <script>(function(d){d.classList.add('js');var r=false;try{r=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}if(!r){d.classList.add('entering');try{if(sessionStorage.getItem('tbp-nav')){sessionStorage.removeItem('tbp-nav');d.classList.add('pt-in')}}catch(e){}}setTimeout(function(){if(window.__tbp){if(!r)d.classList.add('entered')}else{d.classList.remove('js');d.classList.remove('entering');d.classList.remove('pt-in')}},2500)})(document.documentElement)</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=22">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=48">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -33,7 +33,7 @@
     "image": "https://thebadmintonproject.com/assets/og-image.png",
     "email": "thebadmintonproject@gmail.com",
     "sport": "Badminton",
-    "description": "Serious badminton coaching and competitive development for kids and teens — high-performance, competition team, intro & developmental, and athletic development training, plus adult programs."
+    "description": "Serious badminton coaching and competitive development for kids and teens — National Team Elite, High Performance Team, Beginner and Intermediate training, plus adult programs."
   }
   </script>
 </head>
@@ -43,15 +43,14 @@
 
   <!-- Shared SVG symbols -->
   <svg class="svg-defs" aria-hidden="true" focusable="false">
-    <symbol id="icon-shuttle" viewBox="0 0 24 24">
-      <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="18.4" r="2.3"/>
-        <path d="M10.5 16.3 L6.2 6.4"/>
-        <path d="M11.6 16.05 L9.6 5.1"/>
-        <path d="M12.4 16.05 L14.4 5.1"/>
-        <path d="M13.5 16.3 L17.8 6.4"/>
-        <path d="M6.2 6.4 Q12 3.4 17.8 6.4"/>
-        <path d="M9.3 13.6 Q12 12.7 14.7 13.6"/>
+    <symbol id="icon-court" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round">
+        <rect x="5.5" y="2.5" width="13" height="19"/>
+        <line x1="5.5" y1="12" x2="18.5" y2="12"/>
+        <line x1="5.5" y1="9.4" x2="18.5" y2="9.4"/>
+        <line x1="5.5" y1="14.6" x2="18.5" y2="14.6"/>
+        <line x1="12" y1="2.5" x2="12" y2="9.4"/>
+        <line x1="12" y1="14.6" x2="12" y2="21.5"/>
       </g>
     </symbol>
   </svg>
@@ -60,7 +59,7 @@
   <header class="site-header" data-header>
     <div class="container nav-row">
       <a class="brand" href="#top" aria-label="The Badminton Project — back to top">
-        <svg class="brand-mark" aria-hidden="true"><use href="#icon-shuttle"/></svg>
+        <svg class="brand-mark" aria-hidden="true"><use href="#icon-court"/></svg>
         <span class="brand-name">The Badminton Project</span>
       </a>
       <nav class="site-nav" aria-label="Primary">
@@ -68,10 +67,10 @@
         <div class="nav-disclosure" data-nav-disclosure>
           <a class="nav-disclosure__trigger" href="programs.html">The Academy<span class="nav-chevron" aria-hidden="true"></span></a>
           <div class="nav-submenu">
-            <a href="academy-high-performance.html">High Performance</a>
-            <a href="academy-competition.html">Competition Team</a>
-            <a href="academy-intro-development.html">Intro &amp; Development</a>
-            <a href="academy-athletic-development.html">Athletic Development</a>
+            <a href="academy-high-performance.html">National Team Elite</a>
+            <a href="academy-competition.html">High Performance Team</a>
+            <a href="academy-intro-development.html">Beginner Training</a>
+            <a href="academy-intermediate.html">Intermediate Training</a>
             <a href="programs.html#adult-training">Adult Training</a>
             <a href="programs.html#where-we-train">Where We Train</a>
           </div>
@@ -80,7 +79,7 @@
           <a class="nav-disclosure__trigger" href="about.html#team">The Coaches<span class="nav-chevron" aria-hidden="true"></span></a>
           <div class="nav-submenu">
             <a href="sankeerth.html">B.R. Sankeerth</a>
-            <a href="eesan.html">Eesan</a>
+            <a href="eesan.html">Eesan Holtzman</a>
           </div>
         </div>
         <div class="nav-disclosure" data-nav-disclosure>
@@ -107,10 +106,10 @@
       <details class="mobile-disclosure" data-mobile-disclosure>
         <summary class="mobile-disclosure__trigger"><a class="mobile-disclosure__label" href="programs.html">The Academy</a><span class="nav-chevron" aria-hidden="true"></span></summary>
         <div class="mobile-submenu">
-          <a href="academy-high-performance.html">High Performance</a>
-          <a href="academy-competition.html">Competition Team</a>
-          <a href="academy-intro-development.html">Intro &amp; Development</a>
-          <a href="academy-athletic-development.html">Athletic Development</a>
+          <a href="academy-high-performance.html">National Team Elite</a>
+          <a href="academy-competition.html">High Performance Team</a>
+          <a href="academy-intro-development.html">Beginner Training</a>
+          <a href="academy-intermediate.html">Intermediate Training</a>
           <a href="programs.html#adult-training">Adult Training</a>
           <a href="programs.html#where-we-train">Where We Train</a>
         </div>
@@ -119,7 +118,7 @@
         <summary class="mobile-disclosure__trigger"><a class="mobile-disclosure__label" href="about.html#team">The Coaches</a><span class="nav-chevron" aria-hidden="true"></span></summary>
         <div class="mobile-submenu">
           <a href="sankeerth.html">B.R. Sankeerth</a>
-          <a href="eesan.html">Eesan</a>
+          <a href="eesan.html">Eesan Holtzman</a>
         </div>
       </details>
       <details class="mobile-disclosure" data-mobile-disclosure>
@@ -130,11 +129,6 @@
         </div>
       </details>
       <a class="mobile-nav__link mobile-nav__cta" href="signup.html">Book a Trial</a>
-      <div class="ornament" aria-hidden="true">
-        <span class="rule"></span>
-        <svg><use href="#icon-shuttle"/></svg>
-        <span class="rule"></span>
-      </div>
     </nav>
   </div>
 
@@ -168,241 +162,227 @@
         </svg>
       </div>
       <div class="container hero-inner">
-        <p class="overline hero-overline">Training &middot; Coaching &middot; Athletic Development &middot; Excellence</p>
         <h1 class="hero-title">
           <span class="t1 line"><span class="line-inner">The</span></span>
           <span class="t2 line"><span class="line-inner">Badminton</span></span>
           <span class="t3 line"><span class="line-inner">Project</span></span>
         </h1>
-        <div class="ornament" data-serve aria-hidden="true">
-          <span class="rule"></span>
-          <svg><use href="#icon-shuttle"/></svg>
-          <span class="rule"></span>
-        </div>
-        <p class="hero-lede">Serious coaching for kids who are ready to&nbsp;improve.</p>
+        <p class="hero-tagline">Real Training <span class="sep" aria-hidden="true">&middot;</span> Real Growth</p>
+        <p class="overline hero-overline">National Team Elite <span class="sep" aria-hidden="true">&middot;</span> High Performance Team <span class="sep" aria-hidden="true">&middot;</span> Beginner &amp; Intermediate <span class="sep" aria-hidden="true">&middot;</span> Social &amp; Community Events</p>
+        <p class="hero-locations">Mississauga &middot; Toronto</p>
         <div class="hero-actions">
-          <a class="btn btn--gold" href="signup.html">Book a Trial Session</a>
-          <a class="btn btn--ghost" href="#for-parents">See How We Train</a>
+          <a class="btn btn--gold" href="signup.html">Book Your Assessment / Trial Session</a>
+          <a class="btn btn--ghost" href="#programs">Our Training Programs</a>
         </div>
       </div>
-      <a class="scroll-cue" href="#for-parents" aria-label="Scroll to For Parents"><span></span></a>
+      <a class="scroll-cue" href="#who-we-are" aria-label="Scroll to Who We Are"><span></span></a>
       <div class="grain" aria-hidden="true"></div>
     </section>
 
-    <!-- ==================== FOR PARENTS ==================== -->
-    <section class="section section--ivory" id="for-parents">
+    <!-- ==================== PANEL 2 · WHO WE ARE ==================== -->
+    <section class="panel panel--who section--ivory" id="who-we-are">
       <div class="container">
-        <header class="section-head section-head--editorial reveal">
-          <p class="overline">For Parents</p>
-          <h2>Our approach, what we do<br>&amp; how we <em>train.</em></h2>
-          <div class="ornament" data-serve aria-hidden="true">
-            <span class="rule"></span>
-            <svg><use href="#icon-shuttle"/></svg>
-            <span class="rule"></span>
-          </div>
-        </header>
-        <div class="about-grid">
-          <div class="about-lead reveal">
-            <p class="lead-text">Too many programs put kids on a court, roll out a basket of shuttles, and call it training. Your child deserves more than supervised play.</p>
-          </div>
-          <div class="about-body reveal" style="--d:.15s">
-            <p>At The Badminton Project, every session is structured, every drill has a purpose, and every young athlete is developed step by step — technique, footwork, athleticism, and match craft — taught by a coach who competed at the top of the sport.</p>
-            <p>Whether your child is picking up a racquet for the first time or already competing and stalling out somewhere else, we build them properly — and we can show you the difference.</p>
-          </div>
-        </div>
-        <div class="section-cta reveal">
-          <a class="btn btn--green" href="signup.html">Book a Trial Session</a>
-        </div>
-      </div>
-    </section>
+        <h2 class="overline who-eyebrow reveal">Who we are and what we do</h2>
+        <div class="who-grid">
 
-    <!-- ==================== WHO WE ARE ==================== -->
-    <section class="section section--ivory" id="who-we-are">
-      <div class="container">
-        <header class="section-head section-head--editorial reveal">
-          <p class="overline">Who We Are</p>
-          <h2>Every young athlete<br>begins as <em>a project.</em></h2>
-          <div class="ornament" data-serve aria-hidden="true">
-            <span class="rule"></span>
-            <svg><use href="#icon-shuttle"/></svg>
-            <span class="rule"></span>
+        <div class="who-figure reveal">
+          <div class="who-portrait">
+            <!-- Drop the headshot at assets/photos/sankeerth.jpg and replace this
+                 tile with <img src="assets/photos/sankeerth.jpg" alt="B.R. Sankeerth"> -->
+            <div class="ph-media" role="img" aria-label="Portrait of B.R. Sankeerth coming soon">
+              <svg aria-hidden="true"><use href="#icon-court"/></svg>
+              <span>Portrait<br>coming soon</span>
+            </div>
           </div>
-        </header>
-        <div class="about-grid">
-          <div class="about-lead reveal">
-            <p class="lead-text">The Badminton Project exists to give kids and teens genuine coaching and competitive development — the kind that’s planned, purposeful, and taken seriously every session.</p>
-          </div>
-          <div class="about-body reveal" style="--d:.15s">
-            <p>We develop young athletes deliberately: beginners learning the game the right way from day one, developing players finding their competitive edge, and committed juniors chasing the top of the sport. Whatever the level, every child gets the same thing — a real coach, a real plan, and real standards.</p>
-            <p>Progress here is earned step by step. That’s not a limitation. That’s the promise — and it’s why our athletes actually improve.</p>
-          </div>
+          <h3 class="who-name">B.R. <em>Sankeerth</em></h3>
+          <p class="who-role">Founder &amp; Head Coach</p>
+          <ul class="who-creds">
+            <li>World No. 73</li>
+            <li>Team Canada</li>
+            <li>3&times; National Champion</li>
+          </ul>
         </div>
-        <div class="section-cta reveal">
-          <a class="btn btn--green" href="signup.html">Book a Trial Session</a>
-          <a class="btn btn--green" href="mailto:thebadmintonproject@gmail.com">Email Us</a>
-        </div>
-      </div>
-    </section>
 
-    <!-- ==================== QUOTE BAND ==================== -->
-    <section class="band">
-      <div class="container reveal">
-        <svg class="band-mark" aria-hidden="true"><use href="#icon-shuttle"/></svg>
-        <figure class="band-quote">
-          <blockquote>
-            <p>Our goal is simple: to create the best conditions for every young athlete to reach their full athletic development and personal potential.</p>
+        <div class="who-body">
+          <blockquote class="who-lead reveal" style="--d:.08s">
+            <p>This sport gave me a lot, and I built The Badminton Project to hand some of that&nbsp;down.</p>
           </blockquote>
-          <figcaption>The Badminton Project</figcaption>
-        </figure>
+
+          <!-- The client's brief for this screen: BIO · Achievements · News Articles.
+               Filed as one dossier so all three fit the single-screen panel; without
+               JS every pane simply stacks open. -->
+          <div class="dossier reveal" style="--d:.16s" data-tabs>
+            <div class="dossier__tabs" role="tablist" aria-label="B.R. Sankeerth">
+              <button class="dossier__tab" type="button" role="tab" id="tab-s-project" aria-controls="pane-s-project" aria-selected="true">The Project</button>
+              <button class="dossier__tab" type="button" role="tab" id="tab-s-bio" aria-controls="pane-s-bio" aria-selected="false" tabindex="-1">Bio</button>
+              <button class="dossier__tab" type="button" role="tab" id="tab-s-record" aria-controls="pane-s-record" aria-selected="false" tabindex="-1">Achievements</button>
+              <button class="dossier__tab" type="button" role="tab" id="tab-s-news" aria-controls="pane-s-news" aria-selected="false" tabindex="-1">News</button>
+            </div>
+            <div class="dossier__panes">
+
+              <div class="dossier__pane is-active" role="tabpanel" id="pane-s-project" aria-labelledby="tab-s-project" tabindex="0">
+                <p class="dossier__label">The Project</p>
+                <p>Badminton is one of the fastest-growing sports in North America, but coaching hasn&rsquo;t caught up. Most kids who love the game never get taught it properly. For every kid who gets real coaching, five or six of their friends are stuck at school level with nowhere to go next.</p>
+                <p class="dossier__kicker">Talent is everywhere. Access isn&rsquo;t. That&rsquo;s the gap we&rsquo;re here to close.</p>
+              </div>
+
+              <div class="dossier__pane" role="tabpanel" id="pane-s-bio" aria-labelledby="tab-s-bio" tabindex="0" hidden>
+                <p class="dossier__label">Bio</p>
+                <p>Born and raised in Bangalore, India, Sankeerth came up through the Indian Junior National Team and competed at the World Junior Championships. He has represented Team Canada since 2019 on the sport&rsquo;s biggest stages &mdash; the World Championships and World Team Championships, including the Thomas Cup and Sudirman Cup, along with multiple Pan Am Championships in both team and individual events, earning international wins and medals along the way.</p>
+                <p>Across two Olympic cycles, he spent 42 to 45 weeks a year on the international circuit, competing worldwide in pursuit of qualification for the 2020 Tokyo and 2024 Paris Olympic Games.</p>
+              </div>
+
+              <div class="dossier__pane" role="tabpanel" id="pane-s-record" aria-labelledby="tab-s-record" tabindex="0" hidden>
+                <p class="dossier__label">Achievements</p>
+                <ul class="stat-row">
+                  <li><span class="stat-fig">73</span><span class="stat-cap">Career-high world ranking</span></li>
+                  <li><span class="stat-fig">3&times;</span><span class="stat-cap">National champion</span></li>
+                  <li><span class="stat-fig">2</span><span class="stat-cap">Olympic cycles on tour</span></li>
+                </ul>
+                <ul class="honours">
+                  <li>Team Canada representative since 2019</li>
+                  <li>World &amp; World Team Championships &mdash; Thomas Cup, Sudirman Cup</li>
+                  <li>Multiple Pan Am Championships &mdash; team and individual</li>
+                  <li>Indian Junior National Team &mdash; World Junior Championships</li>
+                </ul>
+              </div>
+
+              <div class="dossier__pane" role="tabpanel" id="pane-s-news" aria-labelledby="tab-s-news" tabindex="0" hidden>
+                <p class="dossier__label">News Articles</p>
+                <ul class="newsgrid">
+                  <li><a href="https://www.participaction.com/blog/inspiration/active-champions-series-b-r-sankeerth/" target="_blank" rel="noopener"><span class="news-src">ParticipACTION</span><span class="news-title">Active Champions Series: B.R. Sankeerth</span></a></li>
+                  <li><a href="https://bwfbadminton.com/news-single/2021/10/01/stopping-this-just-kills-you-inside" target="_blank" rel="noopener"><span class="news-src">BWF Badminton</span><span class="news-title">&ldquo;Stopping This Just Kills You Inside&rdquo;</span></a></li>
+                  <li><a href="https://www.sportskeeda.com/badminton/former-indian-junior-shuttler-br-sankeerth-making-waves-canada-player" target="_blank" rel="noopener"><span class="news-src">Sportskeeda</span><span class="news-title">Former Indian junior shuttler making waves in Canada</span></a></li>
+                  <li><a href="https://bwfthomasubercups.bwfbadminton.com/news-single/2022/02/21/victorious-canada-make-it-three-in-a-row/" target="_blank" rel="noopener"><span class="news-src">Thomas &amp; Uber Cups</span><span class="news-title">Victorious Canada Make It Three In A Row</span></a></li>
+                  <li><a href="https://bwfbadminton.com/news-single/2022/04/28/pan-am-championships-sankeerth-awaits-cordon" target="_blank" rel="noopener"><span class="news-src">BWF Badminton</span><span class="news-title">Pan Am Championships: Sankeerth Awaits Cordon</span></a></li>
+                  <li><a href="https://olympics.bwfbadminton.com/news-single/2021/04/30/pan-am-championships-ho-shue-sankeerth-stretched/" target="_blank" rel="noopener"><span class="news-src">BWF Olympics</span><span class="news-title">Pan Am Championships: Ho Shue, Sankeerth Stretched</span></a></li>
+                  <li><a href="https://olympics.bwfbadminton.com/news-single/2021/05/01/pan-am-championships-setback-for-ygor-coelho/" target="_blank" rel="noopener"><span class="news-src">BWF Olympics</span><span class="news-title">Pan Am Championships: Setback For Ygor Coelho</span></a></li>
+                  <li><a href="https://www.badmintonpanam.org/pan-am-players-at-mauritius-international-2019/" target="_blank" rel="noopener"><span class="news-src">Badminton Pan Am</span><span class="news-title">Pan Am Players At Mauritius International 2019</span></a></li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="who-actions reveal" style="--d:.24s">
+            <a class="btn btn--green" href="signup.html">Book Your Assessment / Trial Session</a>
+            <a class="btn btn--green" href="about.html#team">Our Coaching Team</a>
+          </div>
+        </div>
+
+        </div>
       </div>
     </section>
 
-    <!-- ==================== WHAT WE DO ==================== -->
-    <section class="section section--ivory" id="what-we-do">
+    <!-- ============ PANEL 3 · EESAN (mirrors the panel above) ============ -->
+    <section class="panel panel--who panel--who-alt" id="eesan" aria-labelledby="eesan-name">
+      <div class="container">
+        <div class="who-grid">
+
+        <div class="who-figure reveal">
+          <div class="who-portrait">
+            <!-- Drop the headshot at assets/photos/eesan.jpg and replace this
+                 tile with <img src="assets/photos/eesan.jpg" alt="Eesan Holtzman"> -->
+            <div class="ph-media" role="img" aria-label="Portrait of Eesan Holtzman coming soon">
+              <svg aria-hidden="true"><use href="#icon-court"/></svg>
+              <span>Portrait<br>coming soon</span>
+            </div>
+          </div>
+          <h3 class="who-name" id="eesan-name">Eesan <em>Holtzman</em></h3>
+          <p class="who-role">Co-Founder &amp; Coach</p>
+          <ul class="who-creds">
+            <li>Canadian #4 &mdash; Men&rsquo;s Doubles</li>
+            <li>BWF World #273</li>
+            <li>NCCP Level 3</li>
+          </ul>
+        </div>
+
+        <div class="who-body">
+          <blockquote class="who-lead reveal">
+            <p>No player I coach should ever have to relearn their strokes and swings because they weren&rsquo;t taught properly the first&nbsp;time.</p>
+          </blockquote>
+
+          <div class="dossier reveal" style="--d:.08s" data-tabs>
+            <div class="dossier__tabs" role="tablist" aria-label="Eesan Holtzman">
+              <button class="dossier__tab" type="button" role="tab" id="tab-e-bio" aria-controls="pane-e-bio" aria-selected="true">Bio</button>
+              <button class="dossier__tab" type="button" role="tab" id="tab-e-record" aria-controls="pane-e-record" aria-selected="false" tabindex="-1">Achievements</button>
+            </div>
+            <div class="dossier__panes">
+
+              <div class="dossier__pane is-active" role="tabpanel" id="pane-e-bio" aria-labelledby="tab-e-bio" tabindex="0">
+                <p class="dossier__label">Bio</p>
+                <p>Eesan is currently ranked Men&rsquo;s Doubles Canadian #4 and BWF #273, an NCCP Level&nbsp;3 certified coach, and a McMaster Varsity athlete with Super 300 experience at the Canada Open and US Open, reaching the Round of 16 at the 2024 Canadian International Challenge.</p>
+                <p>That matters because he&rsquo;s living the path your child is on right now &mdash; not recalling it from years ago. Eesan brings current, high-level competitive instincts to every session, paired with the structure and standards of Sankeerth&rsquo;s program.</p>
+              </div>
+
+              <div class="dossier__pane" role="tabpanel" id="pane-e-record" aria-labelledby="tab-e-record" tabindex="0" hidden>
+                <p class="dossier__label">Achievements</p>
+                <ul class="stat-row">
+                  <li><span class="stat-fig">#4</span><span class="stat-cap">Canadian men&rsquo;s doubles</span></li>
+                  <li><span class="stat-fig">#273</span><span class="stat-cap">BWF world ranking</span></li>
+                  <li><span class="stat-fig">L3</span><span class="stat-cap">NCCP certified coach</span></li>
+                </ul>
+                <ul class="honours">
+                  <li>Super 300 experience &mdash; Canada Open, US Open</li>
+                  <li>Round of 16 &mdash; 2024 Canadian International Challenge</li>
+                  <li>McMaster University Varsity athlete</li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="who-actions reveal" style="--d:.16s">
+            <a class="btn btn--green" href="signup.html">Book Your Assessment / Trial Session</a>
+            <a class="btn btn--green" href="eesan.html">Eesan&rsquo;s Profile</a>
+          </div>
+        </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PANEL 4 · TRAINING PROGRAMS ==================== -->
+    <section class="panel panel--programs" id="programs">
       <div class="container">
         <header class="section-head reveal">
-          <p class="overline">What We Do</p>
-          <h2>Training with <em>intention.</em></h2>
-          <div class="ornament" data-serve aria-hidden="true">
-            <span class="rule"></span>
-            <svg><use href="#icon-shuttle"/></svg>
-            <span class="rule"></span>
-          </div>
-          <p class="section-intro">Our Academy develops young athletes through four training streams — technique, competition, foundational skills, and athletic development — each planned with the same care, whether your child is chasing titles or finding their first competitive rally. Nothing here is improvised. Every stream is a deliberate step in a longer plan.</p>
+          <p class="overline">The Academy</p>
+          <h2>Training <em>programs.</em></h2>
         </header>
-        <div class="programs">
-          <article class="program reveal">
-            <span class="program-no" aria-hidden="true">01</span>
-            <div class="program-rule" aria-hidden="true"></div>
-            <p class="program-label">The Academy</p>
-            <h3>High-Performance Training</h3>
-            <p>For the junior athlete chasing the top of the sport — committed competitors ready to push toward provincial, national, and beyond.</p>
-            <a class="card-link" href="academy-high-performance.html">Explore</a>
-          </article>
-          <article class="program reveal" style="--d:.1s">
-            <span class="program-no" aria-hidden="true">02</span>
-            <div class="program-rule" aria-hidden="true"></div>
-            <p class="program-label">The Academy</p>
-            <h3>Competition Team Training</h3>
-            <p>Compete under the Project banner — tournament preparation, match simulation, and a team standard to hold to, on and off the court.</p>
-            <a class="card-link" href="academy-competition.html">Explore</a>
-          </article>
-          <article class="program reveal" style="--d:.2s">
-            <span class="program-no" aria-hidden="true">03</span>
-            <div class="program-rule" aria-hidden="true"></div>
-            <p class="program-label">The Academy</p>
-            <h3>Intro &amp; Developmental Training</h3>
-            <p>Where it begins — done right from day one, so nothing has to be un-learned later.</p>
+        <ol class="roadmap">
+          <li class="road-stop reveal">
+            <span class="road-no" aria-hidden="true">01</span>
+            <h3>Beginner Training</h3>
+            <p>Where it starts &mdash; the core strokes and the mechanics behind them, learned correctly from a stable base.</p>
             <a class="card-link" href="academy-intro-development.html">Explore</a>
-          </article>
-          <article class="program reveal" style="--d:.3s">
-            <span class="program-no" aria-hidden="true">04</span>
-            <div class="program-rule" aria-hidden="true"></div>
-            <p class="program-label">The Academy</p>
-            <h3>Athletic Development Training</h3>
-            <p>The physical foundation of the game — footwork, speed, agility, and coordination, built for badminton’s real demands.</p>
-            <a class="card-link" href="academy-athletic-development.html">Explore</a>
-          </article>
-        </div>
-        <p class="section-intro reveal" style="margin-top: 2.6rem;">Beyond the Junior Academy — adults train seriously here too, one-on-one, with a partner, or in a small group at your level. <a href="programs.html#adult-training" style="color: var(--gold-ink);">See adult training.</a></p>
-        <div class="section-cta reveal">
-          <a class="btn btn--green" href="programs.html">Enter the Academy</a>
-        </div>
-      </div>
-    </section>
+          </li>
+          <li class="road-stop reveal" style="--d:.08s">
+            <span class="road-no" aria-hidden="true">02</span>
+            <h3>Intermediate Training</h3>
+            <p>The next step &mdash; the same strokes put into motion, hitting from real match positions.</p>
+            <a class="card-link" href="academy-intermediate.html">Explore</a>
+          </li>
+          <li class="road-stop reveal" style="--d:.16s">
+            <span class="road-no" aria-hidden="true">03</span>
+            <h3>High Performance Team</h3>
+            <p>The tournament pathway &mdash; qualify and compete provincially and nationally, coaches travelling alongside you.</p>
+            <a class="card-link" href="academy-competition.html">Explore</a>
+          </li>
+          <li class="road-stop reveal" style="--d:.24s">
+            <span class="road-no" aria-hidden="true">04</span>
+            <h3>National Team Elite</h3>
+            <p>The highest tier &mdash; provincial and national-level players only. Limited spots, by selection.</p>
+            <a class="card-link" href="academy-high-performance.html">Explore</a>
+          </li>
+        </ol>
 
-    <!-- ==================== THE DIFFERENCE ==================== -->
-    <section class="section" id="difference">
-      <div class="container">
-        <header class="section-head reveal">
-          <p class="overline">The Difference</p>
-          <h2>What real coaching <em>looks like.</em></h2>
-          <div class="ornament" data-serve aria-hidden="true">
-            <span class="rule"></span>
-            <svg><use href="#icon-shuttle"/></svg>
-            <span class="rule"></span>
+        <aside class="road-aside reveal" style="--d:.34s">
+          <div class="road-aside__body">
+            <h3>Adult Training</h3>
+            <p>Off the junior pathway &mdash; for adults picking the sport back up, sharpening their game, or getting serious about competing.</p>
           </div>
-        </header>
-        <table class="diff-table reveal">
-          <caption class="sr-only">What passes for training elsewhere, compared with what your child gets at The Badminton Project</caption>
-          <thead>
-            <tr>
-              <th scope="col">What passes for training elsewhere</th>
-              <th scope="col">What your child gets here</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>A court full of kids and a basket of shuttles</td>
-              <td>Structured sessions with a clear purpose</td>
-            </tr>
-            <tr>
-              <td>The same drill every week, regardless of level</td>
-              <td>A plan that progresses as your child does</td>
-            </tr>
-            <tr>
-              <td>An adult supervising play</td>
-              <td>A coach who competed at the top of the sport</td>
-            </tr>
-            <tr>
-              <td>&ldquo;They had fun&rdquo;</td>
-              <td>&ldquo;They actually improved — and here&rsquo;s how&rdquo;</td>
-            </tr>
-          </tbody>
-        </table>
-        <p class="diff-closing reveal" style="--d:.15s">If your child is training but not improving, the program is the problem. We&nbsp;fix&nbsp;that.</p>
-        <div class="hero-actions reveal" style="--d:.25s">
-          <a class="btn btn--green" href="signup.html">Book a Trial Session</a>
-          <a class="btn btn--green" href="mailto:thebadmintonproject@gmail.com">Email Us</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== MOMENTS (photo gallery) ==================== -->
-    <!-- To add a photo: save it in assets/photos/ and copy one of the <figure>
-         blocks below with the new filename and a short alt description.
-         Figures whose image file is missing are hidden automatically. -->
-    <section class="section moments" id="moments" data-moments>
-      <div class="container">
-        <header class="section-head reveal">
-          <p class="overline">Moments</p>
-          <h2>From the <em>court.</em></h2>
-          <div class="ornament" data-serve aria-hidden="true">
-            <span class="rule"></span>
-            <svg><use href="#icon-shuttle"/></svg>
-            <span class="rule"></span>
-          </div>
-          <p class="section-intro">Snapshots from around the Project.</p>
-        </header>
-        <div class="moments-grid">
-          <figure class="moment reveal">
-            <span class="print"><img src="assets/photos/photo-01.jpg" alt="Two players share a smile at a tournament medal presentation" loading="lazy"></span>
-          </figure>
-          <figure class="moment reveal" style="--d:.12s">
-            <span class="print"><img src="assets/photos/photo-02.jpg" alt="Two young players together at a badminton tournament" loading="lazy"></span>
-          </figure>
-        </div>
-        <div class="section-cta reveal">
-          <a class="btn btn--gold" href="gallery.html">Visit the Gallery</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== JOIN ==================== -->
-    <section class="section section--green" id="join">
-      <div class="container narrow">
-        <p class="overline reveal">Join the Project</p>
-        <h2 class="reveal" style="--d:.1s">Be part of it<br><em>from the beginning.</em></h2>
-        <div class="ornament reveal" data-serve style="--d:.2s" aria-hidden="true">
-          <span class="rule"></span>
-          <svg><use href="#icon-shuttle"/></svg>
-          <span class="rule"></span>
-        </div>
-        <p class="join-copy reveal" style="--d:.3s">A real coach, a real plan, and real standards — for beginners learning the game the right way, developing players finding their competitive edge, and committed juniors chasing the top of the sport. Adults train seriously here too.</p>
-        <div class="hero-actions reveal" style="--d:.4s">
-          <a class="btn btn--gold" href="signup.html">Book a Trial Session</a>
-          <a class="btn btn--ghost" href="mailto:thebadmintonproject@gmail.com">Email Us</a>
-        </div>
+          <a class="card-link" href="programs.html#adult-training">Explore</a>
+        </aside>
       </div>
     </section>
 
@@ -412,7 +392,7 @@
   <footer class="site-footer">
     <div class="container footer-grid">
       <div class="footer-brand">
-        <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
+        <svg aria-hidden="true"><use href="#icon-court"/></svg>
         <span>The Badminton Project</span>
       </div>
       <nav class="footer-nav" aria-label="Footer">
@@ -430,6 +410,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=22"></script>
+  <script src="js/main.js?v=27"></script>
 </body>
 </html>

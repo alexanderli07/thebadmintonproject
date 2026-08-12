@@ -48,11 +48,4 @@
         font-family="Baskerville" font-size="126"
         font-weight="500" letter-spacing="11">PROJECT</text>
 
-  <g transform="translate(600 558)" fill="none" stroke="#C9A649" stroke-width="2">
-    <line x1="-136" y1="0" x2="-34" y2="0"/>
-    <line x1="34" y1="0" x2="136" y2="0"/>
-    <circle cx="0" cy="13" r="5"/>
-    <path d="M-5 7 -16 -18 M-2 6 -8 -22 M2 6 8 -22 M5 7 16 -18"/>
-    <path d="M-16 -18 Q0 -27 16 -18 M-9 -1 Q0 -5 9 -1"/>
-  </g>
 </svg>

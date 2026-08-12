@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Intro & Developmental Training — The Badminton Project</title>
+  <title>Beginner Training — The Badminton Project</title>
   <meta name="description" content="Where it begins — done right from day one. New and developing young players learn the game properly from the start, so nothing has to be un-learned later.">
-  <meta property="og:title" content="Intro & Developmental Training — The Badminton Project">
+  <meta property="og:title" content="Beginner Training — The Badminton Project">
   <meta property="og:description" content="Where it begins — done right from day one. New and developing young players learn the game properly from the start, so nothing has to be un-learned later.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://thebadmintonproject.com/assets/og-image.png">
@@ -21,8 +21,8 @@
   <script>(function(d){d.classList.add('js');var r=false;try{r=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}if(!r){d.classList.add('entering');try{if(sessionStorage.getItem('tbp-nav')){sessionStorage.removeItem('tbp-nav');d.classList.add('pt-in')}}catch(e){}}setTimeout(function(){if(window.__tbp){if(!r)d.classList.add('entered')}else{d.classList.remove('js');d.classList.remove('entering');d.classList.remove('pt-in')}},2500)})(document.documentElement)</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=22">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=48">
 </head>
 <body id="top">
 
@@ -30,15 +30,14 @@
 
   <!-- Shared SVG symbols -->
   <svg class="svg-defs" aria-hidden="true" focusable="false">
-    <symbol id="icon-shuttle" viewBox="0 0 24 24">
-      <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="18.4" r="2.3"/>
-        <path d="M10.5 16.3 L6.2 6.4"/>
-        <path d="M11.6 16.05 L9.6 5.1"/>
-        <path d="M12.4 16.05 L14.4 5.1"/>
-        <path d="M13.5 16.3 L17.8 6.4"/>
-        <path d="M6.2 6.4 Q12 3.4 17.8 6.4"/>
-        <path d="M9.3 13.6 Q12 12.7 14.7 13.6"/>
+    <symbol id="icon-court" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round">
+        <rect x="5.5" y="2.5" width="13" height="19"/>
+        <line x1="5.5" y1="12" x2="18.5" y2="12"/>
+        <line x1="5.5" y1="9.4" x2="18.5" y2="9.4"/>
+        <line x1="5.5" y1="14.6" x2="18.5" y2="14.6"/>
+        <line x1="12" y1="2.5" x2="12" y2="9.4"/>
+        <line x1="12" y1="14.6" x2="12" y2="21.5"/>
       </g>
     </symbol>
   </svg>
@@ -47,7 +46,7 @@
   <header class="site-header" data-header>
     <div class="container nav-row">
       <a class="brand" href="index.html" aria-label="The Badminton Project — home">
-        <svg class="brand-mark" aria-hidden="true"><use href="#icon-shuttle"/></svg>
+        <svg class="brand-mark" aria-hidden="true"><use href="#icon-court"/></svg>
         <span class="brand-name">The Badminton Project</span>
       </a>
       <nav class="site-nav" aria-label="Primary">
@@ -55,10 +54,10 @@
         <div class="nav-disclosure is-current" data-nav-disclosure>
           <a class="nav-disclosure__trigger" href="programs.html">The Academy<span class="nav-chevron" aria-hidden="true"></span></a>
           <div class="nav-submenu">
-            <a href="academy-high-performance.html">High Performance</a>
-            <a href="academy-competition.html">Competition Team</a>
-            <a href="academy-intro-development.html" aria-current="page">Intro &amp; Development</a>
-            <a href="academy-athletic-development.html">Athletic Development</a>
+            <a href="academy-high-performance.html">National Team Elite</a>
+            <a href="academy-competition.html">High Performance Team</a>
+            <a href="academy-intro-development.html" aria-current="page">Beginner Training</a>
+            <a href="academy-intermediate.html">Intermediate Training</a>
             <a href="programs.html#adult-training">Adult Training</a>
             <a href="programs.html#where-we-train">Where We Train</a>
           </div>
@@ -67,7 +66,7 @@
           <a class="nav-disclosure__trigger" href="about.html#team">The Coaches<span class="nav-chevron" aria-hidden="true"></span></a>
           <div class="nav-submenu">
             <a href="sankeerth.html">B.R. Sankeerth</a>
-            <a href="eesan.html">Eesan</a>
+            <a href="eesan.html">Eesan Holtzman</a>
           </div>
         </div>
         <div class="nav-disclosure" data-nav-disclosure>
@@ -94,10 +93,10 @@
       <details class="mobile-disclosure is-current" data-mobile-disclosure open>
         <summary class="mobile-disclosure__trigger"><a class="mobile-disclosure__label" href="programs.html">The Academy</a><span class="nav-chevron" aria-hidden="true"></span></summary>
         <div class="mobile-submenu">
-          <a href="academy-high-performance.html">High Performance</a>
-          <a href="academy-competition.html">Competition Team</a>
-          <a href="academy-intro-development.html" aria-current="page">Intro &amp; Development</a>
-          <a href="academy-athletic-development.html">Athletic Development</a>
+          <a href="academy-high-performance.html">National Team Elite</a>
+          <a href="academy-competition.html">High Performance Team</a>
+          <a href="academy-intro-development.html" aria-current="page">Beginner Training</a>
+          <a href="academy-intermediate.html">Intermediate Training</a>
           <a href="programs.html#adult-training">Adult Training</a>
           <a href="programs.html#where-we-train">Where We Train</a>
         </div>
@@ -106,7 +105,7 @@
         <summary class="mobile-disclosure__trigger"><a class="mobile-disclosure__label" href="about.html#team">The Coaches</a><span class="nav-chevron" aria-hidden="true"></span></summary>
         <div class="mobile-submenu">
           <a href="sankeerth.html">B.R. Sankeerth</a>
-          <a href="eesan.html">Eesan</a>
+          <a href="eesan.html">Eesan Holtzman</a>
         </div>
       </details>
       <details class="mobile-disclosure" data-mobile-disclosure>
@@ -117,11 +116,6 @@
         </div>
       </details>
       <a class="mobile-nav__link mobile-nav__cta" href="signup.html">Book a Trial</a>
-      <div class="ornament" aria-hidden="true">
-        <span class="rule"></span>
-        <svg><use href="#icon-shuttle"/></svg>
-        <span class="rule"></span>
-      </div>
     </nav>
   </div>
 
@@ -150,12 +144,7 @@
       </div>
       <div class="container">
         <p class="overline">The Academy</p>
-        <h1><span class="line"><span class="line-inner">Intro &amp; Developmental</span></span><span class="line"><span class="line-inner"><em>Training.</em></span></span></h1>
-        <div class="ornament" data-serve aria-hidden="true">
-          <span class="rule"></span>
-          <svg><use href="#icon-shuttle"/></svg>
-          <span class="rule"></span>
-        </div>
+        <h1><span class="line"><span class="line-inner">Beginner</span></span><span class="line"><span class="line-inner"><em>Training.</em></span></span></h1>
         <p class="page-lede">Where it begins — done right from day one.</p>
       </div>
     </section>
@@ -169,11 +158,6 @@
         <header class="section-head reveal program-showcase__head">
           <p class="overline">Inside the Program</p>
           <h2>On the <em>court.</em></h2>
-          <div class="ornament" data-serve aria-hidden="true">
-          <span class="rule"></span>
-          <svg><use href="#icon-shuttle"/></svg>
-          <span class="rule"></span>
-        </div>
         </header>
         <div class="carousel reveal program-showcase__rail" data-carousel>
           <button class="car-btn car-prev" type="button" aria-label="Previous slide"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 2 L4 8 L10 14"/></svg></button>
@@ -184,24 +168,21 @@
           </figure>
           <figure class="car-slide editorial-slide editorial-slide--portrait">
             <div class="ph-media" role="img" aria-label="Placeholder — first sessions, media coming soon">
-              <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
+              <svg aria-hidden="true"><use href="#icon-court"/></svg>
               <span>First sessions<br>coming soon</span>
             </div>
-            <figcaption class="ph-text">[Caption — what this moment shows.]</figcaption>
           </figure>
           <figure class="car-slide editorial-slide editorial-slide--wide">
             <div class="ph-media" role="img" aria-label="Placeholder — skills training, media coming soon">
-              <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
+              <svg aria-hidden="true"><use href="#icon-court"/></svg>
               <span>Skills training<br>coming soon</span>
             </div>
-            <figcaption class="ph-text">[Caption — what this moment shows.]</figcaption>
           </figure>
           <figure class="car-slide editorial-slide editorial-slide--portrait">
             <div class="ph-media" role="img" aria-label="Placeholder — program video, media coming soon">
-              <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
+              <svg aria-hidden="true"><use href="#icon-court"/></svg>
               <span>Program video<br>coming soon</span>
             </div>
-            <figcaption class="ph-text">[Caption — what this moment shows.]</figcaption>
           </figure>
           </div>
           <button class="car-btn car-next" type="button" aria-label="Next slide"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 2 L12 8 L6 14"/></svg></button>
@@ -209,32 +190,31 @@
       </div>
     </section>
 
-    <!-- ==================== DETAILS ==================== -->
-    <!-- PLACEHOLDERS: replace [bracketed] copy and chips with real details. -->
+    <!-- ==================== THE BRIEF ==================== -->
     <section class="section">
-      <div class="container narrow" style="max-width: 720px; margin-inline: auto; text-align: center;">
-        <header class="section-head reveal">
-          <p class="overline">The Program</p>
-          <h2>What to <em>expect.</em></h2>
-          <div class="ornament" data-serve aria-hidden="true">
-          <span class="rule"></span>
-          <svg><use href="#icon-shuttle"/></svg>
-          <span class="rule"></span>
-        </div>
-        </header>
-        <div class="program-detail reveal" style="--d:.15s; text-align: left;">
-          <h3>Who it’s for</h3>
-          <p>New and developing young players — kids and teens learning the game properly from the start, so nothing has to be un-learned later.</p>
-          <h3>What they’ll train</h3>
-          <p>Sound technique from the ground up — grip, footwork, the core strokes, and early match craft. We build correct habits early, because the difference between a coached beginner and a supervised one shows up years down the line.</p>
-          <h3>What your child walks away with</h3>
-          <p>A real foundation — clean technique, confident movement, and genuine readiness to step into competitive training when they’re ready.</p>
-          <ul class="chips" style="justify-content: center; margin-top: 2rem;">
-              <li class="chip">[Ages / Level]</li>
-              <li class="chip">[Schedule]</li>
-              <li class="chip">Agility Sports &middot; BNM Badminton</li>
-              <li class="chip">[Fees]</li>
-          </ul>
+      <div class="container">
+        <div class="brief">
+          <header class="section-head brief__head reveal">
+            <p class="overline">The Program</p>
+            <h2>What to <em>expect.</em></h2>
+          </header>
+          <div class="brief__body">
+            <p class="brief__lead reveal" style="--d:.08s">Where it starts. Players learn the game the right way from day one &mdash; the core strokes and the mechanics behind them: the clear, the drive, the lunge, and the footwork that ties it all together. At this stage we build clean technique from a stable, static base, so every stroke is learned correctly before we add speed. Get the foundation right, and everything after it comes easier.</p>
+            <dl class="brief__spec reveal" style="--d:.16s">
+              <div>
+                <dt>Who it&rsquo;s for</dt>
+                <dd>New and developing young players &mdash; kids and teens learning the game properly from the start, so nothing has to be un-learned later.</dd>
+              </div>
+              <div>
+                <dt>What they&rsquo;ll train</dt>
+                <dd>Sound technique from the ground up &mdash; grip, footwork, the core strokes, and early match craft. We build correct habits early, because the difference between a coached beginner and a supervised one shows up years down the line.</dd>
+              </div>
+              <div>
+                <dt>What they walk away with</dt>
+                <dd>A real foundation &mdash; clean technique, confident movement, and genuine readiness to step into competitive training when they&rsquo;re ready.</dd>
+              </div>
+            </dl>
+          </div>
         </div>
       </div>
     </section>
@@ -244,13 +224,8 @@
       <div class="container narrow">
         <p class="overline reveal">Join the Project</p>
         <h2 class="reveal" style="--d:.1s">Start the <em>journey.</em></h2>
-        <div class="ornament reveal" data-serve style="--d:.2s" aria-hidden="true">
-          <span class="rule"></span>
-          <svg><use href="#icon-shuttle"/></svg>
-          <span class="rule"></span>
-        </div>
-        <p class="join-copy reveal" style="--d:.3s">Spots are taken through the sign-up form — tell us who is playing and we will take it from there.</p>
-        <a class="btn btn--gold reveal" style="--d:.4s" href="signup.html">Start With Intro &amp; Development</a>
+        <p class="join-copy reveal" style="--d:.3s">Places are booked through the sign-up form — tell us who is playing and we’ll take it from there.</p>
+        <a class="btn btn--gold reveal" style="--d:.4s" href="signup.html">Start With Beginner Training</a>
         <p class="join-copy reveal" style="--d:.5s; margin-top: 1.6rem; font-size: 0.85rem;">Prefer email? <a href="mailto:thebadmintonproject@gmail.com" style="color: var(--gold);">thebadmintonproject@gmail.com</a></p>
       </div>
     </section>
@@ -261,7 +236,7 @@
   <footer class="site-footer">
     <div class="container footer-grid">
       <div class="footer-brand">
-        <svg aria-hidden="true"><use href="#icon-shuttle"/></svg>
+        <svg aria-hidden="true"><use href="#icon-court"/></svg>
         <span>The Badminton Project</span>
       </div>
       <nav class="footer-nav" aria-label="Footer">
@@ -279,6 +254,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=22"></script>
+  <script src="js/main.js?v=27"></script>
 </body>
 </html>

@@ -1,10 +1,6 @@
 (function () {
   'use strict';
 
-  /* tells the inline head script that main.js arrived — if this flag is
-     missing at its 2.5s backstop, the page self-heals to the no-JS look */
-  window.__tbp = true;
-
   var docEl = document.documentElement;
   var REDUCED = window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -23,7 +19,12 @@
 
   function onceInView(elements, className, threshold, beforeAdd) {
     if (!HAS_IO) {
-      each(elements, function (el) { el.classList.add(className); });
+      /* mirror the observer branch below — callers that pass beforeAdd do their
+         work there instead of in the class, so skipping it froze the roll */
+      each(elements, function (el) {
+        if (beforeAdd) beforeAdd(el);
+        else el.classList.add(className);
+      });
       return null;
     }
     var obs = new IntersectionObserver(function (entries) {
@@ -42,11 +43,8 @@
 
   /* ==================== The Overture: entrance choreography ==================== */
 
-  var heroServeEls = document.querySelectorAll('.hero .ornament[data-serve], .page-hero .ornament[data-serve]');
-
   function skipEntrance() {
     docEl.classList.remove('entering');
-    each(heroServeEls, function (el) { el.classList.add('is-served'); });
   }
 
   if (docEl.classList.contains('entering')) {
@@ -66,10 +64,6 @@
         if (entered) return;
         entered = true;
         requestAnimationFrame(function () { docEl.classList.add('entered'); });
-        var serveDelay = document.querySelector('.page-hero') ? 550 : 1400;
-        setTimeout(function () {
-          each(heroServeEls, function (el) { el.classList.add('is-served'); });
-        }, serveDelay);
         /* Tear down the ceremony once every entrance transition has settled (the
            longest is the scroll-cue at 2.2s + 0.8s = 3.0s). Every .entering.entered
            end-state equals the element's base style, so dropping the class leaves the
@@ -419,8 +413,7 @@
     each(el.querySelectorAll('.reveal'), function (r) { revealEl(r); });
     /* play the section's signature moments too, so nothing fires invisibly
        during the fly-by and everything lands together on arrival */
-    each(el.querySelectorAll('[data-serve]'), function (o) { o.classList.add('is-served'); });
-    each(el.querySelectorAll('.values li, .course, .coach-ach, .footer-grid, .program-rule'), function (o) { o.classList.add('is-ruled'); });
+    each(el.querySelectorAll('.values li, .coach-ach, .footer-grid, .program-rule'), function (o) { o.classList.add('is-ruled'); });
     each(el.querySelectorAll('.band figcaption'), function (o) { o.classList.add('is-stamped'); });
     each(el.querySelectorAll('.moment.has-frame'), function (o) { o.classList.add('is-framed'); });
     each(el.querySelectorAll('.program-no'), function (o) {
@@ -431,7 +424,7 @@
   /* Take a section's reveals AND signature moments away from every scroll
      observer, so nothing plays while the section is still off-screen */
   function claimSection(target) {
-    var claimed = target.querySelectorAll('.reveal, [data-serve], .values li, .course, .coach-ach, .footer-grid, .program-rule, .band figcaption, .moment, .program, .acad-card');
+    var claimed = target.querySelectorAll('.reveal, .values li, .coach-ach, .footer-grid, .program-rule, .band figcaption, .moment, .acad-card');
     each(claimed, function (el) {
       if (typeof io !== 'undefined' && io) io.unobserve(el);
       for (var i = 0; i < momentIOs.length; i++) momentIOs[i].unobserve(el);
@@ -522,16 +515,8 @@
   /* ==================== Signature scroll moments ==================== */
 
   if (!REDUCED) {
-    /* The serve: ornaments outside the heroes assemble when they scroll in */
-    var scrollServe = [];
-    each(document.querySelectorAll('[data-serve]'), function (el) {
-      if (el.closest && (el.closest('.hero') || el.closest('.page-hero'))) return; /* timed by the overture */
-      scrollServe.push(el);
-    });
-    onceInView(scrollServe, 'is-served', 0.5);
-
     /* Chalk lines: structural rules draw themselves */
-    onceInView(document.querySelectorAll('.values li, .course, .coach-ach, .footer-grid, .program-rule'), 'is-ruled', 0.2);
+    onceInView(document.querySelectorAll('.values li, .coach-ach, .footer-grid, .program-rule'), 'is-ruled', 0.2);
 
     /* The steward's stamp: quote-band signature settles in */
     onceInView(document.querySelectorAll('.band figcaption'), 'is-stamped', 0.6);
@@ -558,8 +543,9 @@
     });
     onceInView(momentFigs, 'is-framed', 0.3);
 
-    /* Scoreboard roll: 01/02/03 roll up like manual scoreboard plates */
-    each(document.querySelectorAll('.program-no'), function (el, idx) {
+    /* Scoreboard roll: 01/02/03 roll up like manual scoreboard plates.
+       Runs on the Academy cards and on the pathway's stop numbers. */
+    each(document.querySelectorAll('.program-no, .road-no'), function (el, idx) {
       var target = el.textContent.replace(/\s+/g, '');
       if (!/^\d{2}$/.test(target)) return;
       var prev = ('0' + idx).slice(-2);
@@ -569,8 +555,9 @@
       }
       el.innerHTML = markup;
     });
-    onceInView(document.querySelectorAll('.program, .acad-card'), 'x-roll', 0.3, function (card) {
-      var numeral = card.querySelector('.program-no');
+    /* null className: the callback does the work, so there is nothing to add */
+    onceInView(document.querySelectorAll('.acad-card, .road-stop'), null, 0.3, function (host) {
+      var numeral = host.querySelector('.program-no, .road-no');
       if (numeral) setTimeout(function () { numeral.classList.add('is-rolled'); }, 350);
     });
   }
@@ -614,7 +601,11 @@
   var moments = document.querySelector('[data-moments]');
   if (moments) {
     var figures = moments.querySelectorAll('figure');
-    var liveCount = figures.length;
+    /* count only the figures that actually carry a photo — seeded with all of
+       them, the placeholder tiles would keep the tally above zero forever and
+       the "no photos at all" case could never hide the section */
+    var liveCount = 0;
+    each(figures, function (figure) { if (figure.querySelector('img')) liveCount++; });
     each(figures, function (figure) {
       var img = figure.querySelector('img');
       if (!img) return;
@@ -658,7 +649,6 @@
     addParallax('.page-hero .container', 0.26, 'top', '', 60);
     addParallax('.page-court', 0.06, 'top', 'translate(-50%, -50%)', 40);
     addParallax('.band blockquote', -0.12, 'center', '', 44);
-    addParallax('.moments-grid', 0.11, 'center', '', 56);
     addParallax('.gallery-grid', 0.09, 'center', '', 48);
 
     if (targets.length) {
@@ -870,6 +860,80 @@
     sync();
   });
 
+  /* ==================== Profile dossier tabs ==================== */
+
+  /* Bio / Achievements / News share one screen on the home panels. The markup
+     ships with every pane present, so without JS they simply stack open. */
+  each(document.querySelectorAll('[data-tabs]'), function (group) {
+    var tabs = [].slice.call(group.querySelectorAll('[role="tab"]'));
+    if (tabs.length < 2) return;
+
+    function paneOf(tab) { return document.getElementById(tab.getAttribute('aria-controls')); }
+
+    function select(tab, moveFocus) {
+      each(tabs, function (t) {
+        var on = t === tab;
+        var pane = paneOf(t);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        if (!pane) return;
+        pane.hidden = !on;
+        pane.classList.toggle('is-active', on);
+      });
+      if (moveFocus) tab.focus();
+    }
+
+    each(tabs, function (tab, i) {
+      tab.addEventListener('click', function () { select(tab, false); });
+      tab.addEventListener('keydown', function (e) {
+        var dir = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1
+          : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+        if (dir) {
+          e.preventDefault();
+          select(tabs[(i + dir + tabs.length) % tabs.length], true);
+        } else if (e.key === 'Home' || e.key === 'End') {
+          e.preventDefault();
+          select(e.key === 'Home' ? tabs[0] : tabs[tabs.length - 1], true);
+        }
+      });
+    });
+
+    /* The panes are stacked in one grid cell, so the box would otherwise shrink
+       to whichever pane is showing and shunt a vertically-centred panel on every
+       switch. Hold it open at the tallest pane instead, re-measured on resize. */
+    var panes = group.querySelector('.dossier__panes');
+
+    function reserveHeight() {
+      if (!panes) return;
+      panes.style.minHeight = '';
+      var tallest = 0;
+      each(tabs, function (t) {
+        var pane = paneOf(t);
+        if (!pane) return;
+        var wasHidden = pane.hidden;
+        if (wasHidden) { pane.style.visibility = 'hidden'; pane.hidden = false; }
+        tallest = Math.max(tallest, pane.offsetHeight);
+        if (wasHidden) { pane.hidden = true; pane.style.visibility = ''; }
+      });
+      if (!tallest) return;
+      var pad = parseFloat(getComputedStyle(panes).paddingTop) || 0;
+      panes.style.minHeight = (tallest + pad) + 'px';
+    }
+
+    /* Normalise from the markup's declared state rather than assuming index 0 */
+    var initial = tabs.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0];
+    select(initial || tabs[0], false);
+    reserveHeight();
+
+    var remeasure;
+    window.addEventListener('resize', function () {
+      clearTimeout(remeasure);
+      remeasure = setTimeout(reserveHeight, 150);
+    });
+    /* the display face changes the wrap count, so re-measure once it lands */
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(reserveHeight);
+  });
+
   /* ==================== Sign-up: Supabase submission ==================== */
 
   var signupForm = document.querySelector('[data-signup]');
@@ -969,4 +1033,10 @@
   /* Footer year */
   var year = document.querySelector('[data-year]');
   if (year) year.textContent = String(new Date().getFullYear());
+
+  /* Tells the inline head script that main.js ran to completion. Set LAST on
+     purpose: set at the top, a throw anywhere below would still leave the flag
+     true, and the 2.5s backstop would keep the entrance hold armed on a page
+     whose reveal code never ran — i.e. a permanently blank page. */
+  window.__tbp = true;
 })();

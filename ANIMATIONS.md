@@ -38,14 +38,13 @@ a name being raised on an honours board. Tight 120ms cascade so it reads as one
 gesture. This is the canonical luxury-serif entrance (Omega, Cartier).
 
 **A3. Tracked-In Overline** · small
-"Badminton · Community · Excellence" condenses into place — letter-spacing
+The hero eyebrow condenses into place — letter-spacing
 eases from extra-wide to resting while fading in. The quietest entrance that
 exists; reads as the caption being set by hand.
 
-**A4. The Rules Unfurl** · small
-The ornament assembles centre-outward: shuttlecock mark first, then the two
-gold hairlines grow out from it. Engraver's logic — the hallmark is struck,
-then the rule is drawn away from it.
+**A4. The Rules Unfurl** · retired
+Removed July 2026 at the client's request, along with the rule–shuttle–rule
+ornament it animated. Numbering kept so the entries below still line up.
 
 **A5. Aperture Settle** · small
 The background video starts at 104.5% scale and eases to 100% over 2.4s under
@@ -75,11 +74,9 @@ as it enters view, staggered down lists; the footer line draws centre-out as a
 closing gesture. Extends the hero's court-lining ritual through the whole site.
 Content never moves; only the line paints.
 
-**B2. The Serve** · small
-Site-wide ornament behaviour: when a rule–shuttle–rule divider scrolls into
-view, the shuttle drops and settles like a shuttlecock landing on the T (one
-soft overshoot, no bounce), then the hairlines extend outward. The same gesture
-everywhere makes the crest feel alive.
+**B2. The Serve** · retired
+Removed July 2026 with the ornament (see A4). Numbering kept so the entries
+below still line up.
 
 **B3. Scoreboard Roll** · medium
 The program card numerals (01 / 02 / 03 / 04) roll up into place like plates on an
@@ -142,9 +139,9 @@ the header's scroll-progress hairline. The rally continues across pages.
 
 If choosing, this order gives the most felt quality per effort:
 
-1. **A1 + A2 + A3 + A4** — the hero opening ceremony (the "load-up" ask)
+1. **A1 + A2 + A3** — the hero opening ceremony (the "load-up" ask)
 2. **A7** — abridged sub-page arrivals so interior pages match
-3. **B1 + B2** — chalk lines + the serve (site-wide texture)
+3. **B1** — chalk lines (site-wide texture)
 4. **C1** — button polish
 5. **D1** — page transitions
 6. Then B3/B4/B5, C2/C3, A5/A6 as garnish, and D2 if the rally streak proves

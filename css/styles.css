@@ -58,22 +58,21 @@ h1, h2, h3 {
 
 ::selection { background: var(--gold); color: var(--green-950); }
 
-:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
-/* on light (ivory) surfaces the bright gold fails 3:1 — use the dark gold */
-.field input:focus-visible,
-.field textarea:focus-visible,
-.choice input:focus-visible,
-.form-actions .btn:focus-visible,
-.car-track:focus-visible,
-.car-btn:focus-visible,
-.card-link:focus-visible,
-.post-more:focus-visible,
-.btn--green:focus-visible { outline-color: var(--gold-ink); }
-/* Backstop: any focusable element inside a light (ivory) surface — including plain
-   in-copy links the allowlist above doesn't name — gets the dark gold ring too, so
-   the 2.1:1 bright-gold ring never lands on a light background. */
-.section--ivory :focus-visible,
-.form-card :focus-visible { outline-color: var(--gold-ink); }
+/* The ring defaults to the DARK gold, because most of the site is ivory and the
+   bright gold only reaches 2.1:1 there. Dark surfaces opt back into the bright
+   gold (5.25:1) by name. Stated this way round, a new light section can never
+   silently inherit an unreadable focus ring — the old allowlist kept springing
+   leaks every time a section was added. */
+:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
+.site-header :focus-visible,
+.mobile-menu :focus-visible,
+.skip-link:focus-visible,
+.hero :focus-visible,
+.page-hero :focus-visible,
+.band :focus-visible,
+.section--green :focus-visible,
+.panel--programs :focus-visible,
+.site-footer :focus-visible { outline-color: var(--gold); }
 
 .svg-defs { display: none; }
 
@@ -119,24 +118,13 @@ h1, h2, h3 {
   margin: 0 0 1.2rem;
 }
 
-.ornament {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.9rem;
-  margin: 1.7rem auto;
-  color: var(--gold-ink);
-}
-.ornament .rule { width: 56px; height: 1px; background: currentColor; opacity: 0.55; }
-.ornament svg { width: 20px; height: 20px; }
-
 .btn {
   display: inline-block;
   position: relative;
   overflow: hidden;
-  padding: 1rem 2.3rem;
-  font: 500 0.74rem/1 var(--font-sans);
-  letter-spacing: 0.26em;
+  padding: 1.05rem 2.4rem;
+  font: 600 0.84rem/1 var(--font-sans);
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   text-decoration: none;
   border: 1px solid;
@@ -145,8 +133,20 @@ h1, h2, h3 {
 .btn:active { transform: translateY(1px); }
 .btn--gold { color: var(--gold); border-color: var(--gold); }
 .btn--gold:hover { background: var(--gold); color: var(--green-950); }
+/* Both home-hero CTAs run the other way: solid at rest, outline on hover.
+   Gated on real hover so a tap on touch doesn't leave them stuck looking hollow. */
+.hero .btn--gold { background: var(--gold); color: var(--green-950); }
+.hero .btn--ghost { background: var(--ivory); color: var(--green-950); border-color: var(--ivory); }
+@media (hover: hover) {
+  .hero .btn--gold:hover { background: transparent; color: var(--gold); }
+  .hero .btn--ghost:hover { background: transparent; color: var(--ivory); }
+}
 .btn--ghost { color: rgba(247, 243, 234, 0.9); border-color: rgba(247, 243, 234, 0.35); }
-.btn--ghost:hover { border-color: var(--ivory); background: rgba(247, 243, 234, 0.08); }
+/* Gated: ungated, a tap on touch leaves this rule stuck on, which strips the
+   hero variant's ivory fill while its dark text colour stays — dark on dark. */
+@media (hover: hover) {
+  .btn--ghost:hover { border-color: var(--ivory); background: rgba(247, 243, 234, 0.08); }
+}
 
 /* ---------- Header ---------- */
 
@@ -393,7 +393,6 @@ body.menu-open .menu-bars span:last-child { transform: translateY(-2.5px) rotate
   border: 1px solid var(--gold-soft);
   color: var(--gold);
 }
-.mobile-menu .ornament { margin: 1.4rem auto 0; color: var(--gold); }
 body.menu-open { overflow: hidden; }
 
 /* ---------- Hero ---------- */
@@ -429,7 +428,27 @@ body.menu-open { overflow: hidden; }
   pointer-events: none;
 }
 .hero-inner { position: relative; z-index: 2; }
-.hero-overline { color: var(--gold); margin-bottom: 2rem; }
+/* The tagline is the hero's headline statement; the program list below it is
+   supporting detail, so it sits smaller and quieter than the tagline. */
+.hero-tagline {
+  margin: 2.2rem 0 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 3vw, 2.15rem);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--ivory);
+}
+.hero-tagline .sep { color: var(--gold); margin-inline: 0.45em; }
+
+.hero-overline {
+  color: var(--gold);
+  margin: 1.5rem 0 0;
+  font-size: clamp(0.6rem, 1.5vw, 0.76rem);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+}
+/* Dimmed separators let the program names read as the emphasis */
+.hero-overline .sep { opacity: 0.4; margin-inline: 0.3em; }
 
 .hero-title { color: var(--ivory); }
 .hero-title span { display: block; }
@@ -450,17 +469,14 @@ body.menu-open { overflow: hidden; }
   text-transform: uppercase;
 }
 
-.hero .ornament,
-.section--green .ornament,
-.mobile-menu .ornament { color: var(--gold); }
-
-.hero-lede {
-  max-width: 46ch;
-  margin: 1.8rem auto 0;
-  color: rgba(247, 243, 234, 0.82);
-  font-weight: 300;
-  font-size: 1.05rem;
-  letter-spacing: 0.02em;
+/* Deliberately quieter than the eyebrow above it, so the hierarchy is obvious */
+.hero-locations {
+  margin: 1rem 0 0;
+  font-size: 0.66rem;
+  font-weight: 400;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(247, 243, 234, 0.52);
 }
 .hero-actions {
   margin-top: 2.6rem;
@@ -501,9 +517,6 @@ body.menu-open { overflow: hidden; }
 .section--ivory { background: var(--ivory); }
 
 .section-head { text-align: center; max-width: 760px; margin-inline: auto; }
-.section-head--editorial { text-align: left; margin-left: 0; }
-.section-head--editorial .ornament { justify-content: flex-start; margin-left: 0; }
-.section-head--editorial .section-intro { margin-left: 0; }
 
 h2 {
   font-size: clamp(2.1rem, 4.6vw, 3.4rem);
@@ -512,27 +525,9 @@ h2 {
 }
 h2 em { font-style: italic; color: var(--gold-ink); }
 
-.section-intro { margin: 1.6rem auto 0; max-width: 58ch; color: var(--ink-soft); }
+.section-intro { margin: 2.2rem auto 0; max-width: 58ch; color: var(--ink-soft); }
 
-/* Who we are */
-
-.about-grid {
-  display: grid;
-  grid-template-columns: 5fr 6fr;
-  gap: 3rem 4.5rem;
-  margin-top: 4.5rem;
-  align-items: start;
-}
-.lead-text {
-  font-family: var(--font-serif);
-  font-size: clamp(1.45rem, 2.4vw, 1.8rem);
-  line-height: 1.5;
-  font-weight: 500;
-  color: var(--green-800);
-  margin: 0;
-}
-.about-body p { margin: 0 0 1.2rem; color: var(--ink-soft); }
-.about-body p:last-child { margin-bottom: 0; }
+/* Values row (about page) */
 
 .values {
   list-style: none;
@@ -563,7 +558,11 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   padding-block: clamp(4.5rem, 9vw, 6.5rem);
   text-align: center;
 }
-.band-mark { width: 26px; height: 26px; color: var(--gold); margin: 0 auto 1.6rem; }
+/* .band is a dark surface, so it carries the same inverted heading tokens as
+   .section--green and .panel--programs rather than needing inline overrides */
+.band .overline { color: var(--gold); }
+.band h2 { color: var(--ivory); }
+.band h2 em { color: var(--gold); }
 .band-quote { margin: 0; }
 .band blockquote { margin: 0; }
 .band blockquote p {
@@ -584,38 +583,15 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   color: var(--gold);
 }
 
-/* Programs */
+/* Numerals + rules shared by the Academy cards */
 
-.programs {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0;
-  margin: 4.5rem auto 0;
-  border-top: 1px solid var(--line-light);
-  border-left: 1px solid var(--line-light);
-}
-.program .card-link { margin-top: 1.4rem; }
-.program p { flex: 1; }
-.program {
-  background: transparent;
-  border: 0;
-  border-right: 1px solid var(--line-light);
-  border-bottom: 1px solid var(--line-light);
-  padding: clamp(2.3rem, 4vw, 3.5rem);
-  min-height: 22rem;
-  display: flex;
-  flex-direction: column;
-  transition: background-color 0.35s ease;
-}
-.program:hover {
-  background: rgba(201, 166, 73, 0.055);
-}
 .program-no {
   font-family: var(--font-serif);
   font-style: italic;
   font-size: 2.3rem;
   line-height: 1;
   color: var(--gold-ink);
+  transition: color 0.3s ease;
 }
 .program-rule {
   width: 34px;
@@ -625,47 +601,10 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   transform-origin: left;
   transition: width 0.6s var(--ease-settle), background-color 0.6s ease, transform 0.8s var(--ease-draw);
 }
-.program:hover .program-rule {
-  width: 60px;
-  background: var(--gold-ink);
-  transition: width 0.45s var(--ease-settle), background-color 0.45s ease, transform 0.8s var(--ease-draw);
-}
-.program-no { transition: color 0.3s ease; }
-.program:hover .program-no { color: var(--green-800); }
-.program-label {
-  font: 500 0.66rem/1.6 var(--font-sans);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--gold-ink);
-  margin: 0 0 0.55rem;
-}
-.program h3 {
-  font-size: 1.65rem;
-  font-weight: 600;
-  line-height: 1.15;
-  color: var(--green-800);
-  margin-bottom: 1rem;
-}
-.program p { margin: 0; font-size: 0.95rem; line-height: 1.75; color: var(--ink-soft); }
+
 
 /* Moments (photo gallery) */
 
-.moments {
-  background: linear-gradient(180deg, var(--green-800), var(--green-900));
-  text-align: center;
-}
-.moments .overline { color: var(--gold); }
-.moments h2 { color: var(--ivory); }
-.moments h2 em { color: var(--gold); }
-.moments .ornament { color: var(--gold); }
-.moments .section-intro { color: rgba(247, 243, 234, 0.8); }
-.moments-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 300px);
-  justify-content: center;
-  gap: 1.8rem;
-  margin-top: 3.8rem;
-}
 .moment {
   margin: 0;
   position: relative;
@@ -684,10 +623,6 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   object-fit: cover;
 }
 
-@media (max-width: 700px) {
-  .moments-grid { grid-template-columns: minmax(230px, 340px); }
-}
-
 /* Join */
 
 .section--green {
@@ -699,7 +634,7 @@ h2 em { font-style: italic; color: var(--gold-ink); }
 .section--green h2 { color: var(--ivory); }
 .section--green h2 em { color: var(--gold); }
 .section--green .narrow { max-width: 640px; }
-.join-copy { color: rgba(247, 243, 234, 0.85); margin: 0 0 2.6rem; }
+.join-copy { color: rgba(247, 243, 234, 0.85); margin: 2.2rem 0 2.6rem; }
 
 /* ---------- Footer ---------- */
 
@@ -780,11 +715,10 @@ h2 em { font-style: italic; color: var(--gold-ink); }
 .hero-media.has-video .hero-canvas { opacity: 0; }
 
 /* Film grain over the dark sections */
-.band, .section--green, .moments, .page-hero { position: relative; }
+.band, .section--green, .page-hero { position: relative; }
 .grain,
 .band::after,
 .section--green::after,
-.moments::after,
 .page-hero::after {
   content: "";
   position: absolute;
@@ -809,15 +743,466 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   transform-origin: left;
 }
 
-/* ---------- Sub-pages ---------- */
+/* ==========================================================================
+   Home panels — each one is a single screen the visitor scrolls through.
+   min-height (not height) so content always wins over the screen fit.
+   ========================================================================== */
 
-.page-hero {
-  background: radial-gradient(120% 120% at 50% 0%, #0E4636 0%, var(--green-800) 45%, var(--green-950) 100%);
-  min-height: 70vh;
-  min-height: clamp(34rem, 72svh, 48rem);
+.panel {
+  position: relative;
+  min-height: 100svh;
   display: flex;
   align-items: center;
-  padding: 9rem 0 5.5rem;
+  padding-block: clamp(4.5rem, 9vh, 7.5rem);
+}
+
+/* ---- Panel 2 · who we are + head coach ---- */
+
+.panel--who { background: var(--ivory); }
+/* The panel's section heading; carries the small tracked-caps overline look */
+.who-eyebrow { margin-bottom: clamp(1.6rem, 3vh, 2.6rem); }
+.who-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: clamp(2.5rem, 5vw, 5rem);
+  align-items: center;
+}
+/* max-height keeps the portrait from pushing the panel past one screen */
+.who-portrait :is(.ph-media, img) {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  max-height: 46svh;
+  object-fit: cover;
+}
+.who-name {
+  font-size: clamp(1.8rem, 2.9vw, 2.5rem);
+  color: var(--green-800);
+  margin-top: 1.5rem;
+}
+.who-name em { font-style: italic; color: var(--gold-ink); }
+.who-role {
+  margin: 0.45rem 0 0;
+  font: 500 0.7rem/1.4 var(--font-sans);
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.who-creds {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1.4rem;
+  margin: 1.2rem 0 0;
+  padding: 1.2rem 0 0;
+  border-top: 1px solid var(--gold-soft);
+  font: 500 0.68rem/1 var(--font-sans);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+.who-lead {
+  margin: clamp(1rem, 2.2vh, 1.5rem) 0 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.45rem, 2.8vw, 2.25rem);
+  line-height: 1.32;
+  font-weight: 500;
+  color: var(--green-800);
+}
+.who-lead p { margin: 0; }
+/* The client's own CTA label is long ("Book Your Assessment / Trial Session").
+   Trimmed padding and tracking keep the pair on one row inside the panel column
+   instead of wrapping into a two-storey block of buttons. */
+.who-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: clamp(1.6rem, 3vh, 2.1rem); }
+.who-actions .btn { padding: 1rem 1.55rem; letter-spacing: 0.13em; }
+
+/* ---- The dossier ----
+   The client's brief gives one coach panel three faces — bio, achievements,
+   news — and one screen to hold them. Tabs file them behind a single strip;
+   with JS off every pane stacks open under its own label, nothing is lost. */
+.dossier { margin-top: clamp(1.4rem, 2.8vh, 2rem); }
+.dossier__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 2.2vw, 2rem);
+  border-bottom: 1px solid var(--line-light);
+}
+.dossier__tab {
+  position: relative;
+  appearance: none;
+  background: none;
+  border: 0;
+  margin: 0 0 -1px;
+  padding: 0 0 0.8rem;
+  cursor: pointer;
+  font: 500 0.68rem/1 var(--font-sans);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  transition: color 0.25s ease;
+}
+.dossier__tab::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--gold-ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-settle);
+}
+.dossier__tab[aria-selected="true"] { color: var(--green-800); }
+.dossier__tab[aria-selected="true"]::after { transform: scaleX(1); }
+@media (hover: hover) {
+  .dossier__tab:hover { color: var(--gold-ink); }
+}
+/* Every pane shares one grid cell so they overlay rather than stack. The
+   inactive ones are display:none, so main.js measures the tallest and pins a
+   min-height here — otherwise the box would resize on every tab switch and
+   shunt the vertically-centred panel around it. */
+.dossier__panes { display: grid; padding-top: clamp(1.2rem, 2.6vh, 1.8rem); }
+.dossier__pane { grid-area: 1 / 1; min-width: 0; }
+.dossier__pane[hidden] { display: none; }
+.dossier__pane:focus-visible { outline-offset: 6px; }
+.dossier__pane p { margin: 0 0 0.85rem; font-size: 0.95rem; color: var(--ink-soft); }
+.dossier__pane p:last-child { margin-bottom: 0; }
+.dossier__pane .dossier__kicker { color: var(--green-800); font-weight: 500; }
+/* the pane's own heading only surfaces when the tab strip cannot */
+.dossier__label { display: none; }
+html:not(.js) .dossier__tabs { display: none; }
+html:not(.js) .dossier__panes { grid-auto-flow: row; gap: 2.2rem; }
+html:not(.js) .dossier__pane { grid-area: auto; }
+html:not(.js) .dossier__pane[hidden] { display: block; }
+html:not(.js) .dossier__label {
+  display: block;
+  margin: 0 0 0.9rem;
+  font: 500 0.68rem/1 var(--font-sans);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+
+/* Achievements, told graphically: three headline figures, then the record */
+.stat-row {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.9rem, 2vw, 1.6rem);
+  margin: 0 0 1.5rem;
+  padding: 0;
+}
+.stat-row li { padding-left: clamp(0.7rem, 1.4vw, 1.1rem); border-left: 1px solid var(--gold-soft); }
+.stat-fig {
+  display: block;
+  font: 500 clamp(1.8rem, 3.2vw, 2.6rem)/1 var(--font-serif);
+  color: var(--gold-ink);
+}
+.stat-cap {
+  display: block;
+  margin-top: 0.5rem;
+  font: 400 0.66rem/1.45 var(--font-sans);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.honours { list-style: none; margin: 0; padding: 0; }
+.honours li {
+  position: relative;
+  padding: 0.58rem 0 0.58rem 1.3rem;
+  border-top: 1px solid var(--line-light);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.honours li::before {
+  content: "\25C6";
+  position: absolute;
+  left: 0;
+  top: 0.92rem;
+  font-size: 0.42rem;
+  color: var(--gold-ink);
+}
+
+/* News articles, two columns so eight fit the panel without scrolling */
+.newsgrid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(1.4rem, 3vw, 2.6rem);
+  margin: 0;
+  padding: 0;
+}
+.newsgrid a {
+  display: block;
+  padding: 0.6rem 0;
+  border-top: 1px solid var(--line-light);
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+.news-src {
+  display: block;
+  margin-bottom: 0.28rem;
+  font: 500 0.6rem/1 var(--font-sans);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+.news-title { display: block; font-size: 0.85rem; line-height: 1.45; }
+.newsgrid a:hover { color: var(--gold-ink); border-color: var(--gold-soft); }
+@media (max-width: 700px) {
+  .newsgrid { grid-template-columns: 1fr; }
+}
+
+/* Second coach panel: mirrored and a shade lighter, so two consecutive profile
+   screens don't read as the same slide twice. DOM order stays figure-first
+   (name before bio) — only the visual columns swap. */
+.panel--who-alt {
+  background: var(--ivory-bright);
+  border-top: 1px solid var(--line-light);
+}
+.panel--who-alt .who-grid { grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); }
+.panel--who-alt .who-figure { grid-column: 2; grid-row: 1; }
+.panel--who-alt .who-body { grid-column: 1; grid-row: 1; }
+
+/* ---- Panel 3 · the four training programs, all on one screen ---- */
+
+.panel--programs {
+  background: linear-gradient(160deg, var(--green-800), var(--green-950));
+  color: var(--ivory);
+  text-align: center;
+}
+.panel--programs .overline { color: var(--gold); }
+.panel--programs h2 { color: var(--ivory); }
+.panel--programs h2 em { color: var(--gold); }
+
+/* ---- The pathway: four stops on one gold track ----
+   Horizontal on desktop, vertical on narrow screens. The track is drawn with
+   the same gold hairline language as the court lines. */
+/* Vertical is the base — the track runs down a left rail. Wide screens lay the
+   same pathway out horizontally (see the min-width rule below); .roadmap--stack
+   opts out of that and stays vertical at every size. */
+.roadmap {
+  --road-gap: clamp(1.1rem, 2.2vw, 2.4rem);
+  --mark: 0.85rem;
+  list-style: none;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: clamp(2.6rem, 5.5vh, 4rem) 0 0;
+  padding: 0 0 0 2rem;
+  text-align: left;
+}
+/* Each stop draws only the segment to its NEIGHBOUR; the last one draws a short
+   run-off that fades out, so the pathway carries on past the final marker
+   instead of stopping dead at it. */
+.road-stop { position: relative; padding-bottom: 1.9rem; }
+.road-stop::after {
+  content: "";
+  position: absolute;
+  top: 1.65rem;
+  left: calc(-2rem + var(--mark) / 2);
+  width: 1px;
+  height: calc(100% - 2.18rem);
+  background: rgba(201, 166, 73, 0.55);
+}
+/* the track strengthens as the pathway advances */
+.road-stop:nth-child(1)::after { background: rgba(201, 166, 73, 0.3); }
+.road-stop:nth-child(2)::after { background: rgba(201, 166, 73, 0.52); }
+.road-stop:nth-child(3)::after { background: rgba(201, 166, 73, 0.78); }
+/* the run-off past the last marker: full gold at the top of the progression,
+   fading to nothing over the trailing padding (after the nth-child rules above
+   so it still wins on a pathway of fewer than four stops) */
+.road-stop:last-child::after {
+  background: linear-gradient(to bottom, var(--gold), rgba(201, 166, 73, 0));
+}
+/* the marker sitting on the track — a court-line diamond */
+.road-stop::before {
+  content: "";
+  position: absolute;
+  top: 0.15rem;
+  left: -2rem;
+  width: var(--mark);
+  height: var(--mark);
+  border: 1px solid var(--gold);
+  background: var(--ivory);
+  transform: rotate(45deg);
+}
+/* the destination reads as arrived-at */
+.road-stop:last-child::before { background: var(--gold); }
+.road-no {
+  display: block;
+  font: 500 0.66rem/1 var(--font-sans);
+  letter-spacing: 0.22em;
+  color: var(--gold-ink);
+}
+.road-stop h3 {
+  font-size: clamp(1.05rem, 1.4vw, 1.32rem);
+  color: var(--green-800);
+  margin: 0.55rem 0 0.5rem;
+}
+.road-stop p {
+  margin: 0 0 0.7rem;
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/* Wide screens: the pathway turns and runs across the screen instead of down it */
+@media (min-width: 821px) {
+  .roadmap:not(.roadmap--stack) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--road-gap);
+    padding-left: 0;
+  }
+  /* each stop is its own column, so the copy takes the slack and every Explore
+     link lands on the same line however many lines the paragraph above runs to */
+  .roadmap:not(.roadmap--stack) .road-stop {
+    display: flex;
+    flex-direction: column;
+    padding: 2.15rem 0 0;
+  }
+  .roadmap:not(.roadmap--stack) .road-stop::before { top: 0; left: 0; }
+  .roadmap:not(.roadmap--stack) .road-stop::after {
+    top: calc(var(--mark) / 2);
+    /* the diamond's tip sits at 1.025rem, so start 0.5rem clear of it and end the
+       same distance short of the next one — even breathing room on both sides */
+    left: 1.5rem;
+    width: calc(100% + var(--road-gap) - 2.2rem);
+    height: 1px;
+  }
+  /* the run-off ends flush with the container edge rather than overhanging it */
+  .roadmap:not(.roadmap--stack) .road-stop:last-child::after {
+    width: calc(100% - 1.5rem);
+    background: linear-gradient(to right, var(--gold), rgba(201, 166, 73, 0));
+  }
+  .roadmap:not(.roadmap--stack) .road-stop p { flex: 1 1 auto; margin-bottom: 1rem; }
+}
+
+/* The Academy hub runs the pathway full-height, so each stop can carry more */
+.roadmap--stack { padding-left: 2.6rem; }
+.roadmap--stack .road-stop { padding-bottom: clamp(2rem, 4vw, 2.8rem); }
+.roadmap--stack .road-stop::before { left: -2.6rem; top: 0.35rem; }
+/* top/height derived from the rotated marker: its tips sit 9.6px out from the
+   centre, so the segment starts and ends the same 9.6px clear of each diamond */
+.roadmap--stack .road-stop::after { left: calc(-2.6rem + var(--mark) / 2); top: 1.975rem; height: calc(100% - 38.4px); }
+.roadmap--stack .road-stop h3 { font-size: clamp(1.35rem, 2.2vw, 1.75rem); margin: 0.7rem 0 0.6rem; }
+.roadmap--stack .road-stop p { font-size: 0.97rem; line-height: 1.75; max-width: 62ch; margin-bottom: 1.1rem; }
+/* On the dark home panel the same pathway inverts */
+.panel--programs .road-no { color: var(--gold); opacity: 0.8; }
+.panel--programs .road-stop h3 { color: var(--ivory); }
+.panel--programs .road-stop p { color: rgba(247, 243, 234, 0.75); }
+.panel--programs .road-stop::before { background: var(--green-900); }
+
+/* Adult training sits deliberately off the pathway */
+.road-aside {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  margin-top: clamp(2rem, 4vh, 3rem);
+  padding: clamp(1.1rem, 2.2vh, 1.6rem) clamp(1.2rem, 2.4vw, 1.9rem);
+  border: 1px solid var(--gold-soft);
+  background: rgba(201, 166, 73, 0.05);
+  text-align: left;
+}
+.road-aside__body { flex: 1 1 22rem; }
+.road-aside h3 {
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  color: var(--green-800);
+  margin: 0 0 0.35rem;
+}
+.road-aside p {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+/* the dark home panel inverts it too */
+.panel--programs .road-aside {
+  border-color: rgba(201, 166, 73, 0.28);
+  background: rgba(247, 243, 234, 0.035);
+}
+.panel--programs .road-aside h3 { color: var(--ivory); }
+.panel--programs .road-aside p { color: rgba(247, 243, 234, 0.72); }
+.panel--programs .card-link { color: var(--gold); border-color: rgba(201, 166, 73, 0.45); }
+.panel--programs .card-link:hover { color: var(--ivory); border-color: var(--ivory); }
+/* The global .card-link:focus-visible forces the dark gold ring for ivory surfaces;
+   on this dark panel that is only ~2:1, so restore the bright gold (5.25:1). */
+.panel--programs .card-link:focus-visible { outline-color: var(--gold); }
+
+@media (max-width: 1000px) {
+  .panel { padding-block: clamp(4.5rem, 8vh, 6rem); }
+}
+@media (max-width: 860px) {
+  /* Stacked, the portrait would eat the screen — run it beside the name instead */
+  .who-grid { grid-template-columns: 1fr; gap: 2.2rem; }
+  .who-figure {
+    display: grid;
+    grid-template-columns: 8rem minmax(0, 1fr);
+    gap: 0 1.4rem;
+    align-items: center;
+  }
+  .who-portrait { grid-row: span 3; }
+  .who-portrait :is(.ph-media, img) { aspect-ratio: 1 / 1; max-height: none; }
+  .who-portrait .ph-media { padding: 0.7rem; }
+  .who-portrait .ph-media span { display: none; }
+  .who-name { margin-top: 0; }
+  .who-creds { margin-top: 0.9rem; padding-top: 0.9rem; }
+  /* single column: drop the mirrored placement so the figure leads again */
+  .panel--who-alt .who-grid { grid-template-columns: 1fr; }
+  .panel--who-alt .who-figure,
+  .panel--who-alt .who-body { grid-column: 1; grid-row: auto; }
+}
+/* ---------- Press / news coverage list (coach profiles) ---------- */
+
+.profile-press { margin-top: clamp(2.6rem, 5vw, 3.6rem); }
+.profile-press__title {
+  font: 500 0.72rem/1.4 var(--font-sans);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+  margin: 0 0 1rem;
+}
+.press-list { list-style: none; margin: 0; padding: 0; }
+.press-list a {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.3rem 1.4rem;
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--line-light);
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 0.95rem;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+.press-list li:last-child a { border-bottom: 1px solid var(--line-light); }
+.press-list a span {
+  flex: none;
+  font: 500 0.64rem/1 var(--font-sans);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.press-list a:hover,
+.press-list a:hover span { color: var(--gold-ink); }
+
+/* ---------- Sub-pages ---------- */
+
+/* Sub-page headers are a shallow band — roughly half the viewport, never the
+   whole screen. Top padding only has to clear the fixed header (96px). */
+.page-hero {
+  background: radial-gradient(120% 120% at 50% 0%, #0E4636 0%, var(--green-800) 45%, var(--green-950) 100%);
+  min-height: 42vh;
+  min-height: clamp(16rem, 44svh, 27rem);
+  display: flex;
+  align-items: center;
+  padding: 7.25rem 0 3.25rem;
   text-align: center;
   color: var(--ivory);
   overflow: hidden;
@@ -825,18 +1210,19 @@ h2 em { font-style: italic; color: var(--gold-ink); }
 .page-hero .container { width: min(var(--container), 92%); position: relative; z-index: 2; }
 .page-hero--program,
 .page-hero--profile {
-  min-height: clamp(34rem, 68svh, 44rem);
+  min-height: clamp(16rem, 44svh, 27rem);
   align-items: flex-end;
   text-align: left;
 }
-.page-hero--program .ornament,
-.page-hero--profile .ornament {
-  justify-content: flex-start;
-  margin-left: 0;
-}
 .page-hero--program .page-lede,
 .page-hero--profile .page-lede { margin-left: 0; max-width: 44ch; }
-.page-hero--utility { min-height: clamp(28rem, 52svh, 36rem); }
+.page-hero--utility { min-height: clamp(13rem, 33svh, 20rem); }
+/* 404 is the exception: its header IS the page, so it fills the screen and the
+   footer sits below the fold. Must follow .page-hero — same specificity. */
+.page-hero--full {
+  min-height: 100vh;
+  min-height: 100svh;
+}
 
 /* Photographic backdrop + court lines on sub-page heroes (same tint recipe
    as the home hero video, so the whole site feels shot in one hall) */
@@ -854,12 +1240,16 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   inset: 0;
   background: linear-gradient(180deg, rgba(11, 61, 46, 0.4), rgba(4, 27, 20, 0.6));
 }
+/* Scaled off the header's own height, not the viewport — so the whole court
+   still reads inside the shallow band instead of being sliced to stray lines */
 .page-court {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: min(112vw, 210vh);
+  height: 100%;
+  width: auto;
+  min-width: 100%;
   aspect-ratio: 536 / 244;
   opacity: 0.11;
   pointer-events: none;
@@ -872,10 +1262,9 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   color: var(--ivory);
 }
 .page-hero h1 em { font-style: italic; color: var(--gold); }
-.page-hero .ornament { color: var(--gold); }
 .page-lede {
   max-width: 54ch;
-  margin: 1.4rem auto 0;
+  margin: 2.2rem auto 0;
   color: rgba(247, 243, 234, 0.82);
   font-weight: 300;
 }
@@ -890,58 +1279,6 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   justify-content: center;
   margin-top: 3.5rem;
 }
-/* The For-Parents and Who-We-Are blocks are left-aligned editorial, so their CTAs
-   hang on the same left rail instead of re-centering mid-section. */
-#for-parents .section-cta,
-#who-we-are .section-cta { justify-content: flex-start; }
-
-/* ---------- The Difference (comparison table) ---------- */
-
-.diff-table {
-  width: 100%;
-  max-width: 880px;
-  margin: 3.6rem auto 0;
-  border-collapse: collapse;
-  text-align: left;
-}
-.diff-table th {
-  font: 500 0.7rem/1.5 var(--font-sans);
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  padding: 1.1rem 1.6rem;
-  vertical-align: bottom;
-}
-.diff-table td {
-  padding: 1.35rem 1.6rem;
-  border-top: 1px solid var(--line-light);
-  vertical-align: top;
-  font-size: 0.97rem;
-  line-height: 1.65;
-  width: 50%;
-}
-.diff-table td:first-child { color: var(--ink-soft); }
-.diff-table th:last-child,
-.diff-table td:last-child {
-  background: rgba(201, 166, 73, 0.07);
-  border-left: 2px solid var(--gold-soft);
-}
-.diff-table th:last-child { color: var(--gold-ink); }
-.diff-table td:last-child { color: var(--green-800); font-weight: 500; }
-.diff-closing {
-  max-width: 620px;
-  margin: 3rem auto 0;
-  text-align: center;
-  font-family: var(--font-serif);
-  font-size: clamp(1.3rem, 2.2vw, 1.6rem);
-  line-height: 1.45;
-  font-weight: 500;
-  color: var(--green-800);
-}
-@media (max-width: 560px) {
-  .diff-table th { padding: 0.8rem 0.9rem; letter-spacing: 0.14em; }
-  .diff-table td { padding: 1rem 0.9rem; font-size: 0.9rem; }
-}
 
 /* ---------- Academy program detail (Who it's for / What they'll train / ...) ---------- */
 
@@ -954,6 +1291,51 @@ h2 em { font-style: italic; color: var(--gold-ink); }
 }
 .program-detail h3:first-child { margin-top: 0; }
 .program-detail p { margin: 0; color: var(--ink-soft); }
+
+/* The program brief: the client's description as the lead, then the deck's
+   fixed three parts read as a spec sheet — label rail on the left, answer on
+   the right, hairlines between. Same shape on every program page. */
+.brief {
+  display: grid;
+  grid-template-columns: minmax(220px, 4fr) minmax(0, 7fr);
+  gap: clamp(2.4rem, 6vw, 6rem);
+  align-items: start;
+  text-align: left;
+}
+.brief__head { max-width: none; margin-inline: 0; text-align: left; }
+.brief__body { min-width: 0; }
+.brief__lead {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  line-height: 1.5;
+  color: var(--green-800);
+}
+.brief__copy { margin-top: clamp(1.6rem, 3vw, 2.2rem); }
+.brief__copy p { margin: 0 0 1.1rem; color: var(--ink-soft); }
+.brief__copy p:last-child { margin-bottom: 0; }
+.brief__cta { justify-content: flex-start; margin-top: clamp(2rem, 4vw, 2.8rem); }
+.brief__spec { margin: clamp(2.2rem, 4vw, 3rem) 0 0; }
+.brief__spec > div {
+  display: grid;
+  grid-template-columns: minmax(0, 9.5rem) minmax(0, 1fr);
+  column-gap: clamp(1.4rem, 3vw, 2.4rem);
+  row-gap: 0.5rem;
+  padding: 1.45rem 0;
+  border-top: 1px solid var(--line-light);
+}
+.brief__spec > div:last-child { border-bottom: 1px solid var(--line-light); }
+.brief__spec dt {
+  font: 500 0.66rem/1.6 var(--font-sans);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+.brief__spec dd { margin: 0; font-size: 0.97rem; color: var(--ink-soft); }
+@media (max-width: 860px) {
+  .brief { grid-template-columns: 1fr; gap: 2.4rem; }
+  .brief__spec > div { grid-template-columns: 1fr; row-gap: 0.6rem; }
+}
 
 .site-nav > a[aria-current="page"] { color: var(--gold); }
 .site-nav > a[aria-current="page"]::after { transform: scaleX(1); }
@@ -980,9 +1362,6 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   text-transform: uppercase;
   color: rgba(247, 243, 234, 0.65);
 }
-
-/* Bracketed placeholder copy */
-.ph-text { font-style: italic; color: var(--ink-soft); opacity: 0.8; }
 
 /* Coaches (about page) */
 .coaches {
@@ -1020,13 +1399,17 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   background: var(--gold-soft);
   transform-origin: left;
 }
-.coach-ach-title {
+/* This one <li> is the list's label, not an entry — it must not take the
+   diamond or the indent the sibling rules below hand to every other item. */
+.coach-ach .coach-ach-title {
+  padding-left: 0;
+  margin: 0 0 0.9rem;
   font: 500 0.66rem/1 var(--font-sans);
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--gold-ink);
-  margin: 0 0 0.9rem;
 }
+.coach-ach .coach-ach-title::before { content: none; }
 .coach-ach li {
   position: relative;
   padding-left: 1.2rem;
@@ -1045,38 +1428,7 @@ h2 em { font-style: italic; color: var(--gold-ink); }
 }
 
 /* Courses (programs page) */
-.courses { margin-top: 3rem; }
-.course {
-  display: grid;
-  grid-template-columns: 5fr 7fr;
-  gap: 2.5rem 3.5rem;
-  align-items: center;
-  padding: 3.5rem 0;
-  position: relative;
-  text-align: left;
-}
-.course::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: var(--line-light);
-  transform-origin: left;
-}
-.course:first-child::before { display: none; }
-.course-media .ph-media { aspect-ratio: 4 / 3; }
-.course:nth-child(even) .course-media { order: 2; }
-.course-stream {
-  font: 500 0.66rem/1.6 var(--font-sans);
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--gold-ink);
-  margin: 0 0 0.5rem;
-}
-.course h3 { font-size: 1.9rem; font-weight: 600; color: var(--green-800); margin-bottom: 1rem; }
-.course-body p { margin: 0 0 1rem; font-size: 0.97rem; }
+
 .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; list-style: none; margin: 1.5rem 0 0; padding: 0; }
 .chip {
   font: 500 0.64rem/1 var(--font-sans);
@@ -1099,7 +1451,6 @@ h2 em { font-style: italic; color: var(--gold-ink); }
 }
 .venue-card h3 { font-size: 1.5rem; font-weight: 600; color: var(--ivory); margin-bottom: 0.6rem; }
 .venue-card p { margin: 0 0 0.4rem; color: rgba(247, 243, 234, 0.78); font-size: 0.95rem; }
-.venue-card .ph-text { color: rgba(247, 243, 234, 0.65); }
 
 /* Gallery page */
 .gallery-grid {
@@ -1110,7 +1461,16 @@ h2 em { font-style: italic; color: var(--gold-ink); }
 }
 .gallery-grid .moment img { aspect-ratio: 3 / 4; }
 .moment--ph { display: flex; }
-.moment--ph .ph-media { flex: 1; aspect-ratio: 3 / 4; }
+/* An empty print, not a dark slab — a wall of unfilled dark tiles is the thing
+   that makes a gallery read as half-built */
+.moment--ph .ph-media {
+  flex: 1;
+  aspect-ratio: 3 / 4;
+  background: var(--ivory);
+  border: 1px dashed var(--gold-soft);
+  color: var(--gold-ink);
+}
+.moment--ph .ph-media span { color: var(--ink-soft); }
 
 /* Academy hub cards */
 .acad-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.6rem; margin-top: 4rem; text-align: left; }
@@ -1187,10 +1547,6 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   max-width: 600px;
   margin-left: 0;
   text-align: left;
-}
-.program-showcase__head .ornament {
-  justify-content: flex-start;
-  margin-left: 0;
 }
 .program-showcase__rail { margin-top: clamp(2.8rem, 6vw, 5rem); }
 .editorial-track {
@@ -1286,6 +1642,16 @@ html:not(.js) .car-btn { display: none; }
   font: italic 500 0.95rem/1 var(--font-serif);
   color: var(--gold-ink);
 }
+.form-hint { margin: -0.4rem 0 0; font-size: 0.88rem; color: var(--ink-soft); }
+.form-fallback {
+  max-width: 720px;
+  margin: 3rem auto 0;
+  padding: 1.4rem 1.6rem;
+  border: 1px solid var(--gold-soft);
+  background: rgba(201, 166, 73, 0.07);
+  font-size: 0.95rem;
+  text-align: left;
+}
 .field { display: flex; flex-direction: column; gap: 0.45rem; }
 .field--full { grid-column: 1 / -1; }
 .field > label, .field > legend {
@@ -1370,7 +1736,6 @@ html.js .signup-form.is-sent { display: none; }
 .profile-story__name { font-size: clamp(2.3rem, 4.5vw, 4rem); line-height: 1; }
 .profile-story__role { margin-top: 1rem; }
 .profile-story__head { margin-left: 0; text-align: left; }
-.profile-story__head .ornament { justify-content: flex-start; margin-left: 0; }
 .profile-story__chapters { margin-top: 3rem; border-top: 1px solid var(--line-light); }
 .profile-story__chapter {
   display: grid;
@@ -1394,8 +1759,10 @@ html.js .signup-form.is-sent { display: none; }
   align-items: start;
 }
 .profile-record__intro { margin-left: 0; text-align: left; }
-.profile-record__intro .ornament { justify-content: flex-start; margin-left: 0; }
 .profile-record__list { width: 100%; max-width: none; margin: 0; }
+/* The press block is a third grid item, so left to itself it drops into the
+   narrow label column on row 2. Keep it under the record it belongs to. */
+.profile-record .profile-press { grid-column: 2; }
 .profile-record__media {
   margin-top: clamp(4rem, 8vw, 7rem);
   padding-top: 2.2rem;
@@ -1411,6 +1778,26 @@ html.js .signup-form.is-sent { display: none; }
 .carousel--career .car-slide--career { flex: 0 0 clamp(230px, 27vw, 340px); }
 .carousel--career .car-slide--career:nth-child(even) { flex-basis: clamp(210px, 23vw, 290px); }
 @media (max-width: 860px) { .person-grid { grid-template-columns: 1fr; } }
+
+/* Honest empty state — used where a section has nothing to show yet, so the
+   page reads as deliberate rather than half-built */
+.empty-state {
+  max-width: 46rem;
+  margin-inline: auto;
+  padding: clamp(3rem, 7vw, 5rem) clamp(1.6rem, 4vw, 3rem);
+  border: 1px dashed var(--gold-soft);
+  background: var(--ivory-bright);
+  text-align: center;
+}
+.empty-state__mark {
+  width: 34px;
+  height: 34px;
+  margin: 0 auto 1.7rem;
+  color: var(--gold-ink);
+  opacity: 0.65;
+}
+.empty-state h2 { font-size: clamp(1.55rem, 3vw, 2.2rem); }
+.empty-state p { margin: 1.2rem auto 2rem; max-width: 46ch; color: var(--ink-soft); }
 
 /* Journal posts */
 .posts {
@@ -1443,8 +1830,6 @@ html.js .signup-form.is-sent { display: none; }
 
 @media (max-width: 900px) {
   .coaches { grid-template-columns: 1fr; }
-  .course { grid-template-columns: 1fr; gap: 1.8rem; padding: 2.8rem 0; }
-  .course:nth-child(even) .course-media { order: 0; }
   .posts { grid-template-columns: 1fr; max-width: 560px; margin-inline: auto; }
 }
 
@@ -1461,8 +1846,6 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
 /* ---------- Responsive ---------- */
 
 @media (max-width: 960px) {
-  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .programs { grid-template-columns: 1fr; max-width: 560px; }
   .values { grid-template-columns: 1fr; gap: 2.2rem; }
 }
 
@@ -1492,14 +1875,14 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
 @media (max-width: 860px) {
   .profile-record { grid-template-columns: 1fr; gap: 2.5rem; }
   .profile-record__intro { max-width: 620px; }
+  .profile-record .profile-press { grid-column: 1; }
 }
 
 @media (max-width: 760px) {
   .hero { min-height: max(100svh, 44rem); padding: 7rem 0 5.5rem; }
-  .program { min-height: 0; }
 
   .page-hero--program,
-  .page-hero--profile { min-height: clamp(32rem, 72svh, 40rem); }
+  .page-hero--profile { min-height: clamp(15rem, 42svh, 24rem); }
   .program-showcase__inner { width: 92%; }
   .editorial-track { align-items: flex-start; scroll-padding-inline: 0; }
   .editorial-slide,
@@ -1524,22 +1907,32 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
     min-height: 100svh;
     padding: 5.75rem 0 4.5rem;
   }
-  .hero .hero-overline { margin-bottom: 0.8rem; }
   .hero .hero-title .t1 { font-size: 1.25rem; margin-bottom: 0.15rem; }
   .hero .hero-title :is(.t2, .t3) { font-size: clamp(3rem, 7vw, 4.5rem); }
-  .hero .ornament { margin-block: 1rem; }
-  .hero .hero-lede { margin-top: 0.8rem; font-size: 0.95rem; line-height: 1.55; }
+  .hero .hero-overline { margin-top: 1.2rem; }
+  .hero .hero-locations { margin-top: 0.6rem; font-size: 0.62rem; }
   .hero .hero-actions { margin-top: 1.2rem; }
   .hero .hero-actions .btn { padding-block: 0.85rem; }
+
+  /* On short laptop screens the sub-page header's own content is what makes the
+     band tall, so trim the title and padding rather than the min-height */
+  .page-hero { padding: 6.25rem 0 2.5rem; }
+  .page-hero h1 { font-size: clamp(2.1rem, 4.6vw, 3.2rem); }
+  .page-lede { margin-top: 1.5rem; font-size: 0.95rem; }
 }
 
+/* Short landscape phones: shrink the hero rather than drop pieces of it. The
+   CTAs in particular must survive — they are the point of the screen. */
 @media (max-height: 480px) and (orientation: landscape) {
-  .hero { padding: 4.6rem 0 3rem; }
-  .hero .hero-overline { margin-bottom: 0.3rem; font-size: 0.58rem; }
+  .hero { padding: 4.6rem 0 2.6rem; }
   .hero .hero-title .t1 { font-size: 1rem; }
   .hero .hero-title :is(.t2, .t3) { font-size: clamp(2.35rem, 7vw, 3.4rem); }
-  .hero .ornament { margin-block: 0.55rem; }
-  .hero :is(.hero-lede, .hero-actions) { display: none; }
+  .hero .hero-tagline { margin-top: 0.7rem; font-size: 1.05rem; }
+  .hero .hero-overline { margin-top: 0.5rem; font-size: 0.58rem; }
+  .hero .hero-locations { display: none; }
+  .hero .hero-actions { margin-top: 0.9rem; gap: 0.6rem; }
+  .hero .hero-actions .btn { padding: 0.7rem 1.15rem; font-size: 0.68rem; letter-spacing: 0.1em; }
+  .scroll-cue { display: none; }
 }
 
 @media (max-width: 700px) and (orientation: portrait) {
@@ -1576,7 +1969,8 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
 .roll-track { display: block; transition: transform 0.55s var(--ease-settle); }
 .roll-track span { display: block; height: 1em; }
 .roll + .roll .roll-track { transition-delay: 0.08s; }
-.program-no.is-rolled .roll-track { transform: translateY(-50%); }
+.program-no.is-rolled .roll-track,
+.road-no.is-rolled .roll-track { transform: translateY(-50%); }
 
 /* Photo frame outline (SVG injected by JS) */
 .moment .frame { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
@@ -1641,7 +2035,8 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
   html.entering .hero-overline,
   html.entering .page-hero .overline { opacity: 0; letter-spacing: 0.58em; }
   html.entering .line-inner { transform: translateY(115%); }
-  html.entering .hero-lede,
+  html.entering .hero-tagline,
+  html.entering .hero-locations,
   html.entering .hero-actions,
   html.entering .page-lede { opacity: 0; transform: translateY(10px); }
   html.entering .scroll-cue { opacity: 0; }
@@ -1651,10 +2046,12 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
   html.entering :is(.hero-court, .page-court) .c-net { transform: scaleY(0); transform-origin: center; transform-box: fill-box; }
 
   /* ---- The opening ceremony: play ---- */
+  /* Everything under the wordmark cascades in after the title lands */
+  html.entering.entered .hero-tagline { opacity: 1; transform: none; transition: opacity 0.7s ease 1.42s, transform 0.7s var(--ease-settle) 1.42s; }
   html.entering.entered .hero-overline {
     opacity: 1;
-    letter-spacing: 0.38em;
-    transition: opacity 1.1s ease 0.3s, letter-spacing 1.1s ease 0.3s;
+    letter-spacing: 0.2em;
+    transition: opacity 0.9s ease 1.56s, letter-spacing 0.9s ease 1.56s;
   }
   html.entering.entered .page-hero .overline {
     opacity: 1;
@@ -1667,8 +2064,8 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
   html.entering.entered .t3 .line-inner { transition-delay: 0.74s; }
   html.entering.entered .page-hero h1 .line:first-child .line-inner { transition-duration: 0.8s; transition-delay: 0.15s; }
   html.entering.entered .page-hero h1 .line:nth-child(2) .line-inner { transition-duration: 0.95s; transition-delay: 0.29s; }
-  html.entering.entered .hero-lede { opacity: 1; transform: none; transition: opacity 0.7s ease 1.6s, transform 0.7s var(--ease-settle) 1.6s; }
-  html.entering.entered .hero-actions { opacity: 1; transform: none; transition: opacity 0.7s ease 1.75s, transform 0.7s var(--ease-settle) 1.75s; }
+  html.entering.entered .hero-locations { opacity: 1; transform: none; transition: opacity 0.7s ease 1.7s, transform 0.7s var(--ease-settle) 1.7s; }
+  html.entering.entered .hero-actions { opacity: 1; transform: none; transition: opacity 0.7s ease 1.82s, transform 0.7s var(--ease-settle) 1.82s; }
   html.entering.entered .page-lede { opacity: 1; transform: none; transition: opacity 0.6s ease 0.7s, transform 0.6s var(--ease-settle) 0.7s; }
   html.entering.entered .scroll-cue { opacity: 1; transition: opacity 0.8s ease 2.2s; }
   html.entering.entered .hero-media { transform: scale(1); transition: transform 2.4s ease-out; }
@@ -1709,24 +2106,11 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
     transition: none !important;
   }
 
-  /* ---- The serve: ornaments assemble shuttle-first ---- */
-  html.js [data-serve] svg { opacity: 0; transform: translateY(-10px) rotate(-14deg) scale(0.92); }
-  html.js [data-serve] .rule:first-child { transform: scaleX(0); transform-origin: right center; }
-  html.js [data-serve] .rule:last-child { transform: scaleX(0); transform-origin: left center; }
-  html.js [data-serve].is-served svg {
-    opacity: 1;
-    transform: none;
-    transition: opacity 0.3s ease-out, transform 0.65s cubic-bezier(0.34, 1.3, 0.64, 1);
-  }
-  html.js [data-serve].is-served .rule { transform: scaleX(1); transition: transform 0.55s var(--ease-draw) 0.12s; }
-
   /* ---- Chalk lines: structural rules draw themselves ---- */
   .values li::before,
-  .course::before,
   .coach-ach::before,
   .footer-grid::after { transition: transform 0.8s var(--ease-draw); }
   html.js .values li:not(.is-ruled)::before,
-  html.js .course:not(.is-ruled)::before,
   html.js .coach-ach:not(.is-ruled)::before,
   html.js .footer-grid:not(.is-ruled)::after,
   html.js .program-rule:not(.is-ruled) { transform: scaleX(0); }
@@ -1742,6 +2126,9 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
   html.js .moment.has-frame { border-color: transparent; }
   html.js .moment.has-frame .frame rect { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1s var(--ease-draw); }
   html.js .moment.has-frame.is-framed .frame rect { stroke-dashoffset: 0; }
+
+  /* ---- Filing a new page: the dossier pane settles in ---- */
+  html.js .dossier__pane.is-active { animation: paneIn 0.42s var(--ease-settle) both; }
 
   /* ---- Cufflink polish: one pass of light across buttons ---- */
   .btn::after {
@@ -1807,6 +2194,10 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
 }
 @keyframes mobileDropdownIn {
   from { opacity: 0; transform: translateY(-0.45rem); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes paneIn {
+  from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: none; }
 }
 @keyframes navItemIn {
