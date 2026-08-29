@@ -6,7 +6,7 @@
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var HAS_IO = 'IntersectionObserver' in window;
 
-  /* NodeList helper — older browsers lacking IntersectionObserver also lack
+  /* NodeList helper: older browsers lacking IntersectionObserver also lack
      NodeList.forEach, and this file must never throw in them */
   function each(list, fn) {
     for (var i = 0; i < list.length; i++) fn(list[i], i);
@@ -19,7 +19,7 @@
 
   function onceInView(elements, className, threshold, beforeAdd) {
     if (!HAS_IO) {
-      /* mirror the observer branch below — callers that pass beforeAdd do their
+      /* mirror the observer branch below: callers that pass beforeAdd do their
          work there instead of in the class, so skipping it froze the roll */
       each(elements, function (el) {
         if (beforeAdd) beforeAdd(el);
@@ -353,7 +353,7 @@
 
   /* Scroll reveal.
      Once an element has finished its entrance, the reveal classes are removed
-     entirely — the `html.js .reveal` transition would otherwise out-specify
+     entirely: the `html.js .reveal` transition would otherwise out-specify
      component hover transitions (.program, .btn) for the life of the page. */
   function releaseReveal(el) {
     el.classList.remove('reveal');
@@ -416,7 +416,7 @@
     each(el.querySelectorAll('.values li, .coach-ach, .footer-grid, .program-rule'), function (o) { o.classList.add('is-ruled'); });
     each(el.querySelectorAll('.band figcaption'), function (o) { o.classList.add('is-stamped'); });
     each(el.querySelectorAll('.moment.has-frame'), function (o) { o.classList.add('is-framed'); });
-    each(el.querySelectorAll('.program-no'), function (o) {
+    each(el.querySelectorAll('.program-no, .road-no'), function (o) {
       setTimeout(function () { o.classList.add('is-rolled'); }, 350);
     });
   }
@@ -424,7 +424,7 @@
   /* Take a section's reveals AND signature moments away from every scroll
      observer, so nothing plays while the section is still off-screen */
   function claimSection(target) {
-    var claimed = target.querySelectorAll('.reveal, .values li, .coach-ach, .footer-grid, .program-rule, .band figcaption, .moment, .acad-card');
+    var claimed = target.querySelectorAll('.reveal, .values li, .coach-ach, .footer-grid, .program-rule, .band figcaption, .moment, .acad-card, .road-stop');
     each(claimed, function (el) {
       if (typeof io !== 'undefined' && io) io.unobserve(el);
       for (var i = 0; i < momentIOs.length; i++) momentIOs[i].unobserve(el);
@@ -433,7 +433,7 @@
 
   /* Hold a section's reveals until the scroll has actually arrived AND any
      minimum delay (e.g. the arrival veil clearing) has passed, so the
-     animation always plays in front of the visitor — never mid-flight */
+     animation always plays in front of the visitor, never mid-flight */
   function revealOnArrival(target, top, minDelay, fallback) {
     var started = Date.now();
     var fired = false;
@@ -447,7 +447,7 @@
       if (Math.abs(window.scrollY - top) < 120) {
         var wait = minDelay - (Date.now() - started);
         if (wait <= 0) fire();
-        else setTimeout(attempt, wait); /* arrived early — wait out the veil */
+        else setTimeout(attempt, wait); /* arrived early, wait out the veil */
       }
     };
     window.addEventListener('scroll', attempt, { passive: true });
@@ -478,7 +478,7 @@
     });
   });
 
-  /* Only steer the scroll on fresh navigations — reloads and back/forward
+  /* Only steer the scroll on fresh navigations: reloads and back/forward
      keep the browser's own scroll restoration */
   var navType = '';
   try {
@@ -601,7 +601,7 @@
   var moments = document.querySelector('[data-moments]');
   if (moments) {
     var figures = moments.querySelectorAll('figure');
-    /* count only the figures that actually carry a photo — seeded with all of
+    /* count only the figures that actually carry a photo, seeded with all of
        them, the placeholder tiles would keep the tally above zero forever and
        the "no photos at all" case could never hide the section */
     var liveCount = 0;
@@ -781,7 +781,7 @@
     function frame(t) {
       rafId = null;
       if (media.classList.contains('has-video')) {
-        ctx.clearRect(0, 0, W, H); /* video took over — stop drawing for good */
+        ctx.clearRect(0, 0, W, H); /* video took over, stop drawing for good */
         if (io) { io.disconnect(); io = null; }
         window.removeEventListener('resize', resize);
         return;
@@ -849,7 +849,7 @@
     next.addEventListener('click', function () { step(1, next); });
     function sync() {
       /* the snap rest position is the first slide's offset (track padding),
-         not zero — measure it instead of assuming */
+         not zero: measure it instead of assuming */
       var start = track.firstElementChild ? track.firstElementChild.offsetLeft : 0;
       var max = track.scrollWidth - track.clientWidth - 2;
       prev.setAttribute('aria-disabled', track.scrollLeft <= start + 2 ? 'true' : 'false');
@@ -905,17 +905,32 @@
 
     function reserveHeight() {
       if (!panes) return;
+      var all = [];
+      each(tabs, function (t) { var p = paneOf(t); if (p) all.push(p); });
+      if (!all.length) return;
+
+      /* Measure each pane ALONE. The panes share one grid cell and stretch to
+         the row, so a pane measured while any sibling is still in flow reports
+         the row's height, not its own. Once a min-height has been set,
+         that feeds back into the next measurement and the box only ever grows. */
+      var was = all.map(function (p) { return p.hidden; });
+      var prevMin = panes.style.minHeight;
       panes.style.minHeight = '';
+
       var tallest = 0;
-      each(tabs, function (t) {
-        var pane = paneOf(t);
-        if (!pane) return;
-        var wasHidden = pane.hidden;
-        if (wasHidden) { pane.style.visibility = 'hidden'; pane.hidden = false; }
-        tallest = Math.max(tallest, pane.offsetHeight);
-        if (wasHidden) { pane.hidden = true; pane.style.visibility = ''; }
-      });
-      if (!tallest) return;
+      for (var i = 0; i < all.length; i++) {
+        for (var j = 0; j < all.length; j++) {
+          all[j].hidden = j !== i;
+          if (j === i) all[j].style.visibility = 'hidden';
+        }
+        tallest = Math.max(tallest, all[i].offsetHeight);
+        all[i].style.visibility = '';
+      }
+      for (var k = 0; k < all.length; k++) all[k].hidden = was[k];
+
+      /* a zero measurement means the panel is not laid out yet (display:none
+         ancestor, zero-width viewport), so keep what we had rather than collapse */
+      if (!tallest) { panes.style.minHeight = prevMin; return; }
       var pad = parseFloat(getComputedStyle(panes).paddingTop) || 0;
       panes.style.minHeight = (tallest + pad) + 'px';
     }
@@ -936,6 +951,9 @@
 
   /* ==================== Sign-up: Supabase submission ==================== */
 
+  /* DORMANT since booking moved to BurnOn: no page ships [data-signup] any
+     more, so this whole block no-ops. Kept, along with the edge function and
+     js/supabase-config.js, so putting the form back is a markup-only change. */
   var signupForm = document.querySelector('[data-signup]');
   if (signupForm) {
     var signupStatus = signupForm.querySelector('[data-form-status]');
@@ -1037,6 +1055,6 @@
   /* Tells the inline head script that main.js ran to completion. Set LAST on
      purpose: set at the top, a throw anywhere below would still leave the flag
      true, and the 2.5s backstop would keep the entrance hold armed on a page
-     whose reveal code never ran — i.e. a permanently blank page. */
+     whose reveal code never ran: i.e. a permanently blank page. */
   window.__tbp = true;
 })();

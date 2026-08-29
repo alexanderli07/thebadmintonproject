@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sign Up — The Badminton Project</title>
-  <meta name="description" content="Register for The Badminton Project — academy training for young athletes and adult sessions at Agility Sports (Mississauga) and BNM Badminton (Toronto).">
-  <meta property="og:title" content="Sign Up — The Badminton Project">
-  <meta property="og:description" content="Register for The Badminton Project — academy training for young athletes and adult sessions at Agility Sports (Mississauga) and BNM Badminton (Toronto).">
+  <title>Book a Trial | The Badminton Project</title>
+  <meta name="description" content="Book a trial class with The Badminton Project at BNM Badminton (Toronto) or Agility Sports (Mississauga).">
+  <meta property="og:title" content="Book a Trial | The Badminton Project">
+  <meta property="og:description" content="Book a trial class with The Badminton Project at BNM Badminton (Toronto) or Agility Sports (Mississauga).">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://thebadmintonproject.com/assets/og-image.png">
   <meta property="og:image:width" content="1200">
@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=49">
+  <link rel="stylesheet" href="css/styles.css?v=52">
 </head>
 <body id="top">
 
@@ -45,7 +45,7 @@
   <!-- ==================== HEADER ==================== -->
   <header class="site-header" data-header>
     <div class="container nav-row">
-      <a class="brand" href="index.html" aria-label="The Badminton Project — home">
+      <a class="brand" href="index.html" aria-label="The Badminton Project home">
         <svg class="brand-mark" aria-hidden="true"><use href="#icon-court"/></svg>
         <span class="brand-name">The Badminton Project</span>
       </a>
@@ -54,10 +54,10 @@
         <div class="nav-disclosure" data-nav-disclosure>
           <a class="nav-disclosure__trigger" href="programs.html">The Academy<span class="nav-chevron" aria-hidden="true"></span></a>
           <div class="nav-submenu">
-            <a href="academy-high-performance.html">National Team Elite</a>
-            <a href="academy-competition.html">High Performance Team</a>
-            <a href="academy-intro-development.html">Beginner Training</a>
-            <a href="academy-intermediate.html">Intermediate Training</a>
+            <a href="programs.html#beginner-intermediate">Beginner &amp; Intermediate</a>
+            <a href="programs.html#advanced">Advanced</a>
+            <a href="programs.html#high-performance">High Performance Team</a>
+            <a href="programs.html#national">National Team Elite</a>
             <a href="programs.html#adult-training">Adult Training</a>
             <a href="programs.html#where-we-train">Where We Train</a>
           </div>
@@ -93,10 +93,10 @@
       <details class="mobile-disclosure" data-mobile-disclosure>
         <summary class="mobile-disclosure__trigger"><a class="mobile-disclosure__label" href="programs.html">The Academy</a><span class="nav-chevron" aria-hidden="true"></span></summary>
         <div class="mobile-submenu">
-          <a href="academy-high-performance.html">National Team Elite</a>
-          <a href="academy-competition.html">High Performance Team</a>
-          <a href="academy-intro-development.html">Beginner Training</a>
-          <a href="academy-intermediate.html">Intermediate Training</a>
+          <a href="programs.html#beginner-intermediate">Beginner &amp; Intermediate</a>
+          <a href="programs.html#advanced">Advanced</a>
+          <a href="programs.html#high-performance">High Performance Team</a>
+          <a href="programs.html#national">National Team Elite</a>
           <a href="programs.html#adult-training">Adult Training</a>
           <a href="programs.html#where-we-train">Where We Train</a>
         </div>
@@ -144,99 +144,47 @@
       </div>
       <div class="container">
         <p class="overline">Join the Project</p>
-        <h1><span class="line"><span class="line-inner">Sign <em>up.</em></span></span></h1>
-        <p class="page-lede">Tell us who is playing and where — we will take it from there.</p>
+        <h1><span class="line"><span class="line-inner">Book a <em>trial.</em></span></span></h1>
+        <p class="page-lede">Choose the venue that suits you and book straight into the calendar.</p>
       </div>
     </section>
 
-    <!-- ==================== FORM ==================== -->
-    <!-- Submissions are validated and stored by the submit-registration
-         Supabase Edge Function. Public connection values live in
-         js/supabase-config.js; never put a Supabase secret key in this site. -->
+    <!-- ==================== WHERE ==================== -->
+    <!-- Booking is handled by BurnOn; each venue has its own booking page and
+         both offer a 60-minute adult and child trial class. The links are the
+         only thing that needs maintaining here. -->
     <section class="section section--ivory">
       <div class="container">
         <header class="section-head reveal">
-          <p class="overline">Registration</p>
-          <h2>Tell us who is <em>playing.</em></h2>
+          <p class="overline">Book a Trial</p>
+          <h2>Where would you like to <em>play?</em></h2>
+          <p class="section-intro">We train at two venues. Pick the one that suits you and you will go straight to its booking calendar, where you can choose an adult or a child trial class.</p>
         </header>
 
-        <noscript>
-          <p class="form-fallback">This form needs JavaScript to send. With it switched off, email us at <a href="mailto:thebadmintonproject@gmail.com">thebadmintonproject@gmail.com</a> with the player&rsquo;s name and age, the program you&rsquo;re interested in and your preferred location, and we&rsquo;ll take it from there.</p>
-        </noscript>
+        <ul class="book-choice">
+          <li class="book-card reveal">
+            <p class="book-card__eyebrow">Toronto</p>
+            <h3>BNM Badminton</h3>
+            <p class="book-card__addr">1783 Albion Rd.</p>
+            <ul class="book-card__list">
+              <li>Trial class, adult (60 min)</li>
+              <li>Trial class, child (60 min)</li>
+            </ul>
+            <a class="btn btn--green" href="https://www.burnon.ai/book/pk_3HxlpQsftuv1GD3WCtIo6IF8cWH" target="_blank" rel="noopener">Book at BNM<span class="sr-only"> (opens in a new tab)</span></a>
+          </li>
+          <li class="book-card reveal" style="--d:.1s">
+            <p class="book-card__eyebrow">Mississauga</p>
+            <h3>Agility Sports</h3>
+            <p class="book-card__addr">Mississauga, Ontario</p>
+            <ul class="book-card__list">
+              <li>Trial class, adult (60 min)</li>
+              <li>Trial class, child (60 min)</li>
+            </ul>
+            <a class="btn btn--green" href="https://www.burnon.ai/book/pk_3I4JTeupkvrUFYe8R28eLDluq6l" target="_blank" rel="noopener">Book at Agility<span class="sr-only"> (opens in a new tab)</span></a>
+          </li>
+        </ul>
 
-        <div class="form-card reveal" style="--d:.15s">
-          <div class="form-thanks" id="thanks">
-            <p class="overline" style="margin-bottom: 1rem;">Received</p>
-            <h3 style="font-size: 1.6rem; color: var(--green-800); margin-bottom: 0.8rem;">Thank you — you're on our list.</h3>
-            <p style="color: var(--ink-soft); margin: 0;">We will be in touch shortly. If it is urgent, write to <a href="mailto:thebadmintonproject@gmail.com" style="color: var(--gold-ink);">thebadmintonproject@gmail.com</a>.</p>
-          </div>
-          <form class="signup-form" data-signup>
-            <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <div class="form-grid">
-              <h3 class="form-section-label field--full"><span>01</span> About you</h3>
-              <div class="field">
-                <label for="f-first-name">First name *</label>
-                <input type="text" id="f-first-name" name="first_name" required autocomplete="section-registrant given-name" maxlength="80">
-              </div>
-              <div class="field">
-                <label for="f-last-name">Last name *</label>
-                <input type="text" id="f-last-name" name="last_name" required autocomplete="section-registrant family-name" maxlength="80">
-              </div>
-              <div class="field">
-                <label for="f-email">Email *</label>
-                <input type="email" id="f-email" name="email" required autocomplete="section-registrant email" maxlength="254">
-              </div>
-              <div class="field">
-                <label for="f-phone">Phone</label>
-                <input type="tel" id="f-phone" name="phone" autocomplete="section-registrant tel" maxlength="40">
-              </div>
-              <!-- Age-neutral on purpose: Adult Training is one of the five
-                   programs, so this section has to work for a parent
-                   registering a child AND for an adult registering themselves. -->
-              <h3 class="form-section-label field--full"><span>02</span> Player</h3>
-              <p class="form-hint field--full">Registering yourself? Leave this section blank &mdash; we&rsquo;ll use your details above.</p>
-              <div class="field">
-                <label for="f-player-first-name">Player&rsquo;s first name</label>
-                <input type="text" id="f-player-first-name" name="player_first_name" autocomplete="section-player given-name" maxlength="80">
-              </div>
-              <div class="field">
-                <label for="f-player-last-name">Player&rsquo;s last name</label>
-                <input type="text" id="f-player-last-name" name="player_last_name" autocomplete="section-player family-name" maxlength="80">
-              </div>
-              <div class="field">
-                <label for="f-age">Player&rsquo;s age</label>
-                <input type="number" id="f-age" name="age" inputmode="numeric" min="1" max="120">
-              </div>
-              <h3 class="form-section-label field--full"><span>03</span> Training interests</h3>
-              <fieldset class="field field--full">
-                <legend>Program of interest</legend>
-                <div class="choices">
-                  <label class="choice"><input type="checkbox" name="programs" value="National Team Elite Training"> National Team Elite</label>
-                  <label class="choice"><input type="checkbox" name="programs" value="High Performance Team Training"> High Performance Team</label>
-                  <label class="choice"><input type="checkbox" name="programs" value="Beginner Training"> Beginner</label>
-                  <label class="choice"><input type="checkbox" name="programs" value="Intermediate Training"> Intermediate</label>
-                  <label class="choice"><input type="checkbox" name="programs" value="Adult Training"> Adult Training</label>
-                </div>
-              </fieldset>
-              <fieldset class="field field--full">
-                <legend>Preferred location</legend>
-                <div class="choices">
-                  <label class="choice"><input type="checkbox" name="locations" value="Agility Sports"> Agility Sports</label>
-                  <label class="choice"><input type="checkbox" name="locations" value="BNM Badminton"> BNM Badminton</label>
-                </div>
-              </fieldset>
-              <div class="field field--full">
-                <label for="f-msg">Anything we should know?</label>
-                <textarea id="f-msg" name="message" rows="4" maxlength="2000"></textarea>
-              </div>
-            </div>
-            <div class="form-actions">
-              <button class="btn" type="submit">Register Now</button>
-              <p class="form-status" data-form-status role="status" aria-live="polite" hidden></p>
-              <p class="form-note">Prefer email? Write to <a href="mailto:thebadmintonproject@gmail.com" style="color: var(--gold-ink);">thebadmintonproject@gmail.com</a></p>
-            </div>
-          </form>
-        </div>
+        <p class="book-note reveal" style="--d:.18s">Not sure which one, or which program your child fits? Write to <a href="mailto:thebadmintonproject@gmail.com">thebadmintonproject@gmail.com</a> and we will point you to the right court.</p>
       </div>
     </section>
 
@@ -256,7 +204,7 @@
         <a href="programs.html#where-we-train">Locations</a>
         <a href="gallery.html">Gallery</a>
         <a href="journal.html">Journal</a>
-        <a href="signup.html">Sign Up</a>
+        <a href="signup.html">Book a Trial</a>
       </nav>
     </div>
     <div class="container footer-base">
@@ -264,7 +212,6 @@
     </div>
   </footer>
 
-  <script src="js/supabase-config.js?v=1"></script>
-  <script src="js/main.js?v=27"></script>
+  <script src="js/main.js?v=31"></script>
 </body>
 </html>
