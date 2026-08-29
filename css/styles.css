@@ -1,5 +1,5 @@
 /* ==========================================================================
-   The Badminton Project — stylesheet
+   The Badminton Project: stylesheet
    Palette: deep green / ivory / gold  (Wimbledon-inspired heritage)
    Type:    Cormorant Garamond (display serif) + Jost (sans)
    ========================================================================== */
@@ -61,7 +61,7 @@ h1, h2, h3 {
 /* The ring defaults to the DARK gold, because most of the site is ivory and the
    bright gold only reaches 2.1:1 there. Dark surfaces opt back into the bright
    gold (5.25:1) by name. Stated this way round, a new light section can never
-   silently inherit an unreadable focus ring — the old allowlist kept springing
+   silently inherit an unreadable focus ring: the old allowlist kept springing
    leaks every time a section was added. */
 :focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
 .site-header :focus-visible,
@@ -143,7 +143,7 @@ h1, h2, h3 {
 }
 .btn--ghost { color: rgba(247, 243, 234, 0.9); border-color: rgba(247, 243, 234, 0.35); }
 /* Gated: ungated, a tap on touch leaves this rule stuck on, which strips the
-   hero variant's ivory fill while its dark text colour stays — dark on dark. */
+   hero variant's ivory fill while its dark text colour stays, dark on dark. */
 @media (hover: hover) {
   .btn--ghost:hover { border-color: var(--ivory); background: rgba(247, 243, 234, 0.08); }
 }
@@ -744,7 +744,7 @@ h2 em { font-style: italic; color: var(--gold-ink); }
 }
 
 /* ==========================================================================
-   Home panels — each one is a single screen the visitor scrolls through.
+   Home panels: each one is a single screen the visitor scrolls through.
    min-height (not height) so content always wins over the screen fit.
    ========================================================================== */
 
@@ -756,7 +756,7 @@ h2 em { font-style: italic; color: var(--gold-ink); }
   padding-block: clamp(4.5rem, 9vh, 7.5rem);
 }
 
-/* ---- Panel 2 · who we are + head coach ---- */
+/* ---- Panel 2 · who we are + the founders ---- */
 
 .panel--who { background: var(--ivory); }
 /* The panel's section heading; carries the small tracked-caps overline look */
@@ -789,7 +789,7 @@ h2 em { font-style: italic; color: var(--gold-ink); }
 }
 /* Credential rail: one row per credential, label left, value right. As a single
    wrapping flex line these broke 2-1 under Sankeerth and 1-2 under Eesan, so the
-   two mirrored panels never agreed — a fixed row each always lines up, and the
+   two mirrored panels never agreed: a fixed row each always lines up, and the
    label carries the qualifier ("Men's doubles") that used to bloat one item. */
 .who-creds {
   list-style: none;
@@ -836,8 +836,8 @@ h2 em { font-style: italic; color: var(--gold-ink); }
 .who-actions .btn { padding: 1rem 1.55rem; letter-spacing: 0.13em; }
 
 /* ---- The dossier ----
-   The client's brief gives one coach panel three faces — bio, achievements,
-   news — and one screen to hold them. Tabs file them behind a single strip;
+   The client's brief gives one coach panel three faces (bio, achievements,
+   news) and one screen to hold them. Tabs file them behind a single strip;
    with JS off every pane stacks open under its own label, nothing is lost. */
 .dossier { margin-top: clamp(1.4rem, 2.8vh, 2rem); }
 .dossier__tabs {
@@ -879,7 +879,7 @@ h2 em { font-style: italic; color: var(--gold-ink); }
 }
 /* Every pane shares one grid cell so they overlay rather than stack. The
    inactive ones are display:none, so main.js measures the tallest and pins a
-   min-height here — otherwise the box would resize on every tab switch and
+   min-height here: otherwise the box would resize on every tab switch and
    shunt the vertically-centred panel around it. */
 .dossier__panes { display: grid; padding-top: clamp(1.2rem, 2.6vh, 1.8rem); }
 .dossier__pane { grid-area: 1 / 1; min-width: 0; }
@@ -977,7 +977,7 @@ html:not(.js) .dossier__label {
 
 /* Second coach panel: mirrored and a shade lighter, so two consecutive profile
    screens don't read as the same slide twice. DOM order stays figure-first
-   (name before bio) — only the visual columns swap. */
+   (name before bio): only the visual columns swap. */
 .panel--who-alt {
   background: var(--ivory-bright);
   border-top: 1px solid var(--line-light);
@@ -1000,7 +1000,7 @@ html:not(.js) .dossier__label {
 /* ---- The pathway: four stops on one gold track ----
    Horizontal on desktop, vertical on narrow screens. The track is drawn with
    the same gold hairline language as the court lines. */
-/* Vertical is the base — the track runs down a left rail. Wide screens lay the
+/* Vertical is the base: the track runs down a left rail. Wide screens lay the
    same pathway out horizontally (see the min-width rule below); .roadmap--stack
    opts out of that and stays vertical at every size. */
 .roadmap {
@@ -1038,7 +1038,7 @@ html:not(.js) .dossier__label {
 .road-stop:last-child::after {
   background: linear-gradient(to bottom, var(--gold), rgba(201, 166, 73, 0));
 }
-/* the marker sitting on the track — a court-line diamond */
+/* the marker sitting on the track: a court-line diamond */
 .road-stop::before {
   content: "";
   position: absolute;
@@ -1088,7 +1088,7 @@ html:not(.js) .dossier__label {
   .roadmap:not(.roadmap--stack) .road-stop::after {
     top: calc(var(--mark) / 2);
     /* the diamond's tip sits at 1.025rem, so start 0.5rem clear of it and end the
-       same distance short of the next one — even breathing room on both sides */
+       same distance short of the next one: even breathing room on both sides */
     left: 1.5rem;
     width: calc(100% + var(--road-gap) - 2.2rem);
     height: 1px;
@@ -1158,7 +1158,7 @@ html:not(.js) .dossier__label {
   .panel { padding-block: clamp(4.5rem, 8vh, 6rem); }
 }
 @media (max-width: 860px) {
-  /* Stacked, the portrait would eat the screen — run it beside the name instead */
+  /* Stacked, the portrait would eat the screen, run it beside the name instead */
   .who-grid { grid-template-columns: 1fr; gap: 2.2rem; }
   .who-figure {
     display: grid;
@@ -1173,7 +1173,7 @@ html:not(.js) .dossier__label {
   .who-name { margin-top: 0; }
   .who-creds { margin-top: 0.9rem; }
   /* Beside the portrait the rail is only ~195px, too tight for label + value on
-     one line — the labels wrapped and the two coaches' rails stopped matching.
+     one line: the labels wrapped and the two coaches' rails stopped matching.
      Stack them instead so every row is the same height on both panels. */
   .who-creds li {
     grid-template-columns: 1fr;
@@ -1223,7 +1223,7 @@ html:not(.js) .dossier__label {
 
 /* ---------- Sub-pages ---------- */
 
-/* Sub-page headers are a shallow band — roughly half the viewport, never the
+/* Sub-page headers are a shallow band: roughly half the viewport, never the
    whole screen. Top padding only has to clear the fixed header (96px). */
 .page-hero {
   background: radial-gradient(120% 120% at 50% 0%, #0E4636 0%, var(--green-800) 45%, var(--green-950) 100%);
@@ -1244,13 +1244,13 @@ html:not(.js) .dossier__label {
   text-align: left;
 }
 .page-hero--program .page-lede { margin-left: 0; max-width: 44ch; }
-/* The profile hero's lede is a credential strip, not prose — 44ch caps it at
+/* The profile hero's lede is a credential strip, not prose, 44ch caps it at
    408px where Eesan's needs 427px, which orphaned "NCCP Level 3" on its own
    line. Sankeerth's (359px) always fit, which is why only one page showed it. */
 .page-hero--profile .page-lede { margin-left: 0; max-width: 52ch; }
 .page-hero--utility { min-height: clamp(13rem, 33svh, 20rem); }
 /* 404 is the exception: its header IS the page, so it fills the screen and the
-   footer sits below the fold. Must follow .page-hero — same specificity. */
+   footer sits below the fold. Must follow .page-hero, same specificity. */
 .page-hero--full {
   min-height: 100vh;
   min-height: 100svh;
@@ -1276,7 +1276,7 @@ html:not(.js) .dossier__label {
    (preserveAspectRatio="none" on the SVG), which is safe here because every
    element is a straight line: a non-uniform scale keeps them straight and
    parallel and only changes the court's proportions. Sizing it off its own
-   536/244 ratio instead left it letterboxed — about 660px of court centred in
+   536/244 ratio instead left it letterboxed: about 660px of court centred in
    a 1280px header, which read as a small court floating in the middle. */
 .page-court {
   position: absolute;
@@ -1333,7 +1333,7 @@ html:not(.js) .dossier__label {
 .program-detail p { margin: 0; color: var(--ink-soft); }
 
 /* The program brief: the client's description as the lead, then the deck's
-   fixed three parts read as a spec sheet — label rail on the left, answer on
+   fixed three parts read as a spec sheet: label rail on the left, answer on
    the right, hairlines between. Same shape on every program page. */
 .brief {
   display: grid;
@@ -1439,7 +1439,7 @@ html:not(.js) .dossier__label {
   background: var(--gold-soft);
   transform-origin: left;
 }
-/* This one <li> is the list's label, not an entry — it must not take the
+/* This one <li> is the list's label, not an entry, it must not take the
    diamond or the indent the sibling rules below hand to every other item. */
 .coach-ach .coach-ach-title {
   padding-left: 0;
@@ -1491,6 +1491,10 @@ html:not(.js) .dossier__label {
 }
 .venue-card h3 { font-size: 1.5rem; font-weight: 600; color: var(--ivory); margin-bottom: 0.6rem; }
 .venue-card p { margin: 0 0 0.4rem; color: rgba(247, 243, 234, 0.78); font-size: 0.95rem; }
+/* the venue cards sit on the dark Locations band, so the dark-gold link
+   colour used on ivory would sink into the background here */
+.venue-card .card-link { margin-top: 1.2rem; color: var(--gold); border-color: rgba(201, 166, 73, 0.45); }
+.venue-card .card-link:hover { color: var(--ivory); border-color: var(--ivory); }
 
 /* Gallery page */
 .gallery-grid {
@@ -1501,7 +1505,7 @@ html:not(.js) .dossier__label {
 }
 .gallery-grid .moment img { aspect-ratio: 3 / 4; }
 .moment--ph { display: flex; }
-/* An empty print, not a dark slab — a wall of unfilled dark tiles is the thing
+/* An empty print, not a dark slab, a wall of unfilled dark tiles is the thing
    that makes a gallery read as half-built */
 .moment--ph .ph-media {
   flex: 1;
@@ -1651,11 +1655,89 @@ html:not(.js) .dossier__label {
 .car-btn:hover { background: var(--green-800); color: var(--ivory); border-color: var(--green-800); }
 .car-btn[disabled], .car-btn[aria-disabled="true"] { opacity: 0.35; cursor: default; }
 .car-btn[disabled]:hover, .car-btn[aria-disabled="true"]:hover { background: var(--ivory); color: var(--gold-ink); border-color: var(--gold-soft); }
-/* without JS the buttons are inert — hide them and let the track scroll natively */
+/* without JS the buttons are inert: hide them and let the track scroll natively */
 html:not(.js) .car-btn { display: none; }
 .car-prev { left: -12px; }
 .car-next { right: -12px; }
 @media (max-width: 700px) { .car-prev { left: 4px; } .car-next { right: 4px; } }
+
+/* ---------- Booking: choose a venue ----------
+   The booking system itself asks who is playing, so the only question left to
+   the site is where. Two cards, equal weight, so neither reads as the default. */
+.book-choice {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.2rem, 2.6vw, 2rem);
+  margin: clamp(3rem, 6vw, 4.5rem) auto 0;
+  padding: 0;
+  max-width: 900px;
+  text-align: left;
+}
+.book-card {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.8rem, 3.6vw, 2.8rem);
+  background: var(--ivory-bright);
+  border: 1px solid var(--line-light);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+}
+@media (hover: hover) {
+  .book-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(122, 95, 32, 0.5);
+    box-shadow: 0 30px 50px -38px rgba(6, 35, 27, 0.45);
+  }
+}
+.book-card__eyebrow {
+  margin: 0 0 0.7rem;
+  font: 500 0.66rem/1 var(--font-sans);
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+.book-card h3 {
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  font-weight: 600;
+  color: var(--green-800);
+  margin: 0;
+}
+.book-card__addr { margin: 0.5rem 0 0; font-size: 0.95rem; color: var(--ink-soft); }
+.book-card__list {
+  list-style: none;
+  margin: 1.5rem 0 2rem;
+  padding: 1.4rem 0 0;
+  border-top: 1px solid var(--gold-soft);
+  flex: 1;
+}
+.book-card__list li {
+  position: relative;
+  padding-left: 1.2rem;
+  margin-bottom: 0.55rem;
+  font-size: 0.93rem;
+  color: var(--ink-soft);
+}
+.book-card__list li:last-child { margin-bottom: 0; }
+.book-card__list li::before {
+  content: "\25C6";
+  position: absolute;
+  left: 0;
+  top: 0.45em;
+  font-size: 0.45rem;
+  color: var(--gold-ink);
+}
+.book-card .btn { align-self: flex-start; }
+.book-note {
+  max-width: 52ch;
+  margin: clamp(2.4rem, 4.5vw, 3.4rem) auto 0;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  text-align: center;
+}
+.book-note a { color: var(--gold-ink); }
+@media (max-width: 720px) {
+  .book-choice { grid-template-columns: 1fr; }
+}
 
 /* Sign-up form */
 .form-card {
@@ -1819,7 +1901,156 @@ html.js .signup-form.is-sent { display: none; }
 .carousel--career .car-slide--career:nth-child(even) { flex-basis: clamp(210px, 23vw, 290px); }
 @media (max-width: 860px) { .person-grid { grid-template-columns: 1fr; } }
 
-/* Honest empty state — used where a section has nothing to show yet, so the
+/* ==========================================================================
+   The Academy: one page, five programs, five different layouts.
+   A long page has to read as a sequence of distinct places rather than one
+   template repeated, so only the "tier plate" head is shared: the bodies
+   diverge (two-stage split / centred dark / editorial + media rail / flagship
+   / three-up). Backgrounds alternate light-dark-light-dark-light to give the
+   scroll a rhythm you can feel without reading a word.
+   ========================================================================== */
+
+.prog { position: relative; padding-block: clamp(4.5rem, 9vw, 7.5rem); }
+.prog--bright { background: var(--ivory-bright); }
+.prog--dark {
+  background: linear-gradient(160deg, var(--green-800), var(--green-900));
+  color: var(--ivory);
+}
+.prog--elite {
+  background: radial-gradient(120% 100% at 50% 0%, var(--green-800) 0%, var(--green-950) 78%);
+  color: var(--ivory);
+}
+/* both dark tiers carry the film grain the rest of the dark surfaces have */
+.prog--dark, .prog--elite { overflow: hidden; }
+.prog--dark::after, .prog--elite::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  opacity: 0.055;
+  mix-blend-mode: overlay;
+}
+.prog > .container { position: relative; z-index: 2; }
+
+/* The tier plate: the one thing every program section shares */
+.tier {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0 clamp(1.1rem, 2.4vw, 2.2rem);
+  align-items: start;
+  padding-bottom: clamp(1.5rem, 3vw, 2.3rem);
+  border-bottom: 1px solid var(--line-light);
+}
+.tier__no {
+  margin: 0;
+  font: italic 500 clamp(2rem, 4.4vw, 3.2rem)/0.85 var(--font-serif);
+  color: var(--gold-ink);
+}
+.tier__id { min-width: 0; }
+.tier h2 { font-size: clamp(1.85rem, 4vw, 2.9rem); }
+.tier__tag {
+  margin: 0.75rem 0 0;
+  font: italic 400 clamp(1.02rem, 1.8vw, 1.3rem)/1.45 var(--font-serif);
+  color: var(--ink-soft);
+}
+/* centred variant: the numeral sits above the name instead of beside it */
+.tier--center {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  text-align: center;
+}
+.tier--center .tier__no { margin-bottom: 0.7rem; }
+.prog--dark .tier, .prog--elite .tier { border-bottom-color: rgba(201, 166, 73, 0.22); }
+.prog--dark .tier__no, .prog--elite .tier__no { color: var(--gold); }
+.prog--dark .tier h2, .prog--elite .tier h2 { color: var(--ivory); }
+.prog--dark .tier h2 em, .prog--elite .tier h2 em { color: var(--gold); }
+.prog--dark .tier__tag, .prog--elite .tier__tag { color: rgba(247, 243, 234, 0.74); }
+
+.prog__lead {
+  margin: clamp(2rem, 4vw, 3rem) 0 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  line-height: 1.5;
+  color: var(--green-800);
+  max-width: 62ch;
+}
+.prog__lead--center { margin-inline: auto; text-align: center; }
+.prog--dark .prog__lead, .prog--elite .prog__lead { color: var(--ivory); }
+.prog__cta { justify-content: flex-start; margin-top: clamp(2.4rem, 4.5vw, 3.4rem); }
+.tier--center ~ .section-cta, .prog--elite .prog__cta { justify-content: center; }
+.prog__brief { margin-top: clamp(2.2rem, 4vw, 3rem); align-items: start; }
+.prog__brief .brief__head { max-width: none; }
+.prog__brief .prog__lead { margin-top: 0; }
+.prog__rail { margin-top: clamp(2.6rem, 5vw, 4rem); }
+.prog .values { margin-top: clamp(2.4rem, 4.5vw, 3.4rem); }
+
+/* 01: the two stages of Beginner & Intermediate, read side by side */
+.stages {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.8rem, 4vw, 3.6rem);
+  margin-top: clamp(2.2rem, 4vw, 3rem);
+}
+.stage { padding-left: clamp(1.1rem, 2vw, 1.7rem); border-left: 1px solid var(--gold-soft); }
+.stage__label {
+  margin: 0 0 0.9rem;
+  font: 500 0.67rem/1 var(--font-sans);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+.stage p:last-child { margin: 0; color: var(--ink-soft); }
+
+/* Horizontal spec: the same three questions as the label-rail version, laid
+   across instead of down, so consecutive sections don't repeat a shape */
+.spec-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 3rem);
+  margin: clamp(2.4rem, 4.5vw, 3.6rem) 0 0;
+  text-align: left;
+}
+.spec-row > div { padding-top: 1.3rem; border-top: 1px solid var(--line-light); }
+.spec-row dt {
+  margin-bottom: 0.7rem;
+  font: 500 0.66rem/1.6 var(--font-sans);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+.spec-row dd { margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--ink-soft); }
+.prog--dark .spec-row > div, .prog--elite .spec-row > div { border-top-color: rgba(201, 166, 73, 0.28); }
+.prog--dark .spec-row dt, .prog--elite .spec-row dt { color: var(--gold); }
+.prog--dark .spec-row dd, .prog--elite .spec-row dd { color: rgba(247, 243, 234, 0.78); }
+
+/* 04: the flagship's selection mark */
+.elite-seal {
+  width: max-content;
+  max-width: 100%;
+  margin: clamp(1.8rem, 3.5vw, 2.6rem) auto 0;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--gold);
+  font: 500 0.7rem/1.4 var(--font-sans);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: center;
+}
+
+@media (max-width: 820px) {
+  .stages { grid-template-columns: 1fr; gap: 1.8rem; }
+  .spec-row { grid-template-columns: 1fr; gap: 0; }
+  .spec-row > div { padding-block: 1.3rem 0.2rem; }
+}
+@media (max-width: 560px) {
+  .tier { grid-template-columns: 1fr; gap: 0.5rem; }
+  .tier__no { line-height: 1; }
+}
+
+/* Honest empty state: used where a section has nothing to show yet, so the
    page reads as deliberate rather than half-built */
 .empty-state {
   max-width: 46rem;
@@ -1961,13 +2192,13 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
   .page-lede { margin-top: 1.5rem; font-size: 0.95rem; }
 
   /* The credential rail is three rows tall now, which tipped the Sankeerth panel
-     7px past one screen at 1366x700 — take it back out of the row padding. */
+     7px past one screen at 1366x700: take it back out of the row padding. */
   .who-creds { margin-top: 0.95rem; }
   .who-creds li { padding: 0.36rem 0; }
 }
 
 /* Short landscape phones: shrink the hero rather than drop pieces of it. The
-   CTAs in particular must survive — they are the point of the screen. */
+   CTAs in particular must survive: they are the point of the screen. */
 @media (max-height: 480px) and (orientation: landscape) {
   .hero { padding: 4.6rem 0 2.6rem; }
   .hero .hero-title .t1 { font-size: 1rem; }
@@ -1996,7 +2227,7 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
 }
 
 /* ==========================================================================
-   Motion system — entrance choreography, signature moments, page transitions
+   Motion system: entrance choreography, signature moments, page transitions
    (concepts documented in ANIMATIONS.md; every state below degrades to
    "instantly visible, no motion" under reduced motion or without JS)
    ========================================================================== */
@@ -2141,7 +2372,7 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
   html.hdr-enter.entered .site-nav > :nth-child(5) { animation-delay: calc(var(--hdr-delay, 1.9s) + 0.25s); }
 
   /* Keyboard escape hatch: anything focused during the entrance hold becomes
-     visible immediately — a focus ring must never point at an invisible control */
+     visible immediately: a focus ring must never point at an invisible control */
   html.hdr-enter .brand:focus-visible,
   html.hdr-enter .site-nav > *:focus-within,
   html.hdr-enter .menu-toggle:focus-visible,

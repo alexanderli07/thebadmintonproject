@@ -11,6 +11,8 @@ const PRODUCTION_ORIGINS = new Set([
 // Current names first. The retired names are kept so a visitor on a cached
 // copy of the old form can still submit instead of getting a hard rejection.
 const ALLOWED_PROGRAMS = new Set([
+  "Beginner & Intermediate Training",
+  "Advanced Training",
   "National Team Elite Training",
   "High Performance Team Training",
   "Beginner Training",
@@ -18,7 +20,6 @@ const ALLOWED_PROGRAMS = new Set([
   "Adult Training",
   // retired
   "Competition Team Training",
-  "Beginner & Intermediate Training",
   "High-Performance Training",
   "Intro & Developmental Training",
   "Athletic Development Training",
