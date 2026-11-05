@@ -2503,3 +2503,24 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
   html.js .reveal { opacity: 1; transform: none; }
   .scroll-cue { display: none; }
 }
+
+/* ==================== LEGAL PAGES (privacy.html, terms.html) ==================== */
+.legal { max-width: 70ch; }
+.legal__updated { font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 2rem; }
+.legal h2 { font-size: clamp(1.5rem, 2.4vw, 1.9rem); margin: 2.6rem 0 .8rem; }
+.legal p, .legal li { color: var(--ink-soft); line-height: 1.75; }
+.legal p + p { margin-top: .9rem; }
+.legal ul { margin: .6rem 0 0 1.2rem; padding: 0; list-style: disc; }
+.legal li + li { margin-top: .45rem; }
+.legal a { color: var(--gold-ink); text-decoration: underline; text-underline-offset: .15em; }
+.legal strong { color: var(--ink, inherit); font-weight: 600; }
+
+/* Footer legal links */
+.footer-legal { display: inline-flex; gap: 1.2rem; margin-left: 1.5rem; }
+.footer-legal a { color: inherit; opacity: .75; }
+.footer-legal a:hover { opacity: 1; }
+@media (max-width: 640px) { .footer-legal { display: flex; margin: .6rem 0 0; } }
+
+/* Ask-a-question form on signup.html (HighLevel embed) */
+.ask-form { max-width: 640px; margin: 3rem auto 0; }
+.ask-form iframe { width: 100%; min-height: 860px; border: none; border-radius: 4px; background: #fff; }
