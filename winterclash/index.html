@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TBP Winter Clash</title>
+<meta name="description" content="The Badminton Project Winter Clash: a junior badminton tournament for U13 to U19 at BNM Badminton, Etobicoke, December 19 and 20, 2026. Cash prizes and medals for the top 3.">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE occasion: a junior tournament poster, exciting for kids, trustworthy for parents
+   IDEA the printed tournament poster / draw sheet in TBP's Wimbledon green, ivory and gold
+   PICTURE a big shuttle arcing over a gold-lined court at night, snow falling
+   COLOUR deep green ground, ivory, gold for action, frost blue for winter
+   TYPE Cormorant Garamond display + Jost text (TBP brand)
+   LAYOUT hero poster with key facts, then events, prizes, experience, schedule, fees, FAQ, register; phone stacks with a sticky register bar */
+:root{color-scheme:light dark;--g950:#041B14;--g900:#06231B;--g800:#0B3D2E;--g700:#155C43;--gold:#C9A649;--frost:#BFE3F0;--ivory:#F7F3EA;--bg:light-dark(#F7F3EA,#041B14);--panel:light-dark(#FDFBF5,#0B2A20);--ink:light-dark(#1A2A22,#EDE8DC);--soft:light-dark(#43554B,#B5BFB8);--line:light-dark(rgba(11,61,46,.16),rgba(201,166,73,.24));--goldink:light-dark(#7A5F20,#C9A649)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 'Jost','Segoe UI',system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;line-height:1.05;letter-spacing:-.01em;margin:0;text-wrap:balance}
+h2{font-size:clamp(34px,4.6vw,50px)}
+h3{font-size:26px}
+p{margin:0}
+a{color:inherit}
+.wrap{max-width:1180px;margin-inline:auto}
+.band{padding-block:clamp(48px,6vw,88px);padding-inline:max(5vw,16px)}
+.band.green{background:var(--g900);color:var(--ivory)}
+.lede{color:var(--soft);max-width:62ch;margin-top:14px}
+.green .lede{color:#C9D3CC}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 26px;border-radius:999px;font:600 16px/1 'Jost',sans-serif;text-decoration:none;border:2px solid var(--gold);transition:background .2s,color .2s}
+.btn.solid{background:var(--gold);color:var(--g950)}
+.btn.solid:hover{background:#DDBD62}
+.btn.ghost{color:var(--ivory);border-color:rgba(247,243,234,.5)}
+.btn.ghost:hover{border-color:var(--ivory)}
+:focus-visible{outline:3px solid var(--frost);outline-offset:3px}
+
+/* header */
+.top{position:sticky;top:0;z-index:20;background:var(--g950);color:var(--ivory);border-bottom:1px solid rgba(201,166,73,.25)}
+.top .wrap{display:flex;align-items:center;gap:20px;min-height:64px;padding-inline:max(5vw,16px);max-width:none}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:500;white-space:nowrap}
+.brand svg{width:30px;height:30px;flex:none}
+.top nav{display:flex;gap:22px;margin-left:auto;font-size:15px}
+.top nav a{text-decoration:none;color:#C9D3CC}
+.top nav a:hover{color:var(--gold)}
+.top .btn{min-height:40px;padding:0 18px;font-size:15px}
+@media(max-width:860px){.top nav{display:none}.top .btn{margin-left:auto}}
+
+/* hero */
+.hero{background:radial-gradient(120% 90% at 75% 10%,#0F4A37 0%,var(--g900) 55%,var(--g950) 100%);color:var(--ivory);position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:center;padding:clamp(36px,5vw,72px) max(5vw,16px) clamp(40px,5vw,64px);max-width:1280px}
+.kicker{color:var(--gold);font-weight:500;font-size:17px}
+.hero h1{font-size:clamp(60px,9vw,118px);margin:10px 0 18px}
+.hero h1 span{display:block;font-size:.42em;font-weight:500;font-style:italic;color:#DDE6E0;margin-bottom:4px}
+.hero .pitch{font-size:19px;max-width:34ch;color:#DDE6E0}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:rgba(201,166,73,.3);border:1px solid rgba(201,166,73,.3);border-radius:14px;overflow:hidden;margin:26px 0}
+.facts div{background:rgba(4,27,20,.72);padding:14px 16px}
+.facts b{display:block;font-size:13px;font-weight:500;color:var(--gold)}
+.facts span{font-size:17px;font-weight:500}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.art{position:relative;aspect-ratio:6/5}
+.art svg{position:absolute;inset:0;width:100%;height:100%}
+.flake{animation:fall linear infinite}
+@keyframes fall{from{transform:translateY(-40px)}to{transform:translateY(560px)}}
+@media(prefers-reduced-motion:reduce){.flake{animation:none}html{scroll-behavior:auto}}
+@media(max-width:820px){.hero .wrap{grid-template-columns:minmax(0,1fr)}.art{order:-1;max-width:460px;width:100%;margin:-10px auto -30px}}
+
+/* events */
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(28px,5vw,64px);align-items:start}
+.draws{border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden}
+.draws table{width:100%;border-collapse:collapse;font-size:16px}
+.draws th,.draws td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--line)}
+.draws th{font-weight:600;font-size:14px;color:var(--goldink)}
+.draws td:first-child{font-weight:600;white-space:nowrap}
+.draws tr:last-child td{border-bottom:0}
+.day{font-size:14px;color:var(--soft)}
+.rules{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:12px}
+.rules li{padding-left:28px;position:relative}
+.rules li::before{content:"";position:absolute;left:0;top:.55em;width:14px;height:14px;border:2px solid var(--gold);border-radius:3px;transform:rotate(45deg) scale(.7)}
+@media(max-width:820px){.grid2{grid-template-columns:minmax(0,1fr)}}
+
+/* prizes */
+.podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:end;margin-top:36px}
+.step{border-radius:16px 16px 6px 6px;padding:26px 22px;text-align:center;border:1px solid rgba(201,166,73,.35);background:rgba(255,255,255,.04)}
+.step .medal{width:64px;height:64px;margin:0 auto 12px}
+.step h3{color:var(--ivory)}
+.step ul{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:4px;color:#DDE6E0}
+.step.p1{order:2;padding-block:44px;background:linear-gradient(180deg,rgba(201,166,73,.2),rgba(201,166,73,.05));border-color:var(--gold)}
+.step.p2{order:1}.step.p3{order:3}
+.note{font-size:15px;color:#AEBBB3;margin-top:20px}
+@media(max-width:640px){.podium{grid-template-columns:minmax(0,1fr)}.step.p1{order:0;padding-block:30px}.step.p2{order:1}.step.p3{order:2}}
+
+/* experience */
+.perks{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:16px;margin-top:32px}
+.perk{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
+.perk svg{width:44px;height:44px;margin-bottom:12px}
+.perk h3{font-size:24px;margin-bottom:6px}
+.perk p{color:var(--soft);font-size:16px}
+
+/* schedule */
+.sched{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:32px}
+.dayc{border:1px solid var(--line);border-radius:16px;padding:24px;background:var(--panel)}
+.dayc .date{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:600;line-height:1;color:var(--goldink)}
+.tl{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.tl li{display:grid;grid-template-columns:5.2em minmax(0,1fr);gap:14px;padding:10px 0;border-top:1px solid var(--line)}
+.tl time{font-weight:600;color:var(--goldink);white-space:nowrap;font-variant-numeric:tabular-nums}
+.dayc h3{margin:6px 0 14px}
+.dayc ul{margin:0;padding-left:20px;display:grid;gap:6px}
+@media(max-width:640px){.sched{grid-template-columns:minmax(0,1fr)}}
+
+/* fees */
+.fees{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:32px;max-width:820px}
+.fee{border-radius:16px;padding:26px;background:var(--g800);color:var(--ivory)}
+.fee .amt{font-family:'Cormorant Garamond',serif;font-size:clamp(54px,7vw,72px);font-weight:600;line-height:1;color:var(--gold);white-space:nowrap}
+.fee .was{font-size:16px;color:#C9D3CC;margin-top:8px}
+.fee .was s{opacity:.8}
+.fee h3{font-size:24px;margin-bottom:12px}
+.example{margin-top:18px;color:var(--soft);max-width:62ch}
+@media(max-width:600px){.fees{grid-template-columns:minmax(0,1fr)}}
+
+/* faq */
+.faq{max-width:820px;margin-top:28px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;padding:18px 36px 18px 0;font-weight:500;font-size:18px;position:relative;min-height:44px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:4px;top:12px;font-size:28px;color:var(--goldink);font-weight:400}
+.faq details[open] summary::after{content:"−"}
+.faq details p{padding:0 0 18px;color:var(--soft)}
+
+/* register + sponsors + footer */
+.reg{text-align:center}
+.reg h2{font-size:clamp(40px,6vw,64px)}
+.reg .lede{margin-inline:auto}
+.reg .cta{justify-content:center;margin-top:26px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px;max-width:900px;margin:34px auto 0;text-align:left}
+.steps div{border:1px solid rgba(201,166,73,.3);border-radius:14px;padding:16px 18px;color:#DDE6E0;font-size:16px}
+.steps b{display:block;color:var(--gold);font-weight:600}
+.plogo{height:52px;display:flex;align-items:center;margin-bottom:12px;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:24px;color:var(--goldink)}
+.plogo img{max-height:52px;max-width:160px;object-fit:contain}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:16px;margin-top:32px}
+.scard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:4px}
+.slogo{height:88px;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:10px;margin-bottom:12px;padding:12px;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;color:#155C43;text-align:center;line-height:1.1}
+.slogo img{max-height:64px;max-width:100%;object-fit:contain}
+.scard b{font-weight:600}
+.scard span{font-size:15px;color:var(--soft)}
+footer{background:var(--g950);color:#C9D3CC;padding:36px max(5vw,16px) 110px;font-size:15px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px 40px;justify-content:space-between}
+footer a{color:var(--ivory)}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:none;gap:12px;align-items:center;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));background:var(--g950);border-top:1px solid rgba(201,166,73,.35);color:var(--ivory)}
+.bar p{font-size:15px;line-height:1.3}
+.bar b{color:var(--gold)}
+.bar .btn{margin-left:auto;flex:none}
+@media(max-width:860px){.bar{display:flex}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="court" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#0B3D2E"/><g fill="none" stroke="#C9A649" stroke-width="3"><rect x="16" y="8" width="32" height="48"/><path d="M16 32h32M16 25h32M16 39h32M32 8v17M32 39v17"/></g></symbol>
+  <symbol id="medal" viewBox="0 0 64 64"><path d="M20 4h10l6 18h-10zM44 4H34l-6 18h10z" fill="#155C43"/><circle cx="32" cy="40" r="20" fill="currentColor"/><circle cx="32" cy="40" r="14" fill="none" stroke="rgba(0,0,0,.22)" stroke-width="2"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../"><svg aria-hidden="true"><use href="#court"/></svg>The Badminton Project</a>
+    <nav aria-label="Winter Clash">
+      <a href="#events">Events</a><a href="#prizes">Prizes</a><a href="#schedule">Schedule</a><a href="#fees">Fees</a><a href="#faq">FAQ</a><a href="#sponsors">Sponsors</a>
+    </nav>
+    <a class="btn solid js-reg" href="#register">Register</a>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="kicker">Junior tournament · U13 to U19</p>
+      <h1><span>The Badminton Project</span>Winter Clash</h1>
+      <p class="pitch">Two days of real tournament badminton for juniors: group stage, playoffs, cash prizes and medals.</p>
+      <div class="facts">
+        <div><b>When</b><span>Dec 19–20, 2026</span></div>
+        <div><b>Where</b><span>BNM Badminton, Etobicoke</span></div>
+        <div><b>Entry</b><span>From $75 + HST</span></div>
+        <div><b>Prizes</b><span>Over $10,000 in prizes</span></div>
+      </div>
+      <div class="cta">
+        <a class="btn solid js-reg" href="#register">Register now</a>
+        <a class="btn ghost" href="#events">See events</a>
+      </div>
+    </div>
+    <div class="art" aria-hidden="true">
+      <svg viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="sk" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FDFBF5"/><stop offset="1" stop-color="#D9D2C2"/></linearGradient>
+          <linearGradient id="ck" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F7F3EA"/><stop offset="1" stop-color="#BFB49A"/></linearGradient>
+          <linearGradient id="fl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0F4A37"/><stop offset="1" stop-color="#155C43"/></linearGradient>
+        </defs>
+        <path d="M150 290 L450 290 L590 500 L10 500 Z" fill="url(#fl)"/>
+        <g fill="none" stroke="#C9A649" stroke-width="3" stroke-linejoin="round" opacity=".95">
+          <path d="M150 290 L450 290 L590 500 L10 500 Z"/>
+          <path d="M168 290 L56 500 M432 290 L544 500"/>
+          <path d="M300 290 V352 M300 405 V500"/>
+          <path d="M120 335 H480 M78 432 H522"/>
+        </g>
+        <path d="M108 352 H492 L492 380 H108 Z" fill="rgba(4,27,20,.55)"/>
+        <g stroke="rgba(247,243,234,.28)" stroke-width="1"><path id="mesh" d=""/></g>
+        <rect x="104" y="346" width="392" height="7" rx="2" fill="#F7F3EA"/>
+        <rect x="100" y="346" width="6" height="64" fill="#C9A649"/><rect x="494" y="346" width="6" height="64" fill="#C9A649"/>
+        <path d="M60 260 Q230 -20 418 150" fill="none" stroke="#BFE3F0" stroke-width="3" stroke-dasharray="2 12" stroke-linecap="round" opacity=".8"/>
+        <g transform="translate(440 168) rotate(52) scale(1.25)">
+          <ellipse cx="0" cy="78" rx="40" ry="8" fill="rgba(0,0,0,.18)"/>
+          <path d="M-20 22 L-64 -74 Q0 -90 64 -74 L20 22 Z" fill="url(#sk)"/>
+          <path d="M0 22 L0 -82 Q32 -82 64 -74 L20 22 Z" fill="rgba(4,27,20,.12)"/>
+          <g stroke="#B9AF97" stroke-width="1.6"><path d="M-14 22 L-44 -78M-6 22 L-15 -82M6 22 L15 -82M14 22 L44 -78"/></g>
+          <path d="M-56 -56 Q0 -66 56 -56" fill="none" stroke="#C9A649" stroke-width="2.4"/>
+          <rect x="-22" y="18" width="44" height="9" rx="2" fill="#C9A649"/>
+          <path d="M-22 27 Q-22 58 0 58 Q22 58 22 27 Z" fill="url(#ck)"/>
+          <path d="M-14 31 Q-14 48 -2 52" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+        </g>
+        <g id="snow" fill="#F7F3EA"></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="events">
+  <div class="wrap grid2">
+    <div>
+      <h2>Eight age groups, two events each</h2>
+      <p class="lede">Boys and girls play in separate draws. Enter singles, doubles, or both.</p>
+      <ul class="rules">
+        <li>Group stage in groups of 3, then playoffs. Every player gets multiple matches.</li>
+        <li>All matches are best of 3 games to 15.</li>
+        <li>Open to juniors with under 1,500 Badminton Ontario ranking points.</li>
+        <li>Up to 2 events per player: one singles and one doubles.</li>
+        <li>TBP has final say on all draws and formats.</li>
+      </ul>
+    </div>
+    <div class="draws">
+      <table>
+        <thead><tr><th>Age group</th><th>Singles <span class="day">· Sat</span></th><th>Doubles <span class="day">· Sun</span></th></tr></thead>
+        <tbody id="drawrows"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="band green" id="prizes">
+  <div class="wrap">
+    <h2>Over $10,000 in prizes</h2>
+    <p class="lede">In every event, the top 3 take home cash prizes, a medal and exclusive TBP rewards.</p>
+    <div class="podium">
+      <div class="step p2"><svg class="medal" style="color:#C8CDD0"><use href="#medal"/></svg><h3>2nd place</h3><ul><li>Cash prize</li><li>Silver medal</li><li>TBP rewards</li></ul></div>
+      <div class="step p1"><svg class="medal" style="color:#C9A649"><use href="#medal"/></svg><h3>Champion</h3><ul><li>Cash prize</li><li>Gold medal</li><li>TBP rewards</li></ul></div>
+      <div class="step p3"><svg class="medal" style="color:#B87445"><use href="#medal"/></svg><h3>3rd place</h3><ul><li>Cash prize</li><li>Bronze medal</li><li>TBP rewards</li></ul></div>
+    </div>
+    <p class="note">3rd place is decided by a 3rd/4th place match.</p>
+  </div>
+</section>
+
+<section class="band" id="experience">
+  <div class="wrap">
+    <h2>A real tournament weekend</h2>
+    <p class="lede">We want every player to leave wanting to come back.</p>
+    <div class="perks">
+      <div class="perk"><svg viewBox="0 0 44 44"><rect x="8" y="16" width="28" height="22" rx="3" fill="#155C43"/><path d="M15 16v-4a7 7 0 0 1 14 0v4" fill="none" stroke="#C9A649" stroke-width="3"/><path d="M18 26h8" stroke="#C9A649" stroke-width="3"/></svg><h3>Welcome bag</h3><p>Every player gets a welcome bag at check-in, with something special inside.</p></div>
+      <div class="perk"><div class="plogo" data-logo="kane">Mr. Kane</div><h3>Fresh sugarcane juice</h3><p>Free juice coupons from Mr. Kane in every welcome bag, served fresh on site.</p></div>
+      <div class="perk"><div class="plogo" data-logo="thrive">Thrive Physio</div><h3>Sports physio</h3><p>Physio support from Thrive Physio Sports Performance.</p></div>
+      <div class="perk"><svg viewBox="0 0 44 44"><path d="M15 8h14l-3 20h-8z" fill="#F7F3EA" stroke="#155C43" stroke-width="2"/><path d="M18 28h8v4a4 4 0 0 1-8 0z" fill="#C9A649"/></svg><h3>Shuttles provided</h3><p>Match shuttles are supplied for every match. Just bring your racket.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="schedule" style="padding-top:0">
+  <div class="wrap">
+    <h2>Weekend schedule</h2>
+    <p class="lede">Every player gets a personalized match schedule by email closer to the tournament. Here's the plan for the weekend. Times are approximate and depend on entries.</p>
+    <div class="sched">
+      <div class="dayc"><div class="date">Sat, Dec 19</div><h3>Singles day</h3>
+        <ol class="tl"><li><time>9:00am</time><span>Singles group stage</span></li><li><time>5:00pm</time><span>Singles semifinals</span></li><li><time>7:00pm</time><span>Day ends</span></li></ol></div>
+      <div class="dayc"><div class="date">Sun, Dec 20</div><h3>Doubles and finals day</h3>
+        <ol class="tl"><li><time>9:00am</time><span>Doubles group stage</span></li><li><time>1:00pm</time><span>Singles finals and 3rd place matches</span></li><li><time>3:00pm</time><span>Doubles semifinals</span></li><li><time>4:00pm</time><span>Doubles finals and 3rd place matches</span></li><li><time>7:00pm</time><span>Medal presentations and wrap-up</span></li></ol></div>
+    </div>
+    <p class="example">Between group stage and playoffs you're free to take a break, grab food and come back.</p>
+  </div>
+</section>
+
+<section class="band" id="fees" style="padding-top:0">
+  <div class="wrap">
+    <h2>Entry fees</h2>
+    <div class="fees">
+      <div class="fee"><h3>First event</h3><div class="amt" id="f1">$75</div><p class="was">+ HST · early bird until Nov 29, then <span id="f1r">$85</span> + HST</p></div>
+      <div class="fee"><h3>Second event</h3><div class="amt" id="f2">$40</div><p class="was">+ HST · already in singles? Use code CLASH2 on your doubles entry</p></div>
+    </div>
+    <p class="example" id="feeex">Singles and doubles together: $115 + HST at early bird pricing. Register by Friday, Dec 4 to guarantee your shirt size. Registration closes Sunday, Dec 13 at 11:59pm, or when a draw fills. Payment and the waiver are handled in the registration form.</p>
+  </div>
+</section>
+
+<section class="band" id="faq" style="padding-top:0">
+  <div class="wrap">
+    <h2>Questions</h2>
+    <div class="faq">
+      <details><summary>Who can enter?</summary><p>Juniors in the U13, U15, U17 and U19 age groups with under 1,500 Badminton Ontario ranking points.</p></details>
+      <details><summary>What do players need to bring to check-in?</summary><p>Photo ID showing date of birth. Players without ID at check-in are disqualified, so please don't forget it. Bring your racket, court shoes and water.</p></details>
+      <details><summary>When do we get our match times?</summary><p>Groups are published Dec 16, and every player gets a personalized match schedule by email before the tournament.</p></details>
+      <details><summary>How many matches will my child play?</summary><p>Every event starts with a group stage in groups of 3, so every player gets multiple matches before the playoffs.</p></details>
+      <details><summary>How do I enter doubles?</summary><p>Both partners register and pay separately for the same doubles event, and each enters the other's name. If you're also in singles, use code CLASH2 on your doubles entry.</p></details>
+      <details><summary>Is there a deadline for shirt sizes?</summary><p>Yes. Register by Friday, Dec 4 to guarantee your size. Every player gets a tournament shirt, and we order them 15 days before the tournament, so for entries after Dec 4 we can't guarantee the size you pick.</p></details>
+      <details><summary>What if a draw is full?</summary><p>Each singles draw is capped at 12 players and each doubles draw at 6 pairs. After that, new entries join the waitlist.</p></details>
+      <details><summary>What is the refund policy?</summary><p>If TBP cancels your event and can't combine it with another, you get a full refund. Otherwise entries are non-refundable.</p></details>
+      <details><summary>Can we leave between matches?</summary><p>Yes. Between the group stage and playoffs you can take a break and come back. Check your match times so you're back on time.</p></details>
+      <details><summary>Where is it?</summary><p>BNM Badminton, 1783 Albion Rd, Etobicoke, ON.</p></details>
+      <details><summary>Who do I contact with questions?</summary><p>Call (365) 440-7794 or email thebadmintonproject@gmail.com.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="band green reg" id="register">
+  <div class="wrap">
+    <h2>Claim your spot</h2>
+    <p class="lede">Spots in every draw are limited. Register in a few minutes: pick events, sign the waiver and pay in one form. Register by Friday, Dec 4 to guarantee your shirt size.</p>
+    <div class="steps">
+      <div><b>1. Pick events</b>Age group, singles and/or doubles</div>
+      <div><b>2. Player details</b>Name, date of birth, shirt size, doubles partner</div>
+      <div><b>3. Waiver and pay</b>Secure checkout</div>
+      <div><b>4. You're in</b>Confirmation email with what's next</div>
+    </div>
+    <div class="cta"><a class="btn solid js-reg" href="#register" id="regmain">Register now</a></div>
+  </div>
+</section>
+
+<section class="band" id="sponsors">
+  <div class="wrap">
+    <h2>Our sponsors</h2>
+    <p class="lede">The Winter Clash is made possible by local businesses who back junior badminton. Thank you.</p>
+    <div class="sgrid">
+      <div class="scard"><div class="slogo" data-logo="arora">Arora Real Estate Group</div><b>Arora Real Estate Group</b><span>Event sponsor</span></div>
+      <div class="scard"><div class="slogo" data-logo="thrive">Thrive Physio</div><b>Thrive Physio Sports Performance</b><span>Sports physio partner</span></div>
+      <div class="scard"><div class="slogo" data-logo="scholars">Scholars</div><b>Scholars of Etobicoke Rexdale</b><span>Event sponsor</span></div>
+      <div class="scard"><div class="slogo" data-logo="kane">Mr. Kane</div><b>Mr. Kane</b><span>Sugarcane juice partner</span></div>
+      <div class="scard"><div class="slogo" data-logo="feather">Feather</div><b>Feather AI</b><span>Registration partner</span></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b style="color:var(--ivory)">The Badminton Project Winter Clash</b><br>Dec 19–20, 2026 · BNM Badminton, 1783 Albion Rd, Etobicoke</div>
+    <div>(365) 440-7794<br>thebadmintonproject@gmail.com<br><a href="../">thebadmintonproject.com</a></div>
+  </div>
+</footer>
+
+<div class="bar"><p><b>Winter Clash</b><br>Dec 19–20 · from $75 + HST</p><a class="btn solid js-reg" href="#register">Register</a></div>
+
+<script>
+{
+  /* EDIT HERE: paste the Feather registration link between the quotes, and adjust fees */
+  const REGISTER_URL = "https://www.getfeather.ai/e/thebadmintonproject-bnm/winter-clash";
+  const FEES = {first: 75, firstRegular: 85, second: 40};
+  /* Sponsor logos: paste a data: URI (or image path once on the TBP site) for each */
+  const LOGOS = {arora: "", thrive: "", scholars: "", kane: "", feather: ""};
+  for (const el of document.querySelectorAll('[data-logo]')) {
+    const src = LOGOS[el.dataset.logo];
+    if (src) { const img = new Image(); img.src = src; img.alt = el.textContent.trim() + ' logo'; el.replaceChildren(img); }
+  }
+
+  if (REGISTER_URL) {
+    for (const a of document.querySelectorAll('.js-reg')) { a.href = REGISTER_URL; a.target = '_blank'; a.rel = 'noopener'; }
+  }
+  document.getElementById('f1').textContent = '$' + FEES.first;
+  document.getElementById('f1r').textContent = '$' + FEES.firstRegular;
+  document.getElementById('f2').textContent = '$' + FEES.second;
+  document.getElementById('feeex').firstChild.textContent = 'Singles and doubles together: $' + (FEES.first + FEES.second) + ' + HST at early bird pricing. Register by Friday, Dec 4 to guarantee your shirt size. Registration closes Sunday, Dec 13 at 11:59pm, or when a draw fills. Payment and the waiver are handled in the registration form.';
+
+  const ages = ['U13', 'U15', 'U17', 'U19'];
+  document.getElementById('drawrows').innerHTML = ages.map(a =>
+    '<tr><td>' + a + '</td><td>Boys · Girls</td><td>Boys · Girls</td></tr>').join('');
+
+  const mesh = document.getElementById('mesh');
+  let d = '';
+  for (let x = 120; x < 492; x += 14) d += 'M' + x + ' 353V380';
+  for (let y = 360; y < 380; y += 7) d += 'M108 ' + y + 'H492';
+  mesh.setAttribute('d', d);
+
+  const snow = document.getElementById('snow');
+  let s = 7;
+  const r = () => (s = s * 16807 % 2147483647) / 2147483647;
+  let out = '';
+  for (let i = 0; i < 46; i++) {
+    const x = (r() * 600).toFixed(0), y = (r() * 520 - 40).toFixed(0), rad = (1 + r() * 2.6).toFixed(1);
+    const dur = (9 + r() * 10).toFixed(1), delay = (-r() * 18).toFixed(1), op = (.35 + r() * .55).toFixed(2);
+    out += '<circle class="flake" cx="' + x + '" cy="' + y + '" r="' + rad + '" opacity="' + op + '" style="animation-duration:' + dur + 's;animation-delay:' + delay + 's"/>';
+  }
+  snow.innerHTML = out;
+}
+</script>
+</body>
+</html>
